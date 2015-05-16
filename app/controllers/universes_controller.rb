@@ -19,7 +19,6 @@ class UniversesController < ApplicationController
 
   private
 
-    #TDOD add universe_params test
     def universe_params
       params.permit(:title) 
     end
