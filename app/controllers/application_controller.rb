@@ -7,8 +7,14 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::StatementInvalid, with: :record_invalid
   rescue_from ActionController::ParameterMissing, with: :record_missing
 
+  #TODO test record_invalid with proper error msg
   def record_invalid
-    render json:{error:'yeah'}
+    render json:{error:'record in question is invalid'}
+  end
+
+  #TODO test record_missing with proper error msg
+  def record_missing
+    render json:{error:'record in question is missing'}
   end
 
   def repo
