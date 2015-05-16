@@ -13,7 +13,6 @@ class UniversesController < ApplicationController
     render json:universe
   end
 
-  #TODO contoller specs for delete_all
   def delete_all
     universes = repo.delete_universes
     render json:universes
