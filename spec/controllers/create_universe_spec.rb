@@ -15,7 +15,7 @@ describe "UniversesController#create" do
       expect(controller).to receive(:universe_params){ :params }
       expect(repo).to receive(:create_universe).with(:params){ :universe }
       expect(controller).to receive(:render).
-        with({json: :universe}){ :json }
+        with({json:{universe: :universe}}){ :json }
     end
     it{ is_expected.to be :json }
   end

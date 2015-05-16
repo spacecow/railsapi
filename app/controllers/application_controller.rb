@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from ActiveRecord::StatementInvalid, with: :record_invalid
+  rescue_from ActionController::ParameterMissing, with: :record_missing
 
   def record_invalid
     render json:{error:'yeah'}

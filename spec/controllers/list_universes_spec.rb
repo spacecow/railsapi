@@ -14,7 +14,7 @@ describe "UniversesController#index" do
       expect(controller).to receive(:repo){ repo }
       expect(repo).to receive(:universes){ :universes }
       expect(controller).to receive(:render).
-        with({json: :universes}){ :json }
+        with({json:{universes: :universes}}){ :json }
     end
     it{ is_expected.to be :json }
   end

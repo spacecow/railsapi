@@ -2,6 +2,7 @@ describe "UniversesController" do
 
   let(:controller){ UniversesController.new }
   let(:params){ double :params }
+  let(:universe_params){ double :universe_params }
   let(:permitted_attributes){ %i(title) }
 
   before do
@@ -13,7 +14,9 @@ describe "UniversesController" do
     subject{ controller.send(:universe_params) }
     before do
       expect(controller).to receive(:params){ params }
-      expect(params).to receive(:permit).
+      expect(params).to receive(:require).
+        with(:universe){ universe_params }
+      expect(universe_params).to receive(:permit).
         with(*permitted_attributes){ :params }
     end
     it{ is_expected.to be :params }

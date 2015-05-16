@@ -6,5 +6,6 @@ module ActionController
     def self.protect_from_forgery *args; end
     def self.rescue_from *args; end
   end
+  class ParameterMissing; end
 end unless defined?(ActionController)
 require './app/controllers/application_controller'

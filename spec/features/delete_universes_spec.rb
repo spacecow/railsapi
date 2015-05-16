@@ -11,7 +11,7 @@ describe 'Delete universes' do
       expect(Universe.count).to be 1
       function
       expect(Universe.count).to be 0
-      expect(body).to eq([{
+      expect(body["universes"]).to eq([{
         "id" => universe.id,
         "title" => 'Malazan' }])
     end
