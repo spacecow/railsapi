@@ -3,3 +3,4 @@
 !/log/.keep
 /tmp
 /vendor
+config/database.yml
