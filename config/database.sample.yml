@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: railsapi_development
+
+test:
+  <<: *default
+  database: railsapi_test
+
+production:
+  <<: *default
+  database: railsapi_production
+  username: railsapi
+  password: <%= ENV['RAILSAPI_DATABASE_PASSWORD'] %>
