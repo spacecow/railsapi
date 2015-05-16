@@ -7,7 +7,6 @@ class UniversesController < ApplicationController
     render json:universes
   end
 
-  #TODO contoller specs for create
   def create
     universe = repo.create_universe universe_params
     render json:universe
