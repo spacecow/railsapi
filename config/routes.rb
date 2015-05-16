@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   # root 'welcome#index'
-  resources :universes, only: :index
+  resources :universes, only: [:index, :create]
 end
