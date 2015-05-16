@@ -7,8 +7,6 @@ describe UniversesController do
     let(:function){ get :index }
     let(:body){ JSON.parse response.body }
 
-    before{ request.accept = "application/json" }
-
     context "response" do
       before{ universe; function }
       subject{ body }

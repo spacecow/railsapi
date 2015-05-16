@@ -2,16 +2,12 @@ class UniversesController < ApplicationController
 
   def index
     universes = repo.all_universes
-    respond_to do |f|
-      f.json{ render json:universes }
-    end
+    render json:universes
   end
 
   def create
     universe = repo.create_universe universe_params
-    respond_to do |f|
-      f.json{ render json:universe }
-    end
+    render json:universe
   end
 
   private

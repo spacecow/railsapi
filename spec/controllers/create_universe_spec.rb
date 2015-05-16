@@ -7,8 +7,6 @@ describe UniversesController do
     let(:function){ post :create, params }
     let(:body){ JSON.parse response.body }
 
-    before{ request.accept = "application/json" }
-
     context "success" do
       it{ expect{function}.to change(
         Universe,:count).by(1) }
