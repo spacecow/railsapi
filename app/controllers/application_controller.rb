@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
     render json:{error:'yeah'}
   end
 
+  def repo
+    @repo ||= Repository.new
+  end
+
 end
