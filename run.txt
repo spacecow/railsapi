@@ -1,0 +1,10 @@
+while true; do
+  bundle exec rspec
+    spec
+    --format documentation;
+  for i in {0..5}; do
+    printf \"$i \";
+    sleep 1;
+  done;
+  echo \"Running rspec again!\";
+done
