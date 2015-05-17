@@ -1,13 +1,13 @@
 describe "UniversesController" do
 
-  let(:controller){ UniversesController.new }
+  let(:controller){ Api::V1::UniversesController.new }
   let(:params){ double :params }
   let(:universe_params){ double :universe_params }
   let(:permitted_attributes){ %i(title) }
 
   before do
     require './spec/controller_helper'
-    require './app/controllers/universes_controller'
+    require './app/controllers/api/v1/universes_controller'
   end
 
   describe "universe_params" do

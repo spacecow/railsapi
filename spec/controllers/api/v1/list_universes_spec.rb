@@ -1,11 +1,11 @@
 describe "UniversesController#index" do
 
-  let(:controller){ UniversesController.new }
+  let(:controller){ Api::V1::UniversesController.new }
   let(:repo){ double :repo }
 
   before do
     require './spec/controller_helper'
-    require './app/controllers/universes_controller'
+    require './app/controllers/api/v1/universes_controller'
   end
 
   context "response" do 

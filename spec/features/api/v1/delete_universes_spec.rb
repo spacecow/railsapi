@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Delete universes' do
   let(:driver){ Capybara.current_session.driver }
-  let(:function){ driver.submit :delete, universes_path, nil }
+  let(:function){ driver.submit :delete, api_universes_path, nil }
   let(:body){ JSON.parse page.text }
 
   context "success" do

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Create universe' do
   let(:params){ {universe:{title:'Malazan'}} }
   let(:driver){ Capybara.current_session.driver }
-  let(:function){ driver.submit :post, universes_path, params }
+  let(:function){ driver.submit :post, api_universes_path, params }
   let(:body){ JSON.parse page.text }
 
   context "universe is valid" do
