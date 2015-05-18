@@ -1,7 +1,5 @@
-unless defined? FactoryGirl
-  require 'factory_girl_rails'
-  require './spec/factories'
-end
+require 'factory_girl'
+require './spec/factories'
 require 'active_record'
 require './config/database'
 

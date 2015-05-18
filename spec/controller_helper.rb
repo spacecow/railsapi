@@ -1,4 +1,5 @@
 module ActiveRecord
+  class RecordNotUnique; end
   class StatementInvalid; end
   class RecordNotFound; end
 end unless defined?(ActiveRecord)
@@ -10,5 +11,11 @@ module ActionController
   end
   class ParameterMissing; end
 end unless defined?(ActionController)
+
+class Rails
+  def self.env
+    Struct.new(:test?).new(true)
+  end
+end unless defined?(Rails)
 
 require './app/controllers/application_controller'
