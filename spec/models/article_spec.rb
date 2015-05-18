@@ -1,10 +1,13 @@
 require './spec/model_helper'
 require './app/models/article'
+require './app/models/universe'
 
 describe Article do
 
   let(:name){ 'Kelsier' }
-  let(:model){ Article.create name:name } 
+  let(:universe){ create :universe }
+  let(:universe_id){ universe.id }
+  let(:model){ Article.create name:name, universe_id:universe_id } 
 
   it{ expect{model}.to change(Article,:count).from(0).to(1) }
 
@@ -15,6 +18,23 @@ describe Article do
     }} 
   end
 
-  after{ Article.delete_all }
+  context "universe_id is not set" do
+    let(:universe_id){ nil }
+    it{ expect{model}.to raise_error{|e|
+      expect(e).to be_a ActiveRecord::StatementInvalid
+    }} 
+  end
+
+  context "universe_id is set to a non existing universe" do
+    let(:universe_id){ -1 }
+    it{ expect{model}.to raise_error{|e|
+      expect(e).to be_a ActiveRecord::StatementInvalid
+    }} 
+  end
+
+  after do
+    Article.delete_all
+    Universe.delete_all
+  end
 
 end

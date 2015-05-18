@@ -3,7 +3,7 @@ module Api
     class ArticlesController < ApplicationController
     
       def create
-        article = repo.create_article article_params
+        article = repo.create_article universe_id, article_params
         render json:{article:article} 
       end
 
@@ -11,6 +11,10 @@ module Api
 
         def article_params
           params.require(:article).permit(:name) 
+        end
+      
+        def universe_id
+          params.require(:article)["universe_id"]
         end
 
     end

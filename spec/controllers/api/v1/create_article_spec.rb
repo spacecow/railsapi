@@ -12,8 +12,9 @@ describe "ArticlesController#create" do
     subject{ controller.create }
     before do
       expect(controller).to receive(:repo){ repo }
+      expect(controller).to receive(:universe_id){ :id }
       expect(controller).to receive(:article_params){ :params }
-      expect(repo).to receive(:create_article).with(:params){ :article }
+      expect(repo).to receive(:create_article).with(:id, :params){ :article }
       expect(controller).to receive(:render).
         with({json:{article: :article}}){ :json }
     end

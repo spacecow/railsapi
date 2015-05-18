@@ -22,4 +22,14 @@ describe "ArticlesController" do
     it{ is_expected.to be :params }
   end
 
+  describe "#universe_id" do
+    subject{ controller.send :universe_id }
+    before do
+      expect(controller).to receive(:params){ params }
+      expect(params).to receive(:require).
+        with(:article){ {"universe_id" => :id} }
+    end
+    it{ is_expected.to be :id }
+  end
+
 end

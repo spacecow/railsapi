@@ -16,6 +16,11 @@ ActiveRecord::Schema.define(version: 20150518080105) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "articles", force: :cascade do |t|
+    t.string  "name",        null: false
+    t.integer "universe_id", null: false
+  end
+
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
     t.integer  "application_id",    null: false
@@ -56,14 +61,11 @@ ActiveRecord::Schema.define(version: 20150518080105) do
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
-  create_table "articles", force: :cascade do |t|
-    t.string "name", null: false
-  end
-
   create_table "universes", force: :cascade do |t|
     t.string "title", null: false
   end
 
   add_index "universes", ["title"], name: "index_universes_on_title", unique: true, using: :btree
 
+  add_foreign_key "articles", "universes"
 end
