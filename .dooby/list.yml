@@ -1,0 +1,21 @@
+---
+b1d194: !ruby/object:Dooby::Task
+  todo: add dooby :done
+2ba9fd: !ruby/object:Dooby::Task
+  todo: test factory for empty create
+7e4839: !ruby/object:Dooby::Task
+  todo: cover article_params in articles_controller :done
+e09c4a: !ruby/object:Dooby::Task
+  todo: test article for present name :done
+c2d8de: !ruby/object:Dooby::Task
+  todo: deleting a universe will delete all its articles too
+aa0e7d: !ruby/object:Dooby::Task
+  todo: test article for presence of unvierse_id :done
+544e8a: !ruby/object:Dooby::Task
+  todo: try to create an article when no universe is selected as feature :done
+686d59: !ruby/object:Dooby::Task
+  todo: investigate when activerecord_parametermissing is triggered :done
+7a6059: !ruby/object:Dooby::Task
+  todo: test record_not_found method in applicationcontroller :done
+deae1a: !ruby/object:Dooby::Task
+  todo: feature test for when record is duplicated :doing
