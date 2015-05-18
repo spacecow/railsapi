@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150518080105) do
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "articles", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
   end
 
   create_table "universes", force: :cascade do |t|

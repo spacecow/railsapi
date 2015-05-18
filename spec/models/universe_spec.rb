@@ -1,24 +1,23 @@
-require 'active_record'
-require './config/database'
+require './spec/model_helper'
 require './app/models/universe'
 
 describe Universe do
-  let(:title){ 'Malazan' }
-  let(:universe){ Universe.create title:title } 
 
-  it{ expect{universe}.to change(
-    Universe,:count).by(1) }
+  let(:title){ 'Malazan' }
+  let(:model){ Universe.create title:title } 
+
+  it{ expect{model}.to change(Universe,:count).from(0).to(1) }
 
   context "title is not set" do
     let(:title){ nil }
-    it{ expect{universe}.to raise_error{|e|
+    it{ expect{model}.to raise_error{|e|
       expect(e).to be_a ActiveRecord::StatementInvalid
     }} 
   end
 
   context "title is duplicated" do
     before{ Universe.create title:title }
-    it{ expect{universe}.to raise_error{|e|
+    it{ expect{model}.to raise_error{|e|
       expect(e).to be_a ActiveRecord::RecordNotUnique
     }} 
   end

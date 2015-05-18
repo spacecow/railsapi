@@ -1,7 +1,7 @@
 class CreateArticles < ActiveRecord::Migration
   def up
     create_table :articles do |t|
-      t.string :name
+      t.string :name, null:false
     end
   end
 
