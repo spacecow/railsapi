@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     #Trying to querry the database for a record with find(), but
     #the record is not there.
     render json:{
-      error:'record in question is missing',
+      error:'record in question is not found',
       class:ActiveRecord::RecordNotFound.to_s}
   end
 
