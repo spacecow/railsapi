@@ -5,8 +5,16 @@ class ApplicationController < ActionController::Base
     #only: Proc.new { |c| c.request.format.json? }
 
   rescue_from ActiveRecord::StatementInvalid, with: :record_invalid
+  rescue_from ActiveRecord::RecordNotUnique, with: :record_not_unique
   rescue_from ActionController::ParameterMissing, with: :record_missing
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
+  def record_not_unique
+    #Database duplication violated.
+    render json:{
+      error:'record in question is wrongfully duplicated',
+      class:ActiveRecord::RecordNotUnique.to_s}
+  end
 
   def record_invalid
     #Database integrity violated.

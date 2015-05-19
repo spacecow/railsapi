@@ -39,6 +39,17 @@ describe 'Create universe' do
     end
   end
 
+  context "universe is duplicated" do
+    it "universe is not created" do
+      create :universe, title:'Malazan'
+      expect(Universe.count).to be 1
+      function
+      expect(Universe.count).to be 1
+      expect(body).to have_key 'error'
+      expect(body['class']).to eq ActiveRecord::RecordNotUnique.to_s 
+    end
+  end
+
   after{ Universe.delete_all }
 
 end
