@@ -24,6 +24,7 @@ describe 'Create universe' do
       function
       expect(Universe.count).to be 0
       expect(body).to have_key 'error'
+      expect(body['class']).to eq ActiveRecord::StatementInvalid.to_s 
     end
   end
 
@@ -34,6 +35,7 @@ describe 'Create universe' do
       function
       expect(Universe.count).to be 0
       expect(body).to have_key 'error'
+      expect(body['class']).to eq ActionController::ParameterMissing.to_s 
     end
   end
 

@@ -9,8 +9,9 @@ describe "ApplicationContoller" do
   describe "#record_invalid" do
     subject{ controller.record_invalid }
     before do
-      expect(controller).to receive(:render).
-        with(json:{error:record_invalid_msg}){ :json }
+      expect(controller).to receive(:render).with(json:{
+          error:record_invalid_msg,
+          class:ActiveRecord::StatementInvalid.to_s}){ :json }
     end
     it{ is_expected.to eq :json }
   end
@@ -18,8 +19,9 @@ describe "ApplicationContoller" do
   describe "#record_missing" do
     subject{ controller.record_missing }
     before do
-      expect(controller).to receive(:render).
-        with(json:{error:record_missing_msg}){ :json }
+      expect(controller).to receive(:render).with(json:{
+        error:record_missing_msg,
+        class:ActionController::ParameterMissing.to_s}){ :json }
     end
     it{ is_expected.to eq :json }
   end

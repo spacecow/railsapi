@@ -3,7 +3,8 @@ require 'rails_helper'
 describe 'Create Article' do
 
   let(:universe){ create :universe }
-  let(:params){ {article:{name:'Kelsier', universe_id:universe.id}} }
+  let(:universe_id){ universe.id }
+  let(:params){ {article:{name:'Kelsier', universe_id:universe_id}} }
   let(:driver){ Capybara.current_session.driver }
   let(:function){ driver.submit :post, api_articles_path, params }
   let(:body){ JSON.parse page.text }
@@ -20,7 +21,16 @@ describe 'Create Article' do
     end
   end
 
-  pending "no universe is selected"
+  context "no universe is selected" do
+    let(:universe_id){ nil }
+    it "" do
+      expect(Article.count).to be 0
+      function
+      expect(Article.count).to be 0
+      expect(body).to have_key 'error'
+      expect(body['class']).to eq ActiveRecord::RecordNotFound.to_s
+    end
+  end
 
   after do
     Article.delete_all

@@ -1,6 +1,8 @@
 module ActiveRecord
   class StatementInvalid; end
+  class RecordNotFound; end
 end unless defined?(ActiveRecord)
+
 module ActionController
   class Base
     def self.protect_from_forgery *args; end
@@ -8,4 +10,5 @@ module ActionController
   end
   class ParameterMissing; end
 end unless defined?(ActionController)
+
 require './app/controllers/application_controller'
