@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe 'List universes' do
+
   let(:universe){ create :universe, title:'Malazan' }
   let(:function){ visit api_universes_path }
   let(:body){ JSON.parse(page.text)["universes"] }
@@ -16,4 +17,5 @@ describe 'List universes' do
   end
 
   after{ Universe.delete_all }
+
 end

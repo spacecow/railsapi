@@ -1,8 +1,6 @@
 ---
 b1d194: !ruby/object:Dooby::Task
   todo: add dooby :done
-2ba9fd: !ruby/object:Dooby::Task
-  todo: test factory for empty create
 7e4839: !ruby/object:Dooby::Task
   todo: cover article_params in articles_controller :done
 e09c4a: !ruby/object:Dooby::Task
@@ -17,5 +15,13 @@ aa0e7d: !ruby/object:Dooby::Task
   todo: investigate when activerecord_parametermissing is triggered :done
 7a6059: !ruby/object:Dooby::Task
   todo: test record_not_found method in applicationcontroller :done
-deae1a: !ruby/object:Dooby::Task
-  todo: feature test for when record is duplicated :doing
+6c09b3: !ruby/object:Dooby::Task
+  todo: feature test for when record is duplicated :done
+40b85a: !ruby/object:Dooby::Task
+  todo: test factory for empty create :done
+57356d: !ruby/object:Dooby::Task
+  todo: doorkeeper och articles controller
+6e33df: !ruby/object:Dooby::Task
+  todo: move test of versioning to own file
+23e89b: !ruby/object:Dooby::Task
+  todo: article index api :done

@@ -2,6 +2,11 @@ module Api
   module V1
     class ArticlesController < ApplicationController
     
+      def index
+        articles = repo.articles
+        render json:{articles:articles}
+      end
+
       def create
         article = repo.create_article universe_id, article_params
         render json:{article:article} 
