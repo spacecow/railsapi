@@ -12,6 +12,11 @@ module Api
         render json:{article:article} 
       end
 
+      def delete_all
+        articles = repo.delete_articles
+        render json:{articles:articles}
+      end
+
       private
 
         def article_params
