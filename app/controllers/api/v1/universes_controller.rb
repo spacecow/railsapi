@@ -1,7 +1,7 @@
 module Api
   module V1
     class UniversesController < ApplicationController
-      before_action :doorkeeper_authorize! unless Rails.env.test?
+      #before_action :doorkeeper_authorize! unless Rails.env.test?
 
       def index
         universes = repo.universes
