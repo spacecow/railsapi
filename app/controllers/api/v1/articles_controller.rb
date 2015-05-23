@@ -3,7 +3,7 @@ module Api
     class ArticlesController < ApplicationController
     
       def index
-        articles = repo.articles
+        articles = repo.articles universe_id
         render json:{articles:articles}
       end
 

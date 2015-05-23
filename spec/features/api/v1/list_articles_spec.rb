@@ -2,7 +2,8 @@ describe 'List articles' do
 
   let(:universe){ create :universe }
   let(:article){ create :article, name:'Kelsier', universe:universe }
-  let(:function){ visit api_articles_path }
+  let(:params){ {article:{universe_id:universe.id}} }
+  let(:function){ visit api_articles_path params }
   let(:body){ JSON.parse(page.text)["articles"] }
 
   context 'response' do
