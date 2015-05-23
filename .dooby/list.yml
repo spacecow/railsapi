@@ -21,7 +21,68 @@ aa0e7d: !ruby/object:Dooby::Task
   todo: test factory for empty create :done
 57356d: !ruby/object:Dooby::Task
   todo: doorkeeper och articles controller
-6e33df: !ruby/object:Dooby::Task
-  todo: move test of versioning to own file
 23e89b: !ruby/object:Dooby::Task
   todo: article index api :done
+f230b8: !ruby/object:Dooby::Task
+  todo: deleting all universes should be an admin feature or only be able to do in
+    test environment
+2844f0: !ruby/object:Dooby::Task
+  todo: delete article functionality :done
+646bd4: !ruby/object:Dooby::Task
+  todo: not be able to ask for all articles, but only those in a universe :done
+4dc9ef: !ruby/object:Dooby::Task
+  todo: route for show universe :done
+26b71f: !ruby/object:Dooby::Task
+  todo: spec show method in the universes controller :done
+00248d: !ruby/object:Dooby::Task
+  todo: include articles in the single universe call :done
+92f88a: !ruby/object:Dooby::Task
+  todo: disable the articles_path call :done
+c6ccb0: !ruby/object:Dooby::Task
+  todo: do not included universe_id in article nested inside universe :done
+b43b11: !ruby/object:Dooby::Task
+  todo: create a character instead of an article :done
+de29bc: !ruby/object:Dooby::Task
+  todo: article type cannot be null :done
+e0e081: !ruby/object:Dooby::Task
+  todo: add blank constraint to name in articles :done
+16e663: !ruby/object:Dooby::Task
+  todo: api response for null exception in db :done
+31db42: !ruby/object:Dooby::Task
+  todo: api response for blank exception in db :done
+b7547f: !ruby/object:Dooby::Task
+  todo: api response for duplication exception in db :done
+e836f2: !ruby/object:Dooby::Task
+  todo: api resonse for non-inclusion exception in db :done
+'636605': !ruby/object:Dooby::Task
+  todo: do not be able to create a blank universe :done
+5f5a35: !ruby/object:Dooby::Task
+  todo: add descriptions to create article feature :done
+c5f7bd: !ruby/object:Dooby::Task
+  todo: let params error can be removed from application controller spec, when all
+    specs are rewritten
+b32339: !ruby/object:Dooby::Task
+  todo: api response for foreign key exception in db (probably not encountered, since
+    we are using find())
+4e0ac0: !ruby/object:Dooby::Task
+  todo: be able to check status code in feature specs and not the previous 'error'
+    param
+bae47d: !ruby/object:Dooby::Task
+  todo: move test of versioning to own file (prb ok. will be included in controllers
+    specs with new api version)
+b4b95f: !ruby/object:Dooby::Task
+  todo: return the available article types :done
+5f9668: !ruby/object:Dooby::Task
+  todo: do not hardcode available article types to return :done
+677a50: !ruby/object:Dooby::Task
+  todo: list books api :done
+42c091: !ruby/object:Dooby::Task
+  todo: use repo in the books controller :done
+74b887: !ruby/object:Dooby::Task
+  todo: create books :done
+30f97e: !ruby/object:Dooby::Task
+  todo: delete books :done
+3f9e04: !ruby/object:Dooby::Task
+  todo: before creating a note, the article, book and note universe_id must be same
+'574586': !ruby/object:Dooby::Task
+  todo: create note model :done
