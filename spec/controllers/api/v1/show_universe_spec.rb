@@ -1,7 +1,8 @@
-describe 'UniversesController#index' do
+describe 'UniversesController#show' do
 
   let(:controller){ Api::V1::UniversesController.new }
   let(:repo){ double :repo }
+  let(:params){ {id: :id} }
 
   before do
     require './spec/controller_helper'
@@ -9,14 +10,15 @@ describe 'UniversesController#index' do
   end
 
   context "response" do 
-    subject{ controller.index }
+    subject{ controller.show }
     before do
       expect(controller).to receive(:repo){ repo }
-      expect(repo).to receive(:universes){ :universes }
+      expect(controller).to receive(:params){ params }
+      expect(repo).to receive(:universe).with(:id){ :universe }
       expect(controller).to receive(:render).
-        with({json:{universes: :universes}}){ :json }
+        with(json:{universe: :universe}){ :json }
     end
-    it{ is_expected.to be :json }
+    it{ is_expected.to eq :json }
   end
 
 end
