@@ -3,6 +3,11 @@ module Api
     class UniversesController < ApplicationController
       #before_action :doorkeeper_authorize! unless Rails.env.test?
 
+      def show
+        universe = repo.universe params[:id]
+        render json:{universe:universe}
+      end
+
       def index
         universes = repo.universes
         render json:{universes:universes}
