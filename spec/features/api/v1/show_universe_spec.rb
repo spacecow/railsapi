@@ -16,8 +16,7 @@ describe 'Show universe' do
       'title' => 'The Final Empire',
       'articles' => [
         'id' => Article.first.id,
-        'name' => 'Vin',
-        'universe_id' => Universe.first.id] }) }
+        'name' => 'Vin' ] }) }
   end
 
   after do
