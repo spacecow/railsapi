@@ -14,9 +14,9 @@ describe 'UniversesController#show' do
     before do
       expect(controller).to receive(:repo){ repo }
       expect(controller).to receive(:params){ params }
-      expect(repo).to receive(:universe).with(:id){ :universe }
+      expect(repo).to receive(:universe).with(:id){ "universe" }
       expect(controller).to receive(:render).
-        with(json:{universe: :universe}){ :json }
+        with(json:{universe:"universe"}){ :json }
     end
     it{ is_expected.to eq :json }
   end

@@ -5,7 +5,7 @@ module Api
 
       def show
         universe = repo.universe params[:id]
-        render json:{universe:universe}
+        render json:{universe:universe.as_json(include: :articles)}
       end
 
       def index
