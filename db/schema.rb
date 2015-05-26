@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150518080105) do
   create_table "articles", force: :cascade do |t|
     t.string  "name",        null: false
     t.integer "universe_id", null: false
-    t.string  "type"
+    t.string  "type",        null: false
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
