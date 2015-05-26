@@ -4,7 +4,7 @@ describe 'Create Article' do
 
   let(:universe){ create :universe }
   let(:universe_id){ universe.id }
-  let(:params){ {article:{name:'Kelsier', universe_id:universe_id}} }
+  let(:params){ {article:{name:'Kelsier', type:'Character', universe_id:universe_id}} }
   let(:driver){ Capybara.current_session.driver }
   let(:function){ driver.submit :post, api_articles_path, params }
   let(:body){ JSON.parse page.text }
@@ -15,9 +15,10 @@ describe 'Create Article' do
       function
       expect(Article.count).to be 1
       expect(body["article"]).to eq({
-        "id" => Article.first.id,
-        "name" => 'Kelsier',
-        "universe_id" => universe.id })
+        'id'          => Article.first.id,
+        'name'        => 'Kelsier',
+        'type'        => 'Character',
+        'universe_id' => universe.id })
     end
   end
 

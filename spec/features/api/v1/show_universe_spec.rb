@@ -12,11 +12,12 @@ describe 'Show universe' do
     end
     subject{ body }
     it{ is_expected.to eq({
-      'id'    => Universe.first.id,
-      'title' => 'The Final Empire',
+      'id'       => Universe.first.id,
+      'title'    => 'The Final Empire',
       'articles' => [
-        'id' => Article.first.id,
-        'name' => 'Vin' ] }) }
+        'id'     => Article.first.id,
+        'type'   => 'Character',
+        'name'   => 'Vin' ] }) }
   end
 
   after do

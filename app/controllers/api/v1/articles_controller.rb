@@ -15,7 +15,7 @@ module Api
       private
 
         def article_params
-          params.require(:article).permit(:name) 
+          params.require(:article).permit(:name, :type) 
         end
       
         def universe_id

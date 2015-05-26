@@ -10,7 +10,7 @@ class Repository
   def delete_universes; Universe.destroy_all end
 
   def articles universe_id:
-    Article.where(universe_id:universe_id).select(:id,:name).to_a
+    Article.where(universe_id:universe_id).select(:id,:name,:type).to_a
   end
   def create_article universe_id, params
     Universe.find(universe_id).articles.create params

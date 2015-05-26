@@ -3,7 +3,7 @@ describe "ArticlesController" do
   let(:controller){ Api::V1::ArticlesController.new }
   let(:params){ double :params }
   let(:article_params){ double :article_params }
-  let(:permitted_params){ %i(name) }
+  let(:permitted_params){ %i(name type) }
 
   before do
     require './spec/controller_helper'

@@ -16,6 +16,7 @@ describe 'Delete articles' do
       expect(response['articles']).to eq([{
         'id'          => article.id,
         'name'        => 'Kelsier',
+        'type'        => 'Character',
         'universe_id' => universe.id }])
     end
   end

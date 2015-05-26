@@ -1,7 +1,8 @@
-if FactoryGirl.factories.instance_variable_get("@items").empty?
+if FactoryGirl.factories.instance_variable_get('@items').empty?
   FactoryGirl.define do
     factory :article do
-      name "factory name"
+      name 'factory name'
+      type 'Character'
       universe
     end
 
