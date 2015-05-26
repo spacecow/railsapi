@@ -1,5 +1,6 @@
 require './spec/model_helper'
 require './app/models/article'
+require './app/models/article/character'
 require './app/models/universe'
 
 describe Article do
@@ -8,7 +9,7 @@ describe Article do
   let(:type){ 'Character' }
   let(:universe){ create :universe }
   let(:universe_id){ universe.id }
-  let(:model){ Article.create name:name, type:type, universe_id:universe_id } 
+  let(:model){ Article.create! name:name, type:type, universe_id:universe_id } 
 
   it{ expect{model}.to change(Article,:count).from(0).to(1) }
 
@@ -36,7 +37,14 @@ describe Article do
   context "type is not set" do
     let(:type){ nil }
     it{ expect{model}.to raise_error{|e|
-      expect(e).to be_a ActiveRecord::StatementInvalid
+      expect(e).to be_a ActiveRecord::RecordInvalid
+    }} 
+  end
+
+  context "type is set to something unacceptable" do
+    let(:type){ "Batman" }
+    it{ expect{model}.to raise_error{|e|
+      expect(e).to be_a ActiveRecord::SubclassNotFound
     }} 
   end
 

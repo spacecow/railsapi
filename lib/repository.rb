@@ -6,14 +6,14 @@ class Repository
     u.merge(articles:as)
   end
   def universes; Universe.all end
-  def create_universe params; Universe.create params end
+  def create_universe params; Universe.create! params end
   def delete_universes; Universe.destroy_all end
 
   def articles universe_id:
     Article.where(universe_id:universe_id).select(:id,:name,:type).to_a
   end
   def create_article universe_id, params
-    Universe.find(universe_id).articles.create params
+    Universe.find(universe_id).articles.create! params
   end
   def delete_articles; Article.destroy_all end
 
