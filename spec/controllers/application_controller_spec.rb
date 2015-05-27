@@ -11,16 +11,29 @@ describe "ApplicationContoller" do
   subject{ controller.send function, *params }
 
   describe "#record_invalid" do
-    let(:msg){ 'null value in column "title" INSERT INTO "universes"' }
-    let(:error){ double :error, message:msg }
     let(:params){ error }
+    let(:error){ double :error, message:msg }
     let(:function){ :record_invalid }
-    before do
-      expect(controller).to receive(:render).with(
-        status: :bad_request,
-        json:{universe:{title:'cannot be null'}}){ :json }  
+
+    context "value is null" do
+      let(:msg){ 'null value in column "title" INSERT INTO "universes"' }
+      before do
+        expect(controller).to receive(:render).with(
+          status: :bad_request,
+          json:{universe:{title:'cannot be null'}}){ :json }  
+      end
+      it{ is_expected.to eq :json }
     end
-    it{ is_expected.to eq :json }
+
+    context "value is blank" do
+      let(:msg){ 'check constraint "title_cannot_be_blank" INSERT INTO "universes"' }
+      before do
+        expect(controller).to receive(:render).with(
+          status: :bad_request,
+          json:{universe:{title:'cannot be blank'}}){ :json }  
+      end
+      it{ is_expected.to eq :json }
+    end
   end
 
   describe "#record_missing" do

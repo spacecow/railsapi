@@ -4,7 +4,8 @@ describe 'Create Article' do
 
   let(:universe){ create :universe }
   let(:universe_id){ universe.id }
-  let(:params){ {article:{name:'Kelsier', type:'Character', universe_id:universe_id}} }
+  let(:name){ 'Kelsier' }
+  let(:params){ {article:{name:name, type:'Character', universe_id:universe_id}} }
   let(:driver){ Capybara.current_session.driver }
   let(:function){ driver.submit :post, api_articles_path, params }
   let(:body){ JSON.parse page.text }
@@ -30,6 +31,16 @@ describe 'Create Article' do
       expect(Article.count).to be 0
       expect(body).to have_key 'error'
       expect(body['class']).to eq ActiveRecord::RecordNotFound.to_s
+    end
+  end
+
+  context "name is blank" do
+    let(:name){ '' }
+    it "" do
+      expect(Article.count).to be 0
+      function
+      expect(Article.count).to be 0
+      expect(body['article']['name']).to eq 'cannot be blank' 
     end
   end
 

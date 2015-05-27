@@ -17,7 +17,7 @@ describe 'Create universe' do
     end
   end
   
-  context "universe is invalid" do
+  context "title is null" do
     let(:params){ {universe:{name:'Malazan'}} }
     it "universe is not created" do
       expect(Universe.count).to be 0

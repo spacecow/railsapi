@@ -21,6 +21,9 @@ class ApplicationController < ActionController::Base
     if match = error.message.match(/null value in column "(.*?)".*INSERT INTO "(.*?)"/m)
       column, table = match.captures
       msg = 'cannot be null'
+    elsif match = error.message.match(/check constraint "(.*?)_cannot_be_blank.*INSERT INTO "(.*?)"/m)
+      column, table = match.captures
+      msg = 'cannot be blank'
     end
     render status: :bad_request,
            json:{table.singularize.to_sym => {column.to_sym => msg}}
