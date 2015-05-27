@@ -8,6 +8,18 @@ class ApplicationController < ActionController::Base
   rescue_from(ActiveRecord::RecordNotUnique){|e| record_not_unique e}
   rescue_from ActionController::ParameterMissing, with: :record_missing
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from(ActiveRecord::SubclassNotFound){|e| subclass_not_found e}
+
+  def subclass_not_found error
+    column, table = "", ""
+    if match = error.message.match(/is not a subclass of (.*)$/)
+      column = 'type'
+      table = match.captures.first
+      msg = 'is invalid'
+    end
+    render status: :bad_request,
+           json:{table.downcase.to_sym => {column.to_sym => msg}}
+  end
 
   def record_not_unique error
     column, table = "", ""

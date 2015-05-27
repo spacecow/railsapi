@@ -5,7 +5,8 @@ describe 'Create Article' do
   let(:universe){ create :universe }
   let(:universe_id){ universe.id }
   let(:name){ 'Kelsier' }
-  let(:params){ {article:{name:name, type:'Character', universe_id:universe_id}} }
+  let(:type){ 'Character' }
+  let(:params){ {article:{name:name, type:type, universe_id:universe_id}} }
   let(:driver){ Capybara.current_session.driver }
   let(:function){ driver.submit :post, api_articles_path, params }
   let(:body){ JSON.parse page.text }
@@ -41,6 +42,16 @@ describe 'Create Article' do
       function
       expect(Article.count).to be 0
       expect(body['article']['name']).to eq 'cannot be blank' 
+    end
+  end
+
+  context "type is invalid" do
+    let(:type){ 'Superman' }
+    it "" do
+      expect(Article.count).to be 0
+      function
+      expect(Article.count).to be 0
+      expect(body['article']['type']).to eq 'is invalid' 
     end
   end
 
