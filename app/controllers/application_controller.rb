@@ -5,15 +5,18 @@ class ApplicationController < ActionController::Base
     #only: Proc.new { |c| c.request.format.json? }
 
   rescue_from(ActiveRecord::StatementInvalid){|e| record_invalid e}
-  rescue_from ActiveRecord::RecordNotUnique, with: :record_not_unique
+  rescue_from(ActiveRecord::RecordNotUnique){|e| record_not_unique e}
   rescue_from ActionController::ParameterMissing, with: :record_missing
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  def record_not_unique
-    #Database duplication violated.
-    render json:{
-      error:'record in question is wrongfully duplicated',
-      class:ActiveRecord::RecordNotUnique.to_s}
+  def record_not_unique error
+    column, table = "", ""
+    if match = error.message.match(/duplicate key.*_on_(.*?)".*INSERT INTO "(.*?)"/m)
+      column, table = match.captures
+      msg = 'must be unique'
+    end
+    render status: :bad_request,
+           json:{table.singularize.to_sym => {column.to_sym => msg}}
   end
 
   def record_invalid error

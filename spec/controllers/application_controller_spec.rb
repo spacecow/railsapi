@@ -1,18 +1,17 @@
 describe "ApplicationContoller" do
 
   let(:controller){ ApplicationController.new }
-  let(:record_invalid_msg){ 'record in question is invalid' }
   let(:record_missing_msg){ 'record in question is missing' }
   let(:record_not_found_msg){ 'record in question is not found' }
 
   before{ require './spec/controller_helper' }
 
+  let(:error){ double :error, message:msg }
   let(:params){ [] }
   subject{ controller.send function, *params }
 
   describe "#record_invalid" do
     let(:params){ error }
-    let(:error){ double :error, message:msg }
     let(:function){ :record_invalid }
 
     context "value is null" do
@@ -52,6 +51,18 @@ describe "ApplicationContoller" do
       expect(controller).to receive(:render).with(json:{
         error:record_not_found_msg,
         class:ActiveRecord::RecordNotFound.to_s}){ :json }
+    end
+    it{ is_expected.to eq :json }
+  end
+
+  describe "#record_not_unique" do
+    let(:msg){ 'duplicate key "index_universes_on_title" INSERT INTO "universes"' }
+    let(:params){ error }
+    let(:function){ :record_not_unique }
+    before do
+      expect(controller).to receive(:render).with(
+        status: :bad_request,
+        json:{universe:{title:'must be unique'}}){ :json }  
     end
     it{ is_expected.to eq :json }
   end

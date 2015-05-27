@@ -44,8 +44,7 @@ describe 'Create universe' do
       expect(Universe.count).to be 1
       function
       expect(Universe.count).to be 1
-      expect(body).to have_key 'error'
-      expect(body['class']).to eq ActiveRecord::RecordNotUnique.to_s 
+      expect(body['universe']['title']).to eq 'must be unique' 
     end
   end
 
