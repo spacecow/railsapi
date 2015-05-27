@@ -7,14 +7,18 @@ describe "ApplicationContoller" do
 
   before{ require './spec/controller_helper' }
 
-  subject{ controller.send function }
+  let(:params){ [] }
+  subject{ controller.send function, *params }
 
   describe "#record_invalid" do
+    let(:msg){ 'null value in column "title" INSERT INTO "universes"' }
+    let(:error){ double :error, message:msg }
+    let(:params){ error }
     let(:function){ :record_invalid }
     before do
-      expect(controller).to receive(:render).with(json:{
-          error:record_invalid_msg,
-          class:ActiveRecord::StatementInvalid.to_s}){ :json }
+      expect(controller).to receive(:render).with(
+        status: :bad_request,
+        json:{universe:{title:'cannot be null'}}){ :json }  
     end
     it{ is_expected.to eq :json }
   end

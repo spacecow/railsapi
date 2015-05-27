@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery #with: :null_session,
     #only: Proc.new { |c| c.request.format.json? }
 
-  rescue_from ActiveRecord::StatementInvalid, with: :record_invalid
+  rescue_from(ActiveRecord::StatementInvalid){|e| record_invalid e}
   rescue_from ActiveRecord::RecordNotUnique, with: :record_not_unique
   rescue_from ActionController::ParameterMissing, with: :record_missing
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
@@ -16,11 +16,14 @@ class ApplicationController < ActionController::Base
       class:ActiveRecord::RecordNotUnique.to_s}
   end
 
-  def record_invalid
-    #Database integrity violated.
-    render json:{
-      error:'record in question is invalid',
-      class:ActiveRecord::StatementInvalid.to_s}
+  def record_invalid error
+    column, table = "", ""
+    if match = error.message.match(/null value in column "(.*?)".*INSERT INTO "(.*?)"/m)
+      column, table = match.captures
+      msg = 'cannot be null'
+    end
+    render status: :bad_request,
+           json:{table.singularize.to_sym => {column.to_sym => msg}}
   end
 
   def record_missing
