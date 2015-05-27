@@ -13,7 +13,14 @@ describe Article do
 
   it{ expect{model}.to change(Article,:count).from(0).to(1) }
 
-  context "name is not set" do
+  context "name is blank" do
+    let(:name){ "" }
+    it{ expect{model}.to raise_error{|e|
+      expect(e).to be_a ActiveRecord::StatementInvalid
+    }} 
+  end
+
+  context "name is nil" do
     let(:name){ nil }
     it{ expect{model}.to raise_error{|e|
       expect(e).to be_a ActiveRecord::StatementInvalid
