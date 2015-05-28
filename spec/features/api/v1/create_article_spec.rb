@@ -34,6 +34,16 @@ describe 'Create Article' do
     end
   end
 
+  context "a non-existing universe is selected" do
+    let(:universe_id){ -1 }
+    it "article is not created" do
+      expect(Article.count).to be 0
+      function
+      expect(Article.count).to be 0
+      expect(body['universe']['id']).to eq 'is not found' 
+    end
+  end
+
   context "name is blank" do
     let(:name){ '' }
     it "article is not created" do
