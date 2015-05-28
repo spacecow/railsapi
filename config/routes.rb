@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
       resources :articles, only:[:create]
       delete '/articles', to:'articles#delete_all'
+
+      resources :article_types, only: :index
     end
   end
 end
