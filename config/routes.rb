@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       delete '/articles', to:'articles#delete_all'
 
       resources :article_types, only: :index
+
+      resources :books, only: :index
     end
   end
 end

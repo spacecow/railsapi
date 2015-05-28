@@ -1,4 +1,4 @@
-require './spec/model_helper'
+require 'model_helper'
 require './app/models/article'
 require './app/models/article/character'
 require './app/models/universe'
