@@ -7,7 +7,7 @@ describe 'Create universe' do
   let(:body){ JSON.parse page.text }
 
   context "universe is valid" do
-    it "creates a universe" do
+    it "a universe is created" do
       expect(Universe.count).to be 0
       function
       expect(Universe.count).to be 1

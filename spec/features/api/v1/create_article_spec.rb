@@ -11,8 +11,8 @@ describe 'Create Article' do
   let(:function){ driver.submit :post, api_articles_path, params }
   let(:body){ JSON.parse page.text }
 
-  context "a universe is selected" do
-    it "" do
+  context "article is valid" do
+    it "an article is created" do
       expect(Article.count).to be 0
       function
       expect(Article.count).to be 1
@@ -26,7 +26,7 @@ describe 'Create Article' do
 
   context "no universe is selected" do
     let(:universe_id){ nil }
-    it "" do
+    it "article is not created" do
       expect(Article.count).to be 0
       function
       expect(Article.count).to be 0
@@ -37,7 +37,7 @@ describe 'Create Article' do
 
   context "name is blank" do
     let(:name){ '' }
-    it "" do
+    it "article is not created" do
       expect(Article.count).to be 0
       function
       expect(Article.count).to be 0
@@ -47,7 +47,7 @@ describe 'Create Article' do
 
   context "type is invalid" do
     let(:type){ 'Superman' }
-    it "" do
+    it "article is not created" do
       expect(Article.count).to be 0
       function
       expect(Article.count).to be 0
