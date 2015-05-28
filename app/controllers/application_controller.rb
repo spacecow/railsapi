@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from(ActiveRecord::StatementInvalid){|e| record_invalid e}
   rescue_from(ActiveRecord::RecordNotUnique){|e| record_not_unique e}
-  rescue_from ActionController::ParameterMissing, with: :record_missing
+  rescue_from(ActionController::ParameterMissing){|e| nested_parameter_missing e}
   rescue_from(ActiveRecord::RecordNotFound){|e| record_not_found e}
   rescue_from(ActiveRecord::SubclassNotFound){|e| subclass_not_found e}
 
@@ -44,11 +44,14 @@ class ApplicationController < ActionController::Base
            json:{table.singularize.to_sym => {column.to_sym => msg}}
   end
 
-  def record_missing
-    #Strong parameter's require is not fullfilled.
-    render json:{
-      error:'record in question is missing',
-      class:ActionController::ParameterMissing.to_s}
+  def nested_parameter_missing error
+    column = ""
+    if match = error.message.match(/param is missing or the value is empty: (.*)/) 
+      column = match.captures.first
+      msg = 'is missing'
+    end
+    render status: :bad_request,
+           json:{column.to_sym => msg}
   end
 
   def record_not_found error

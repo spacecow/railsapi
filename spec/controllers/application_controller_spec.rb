@@ -7,11 +7,10 @@ describe "ApplicationContoller" do
   before{ require './spec/controller_helper' }
 
   let(:error){ double :error, message:msg }
-  let(:params){ [] }
+  let(:params){ error }
   subject{ controller.send function, *params }
 
   describe "#record_invalid" do
-    let(:params){ error }
     let(:function){ :record_invalid }
 
     context "value is null" do
@@ -35,18 +34,18 @@ describe "ApplicationContoller" do
     end
   end
 
-  describe "#record_missing" do
-    let(:function){ :record_missing }
+  describe "#nested_parameter_missing" do
+    let(:msg){ "param is missing or the value is empty: universe" }
+    let(:function){ :nested_parameter_missing }
     before do
-      expect(controller).to receive(:render).with(json:{
-        error:record_missing_msg,
-        class:ActionController::ParameterMissing.to_s}){ :json }
+      expect(controller).to receive(:render).with(
+        status: :bad_request,
+        json:{universe:'is missing'}){ :json }  
     end
     it{ is_expected.to eq :json }
   end
 
   describe "#record_not_found" do
-    let(:params){ error }
     let(:function){ :record_not_found }
     let(:msg){ "Couldn't find Universe with 'id'" }
     before do
@@ -59,7 +58,6 @@ describe "ApplicationContoller" do
 
   describe "#record_not_unique" do
     let(:msg){ 'duplicate key "index_universes_on_title" INSERT INTO "universes"' }
-    let(:params){ error }
     let(:function){ :record_not_unique }
     before do
       expect(controller).to receive(:render).with(

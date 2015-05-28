@@ -33,8 +33,7 @@ describe 'Create universe' do
       expect(Universe.count).to be 0
       function
       expect(Universe.count).to be 0
-      expect(body).to have_key 'error'
-      expect(body['class']).to eq ActionController::ParameterMissing.to_s 
+      expect(body['universe']).to eq 'is missing' 
     end
   end
 
