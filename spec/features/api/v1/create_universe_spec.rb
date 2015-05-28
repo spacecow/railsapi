@@ -44,7 +44,7 @@ describe 'Create universe' do
       expect(Universe.count).to be 1
       function
       expect(Universe.count).to be 1
-      expect(body['universe']['title']).to eq 'must be unique' 
+      expect(body['universe']['title']).to eq 'is already taken' 
     end
   end
 

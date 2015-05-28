@@ -62,7 +62,7 @@ describe "ApplicationContoller" do
     before do
       expect(controller).to receive(:render).with(
         status: :bad_request,
-        json:{universe:{title:'must be unique'}}){ :json }  
+        json:{universe:{title:'is already taken'}}){ :json }  
     end
     it{ is_expected.to eq :json }
   end

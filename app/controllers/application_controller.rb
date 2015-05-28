@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     column, table = "", ""
     if match = error.message.match(/duplicate key.*_on_(.*?)".*INSERT INTO "(.*?)"/m)
       column, table = match.captures
-      msg = 'must be unique'
+      msg = 'is already taken'
     end
     render status: :bad_request,
            json:{table.singularize.to_sym => {column.to_sym => msg}}
