@@ -3,7 +3,8 @@ module Api
     class ArticleTypesController < ApplicationController
 
       def index
-        render json:{article_types:['Character']} 
+        article_types = repo.article_types
+        render json:{article_types:article_types}
       end
 
     end
