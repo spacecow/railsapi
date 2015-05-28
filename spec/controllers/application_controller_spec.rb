@@ -46,11 +46,13 @@ describe "ApplicationContoller" do
   end
 
   describe "#record_not_found" do
+    let(:params){ error }
     let(:function){ :record_not_found }
+    let(:msg){ "Couldn't find Universe with 'id'" }
     before do
-      expect(controller).to receive(:render).with(json:{
-        error:record_not_found_msg,
-        class:ActiveRecord::RecordNotFound.to_s}){ :json }
+      expect(controller).to receive(:render).with(
+        status: :bad_request,
+        json:{universe:{id:'is not found'}}){ :json }  
     end
     it{ is_expected.to eq :json }
   end

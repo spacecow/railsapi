@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   rescue_from(ActiveRecord::StatementInvalid){|e| record_invalid e}
   rescue_from(ActiveRecord::RecordNotUnique){|e| record_not_unique e}
   rescue_from ActionController::ParameterMissing, with: :record_missing
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from(ActiveRecord::RecordNotFound){|e| record_not_found e}
   rescue_from(ActiveRecord::SubclassNotFound){|e| subclass_not_found e}
 
   def subclass_not_found error
@@ -51,12 +51,13 @@ class ApplicationController < ActionController::Base
       class:ActionController::ParameterMissing.to_s}
   end
 
-  def record_not_found
-    #Trying to querry the database for a record with find(), but
-    #the record is not there.
-    render json:{
-      error:'record in question is not found',
-      class:ActiveRecord::RecordNotFound.to_s}
+  def record_not_found error
+    if match = error.message.match(/Couldn't find (.*) with '(.*)'/)
+      table, column = match.captures
+      msg = 'is not found'
+    end
+    render status: :bad_request,
+           json:{table.downcase.to_sym => {column.to_sym => msg}}
   end
 
   def repo

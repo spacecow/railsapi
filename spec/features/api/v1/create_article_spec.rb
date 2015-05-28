@@ -30,8 +30,7 @@ describe 'Create Article' do
       expect(Article.count).to be 0
       function
       expect(Article.count).to be 0
-      expect(body).to have_key 'error'
-      expect(body['class']).to eq ActiveRecord::RecordNotFound.to_s
+      expect(body['universe']['id']).to eq 'is not found' 
     end
   end
 
