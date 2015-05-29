@@ -2,6 +2,7 @@ module ActiveRecord
   class RecordNotUnique; end
   class StatementInvalid; end
   class RecordNotFound; end
+  class SubclassNotFound; end
 end unless defined?(ActiveRecord)
 
 module ActionController

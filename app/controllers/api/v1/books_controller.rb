@@ -3,9 +3,15 @@ module Api
     class BooksController < ApplicationController
 
       def index
-        books = Book.all
+        books = repo.books universe_id
         render json:{books:books}
       end
+
+      private
+
+        def universe_id
+          params["universe_id"]
+        end
 
     end
   end

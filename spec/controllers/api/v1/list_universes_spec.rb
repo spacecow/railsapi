@@ -4,11 +4,11 @@ describe 'UniversesController#index' do
   let(:repo){ double :repo }
 
   before do
-    require './spec/controller_helper'
+    require 'controller_helper'
     require './app/controllers/api/v1/universes_controller'
   end
 
-  context "response" do 
+  describe "response" do 
     subject{ controller.index }
     before do
       expect(controller).to receive(:repo){ repo }

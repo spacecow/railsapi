@@ -5,7 +5,7 @@ describe 'List books' do
   let(:universe){ create :universe }
   let(:book){ create :book, title:'Cryptonomicon', universe_id:universe.id }
   let(:body){ JSON.parse(page.text)['books'] }
-  let(:function){ visit api_books_path }
+  let(:function){ visit api_books_path(universe_id:universe.id) }
 
   context 'response' do
     before{ book; function } 
