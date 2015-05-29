@@ -9,13 +9,13 @@ describe 'ArticlesController#delete_all' do
   end
 
   context 'response' do
-    subject{ controller.delete_all }
     before do
       expect(controller).to receive(:repo){ repo }
       expect(repo).to receive(:delete_articles){ :articles }
       expect(controller).to receive(:render).
         with({json:{articles: :articles}}){ :json }
     end
+    subject{ controller.delete_all }
     it{ is_expected.to be :json }
   end
 

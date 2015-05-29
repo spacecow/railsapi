@@ -6,21 +6,23 @@ describe 'Delete articles' do
   let(:function){ driver.submit :delete, api_articles_path, nil }
   let(:response){ JSON.parse page.text }
 
-  context 'success' do
+  describe 'success' do
     it 'all articles are deleted' do
-      universe = create :universe
-      article = create :article, name:'Kelsier', universe:universe
-      expect(Article.count).to be 1
-      function
-      expect(Article.count).to be 0
-      expect(response['articles']).to eq([{
-        'id'          => article.id,
-        'name'        => 'Kelsier',
-        'type'        => 'Character',
-        'universe_id' => universe.id }])
+      begin
+        article = create :article, name:'Kelsier'
+        expect(Article.count).to be 1
+        function
+        expect(Article.count).to be 0
+        expect(response['articles']).to eq([{
+          'id'          => article.id,
+          'name'        => 'Kelsier',
+          'type'        => 'Character',
+          'universe_id' => article.universe_id }])
+      ensure
+        Article.delete_all
+        Universe.delete_all
+      end
     end
   end
-
-  after{ Universe.delete_all }
 
 end

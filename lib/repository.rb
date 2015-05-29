@@ -14,6 +14,7 @@ class Repository
   def create_book universe_id, params
     Universe.find(universe_id).books.create params
   end
+  def delete_books; Book.destroy_all end
 
   def article_types
     Dir.entries("./app/models/article").

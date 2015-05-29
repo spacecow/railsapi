@@ -2,6 +2,7 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
 
   FactoryGirl.define do
     factory :book do
+      title 'factory title'
       universe
     end
 

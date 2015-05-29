@@ -11,6 +11,11 @@ module Api
         book = repo.create_book remove_universe_id, book_params
         render json:{book:book}
       end
+  
+      def delete_all
+        books = repo.delete_books
+        render json:{books:books}
+      end
 
       private
 
