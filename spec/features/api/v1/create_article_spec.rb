@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Create Article' do
+describe 'Create article' do
 
   let(:universe){ create :universe }
   let(:universe_id){ universe.id }

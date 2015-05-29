@@ -3,7 +3,7 @@ module Api
     class ArticlesController < ApplicationController
     
       def create
-        article = repo.create_article universe_id, article_params
+        article = repo.create_article remove_universe_id, article_params
         render json:{article:article} 
       end
 
@@ -18,8 +18,8 @@ module Api
           params.require(:article).permit(:name, :type) 
         end
       
-        def universe_id
-          params.require(:article)["universe_id"]
+        def remove_universe_id
+          params.require(:article).delete(:universe_id)
         end
 
     end

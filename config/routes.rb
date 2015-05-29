@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
       resources :article_types, only: :index
 
-      resources :books, only: :index
+      resources :books, only:[:index, :create]
     end
   end
 end

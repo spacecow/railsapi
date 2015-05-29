@@ -11,6 +11,9 @@ class Repository
   def books universe_id
     Universe.find(universe_id).books
   end
+  def create_book universe_id, params
+    Universe.find(universe_id).books.create params
+  end
 
   def article_types
     Dir.entries("./app/models/article").
