@@ -8,6 +8,13 @@ class Repository
   end
   def delete_articles; Article.destroy_all end
 
+
+  def article_types
+    Dir.entries("./app/models/article").
+      grep(/.*\.rb/).map{|e| e[0..-4].capitalize}
+  end
+
+
   def books universe_id
     Universe.find(universe_id).books
   end
@@ -16,9 +23,9 @@ class Repository
   end
   def delete_books; Book.destroy_all end
 
-  def article_types
-    Dir.entries("./app/models/article").
-      grep(/.*\.rb/).map{|e| e[0..-4].capitalize}
+
+  def create_note article_id, book_id
+    Note.create article_id:article_id, book_id:book_id
   end
 
   def universe id
