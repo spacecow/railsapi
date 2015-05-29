@@ -4,11 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery #with: :null_session,
     #only: Proc.new { |c| c.request.format.json? }
 
-  rescue_from(ActiveRecord::StatementInvalid){|e| record_invalid e}
-  rescue_from(ActiveRecord::RecordNotUnique){|e| record_not_unique e}
-  rescue_from(ActionController::ParameterMissing){|e| nested_parameter_missing e}
-  rescue_from(ActiveRecord::RecordNotFound){|e| record_not_found e}
-  rescue_from(ActiveRecord::SubclassNotFound){|e| subclass_not_found e}
+  unless RSpec.current_example.metadata.keys.include?(:exception)
+    rescue_from(ActiveRecord::StatementInvalid){|e| record_invalid e}
+    rescue_from(ActiveRecord::RecordNotUnique){|e| record_not_unique e}
+    rescue_from(ActionController::ParameterMissing){|e| nested_parameter_missing e}
+    rescue_from(ActiveRecord::RecordNotFound){|e| record_not_found e}
+    rescue_from(ActiveRecord::SubclassNotFound){|e| subclass_not_found e}
+  end
 
   def subclass_not_found error
     column, table = "", ""
