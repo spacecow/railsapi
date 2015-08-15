@@ -3,7 +3,8 @@ module Api
     class NotesController < ApplicationController
 
       def create
-        note = repo.create_note article_id:remove_article_id
+        note = repo.create_note(
+          article_id:remove_article_id, params:note_params)
         render json:{note:note}
       end
 
@@ -14,6 +15,10 @@ module Api
 
       private
 
+        def note_params
+          params.require(:note).permit(:text) 
+        end
+      
         def remove_article_id
           params.require(:note).delete(:article_id)
         end

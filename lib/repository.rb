@@ -29,12 +29,12 @@ class Repository
   def delete_books; Book.destroy_all end
 
 
-  def create_note article_id:
+  def create_note article_id:, params:{}
     article = Article.find(article_id)
-    Note.create article_id:article_id
+    article.notes.create params
   end
   def notes article_id:
-    Note.where(article_id:article_id).select(:id)
+    Note.where(article_id:article_id).select(:id, :text)
   end
   def delete_notes; Note.destroy_all end
 

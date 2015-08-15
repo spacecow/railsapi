@@ -29,7 +29,9 @@ describe Repository do
   end
 
   describe "#create_note" do
-    let(:function){ repo.create_note article_id:article_id.to_s }
+    let(:params){{ text:'a note' }}
+    let(:function){ repo.create_note(
+      article_id:article_id.to_s, params:params )} 
 
     context "valid note" do
       it{ expect{function}.to change(Note,:count).from(0).to(1) } 

@@ -7,10 +7,18 @@ describe Note do
 
   let(:article){ create :article }
   let(:article_id){ article.id }
-  let(:model){ Note.create article_id:article_id }
+  let(:params){{ article_id:article_id, text:'a note' }}
+  let(:model){ Note.create params }
 
   context "note is valid" do
     it{ expect{model}.to change(Note,:count).from(0).to(1) }
+  end
+
+  context "text is missing" do
+    let(:params){{ article_id:article_id }}
+    it{ expect{model}.to raise_error{|e|
+      expect(e).to be_a ActiveRecord::StatementInvalid
+    }} 
   end
 
   context "article_id is nil" do

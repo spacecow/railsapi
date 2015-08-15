@@ -7,7 +7,7 @@ describe 'Show article' do
   let(:article_id){ article.id }
   let(:universe){ article.universe }
   let(:universe_id){ universe.id }
-  let(:note){ create :note, article:article }
+  let(:note){ create :note, article:article, text:'a note' }
   let(:note_id){ note.id }
 
   context 'Article exists' do
@@ -18,12 +18,13 @@ describe 'Show article' do
     subject{ body }
     it{ subject }
     it{ is_expected.to eq({
-      'id' => article_id,
-      'name' => 'Vin',
+      'id'          => article_id,
+      'name'        => 'Vin',
       'universe_id' => universe_id,
-      'type' => 'Character',
-      'notes' => [
-        'id' => note_id ] }) }
+      'type'        => 'Character',
+      'notes'       => [
+        'id'          => note_id,
+        'text'        => 'a note' ] }) }
   end
 
   after do

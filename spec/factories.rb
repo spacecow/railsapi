@@ -14,6 +14,7 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
 
     factory :note do
       article
+      text 'factory text'
     end
 
     factory :universe do
