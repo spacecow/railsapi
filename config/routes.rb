@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :universes, only: [:show, :index, :create]
       delete '/universes', to:'universes#delete_all'
 
-      resources :articles, only:[:create]
+      resources :articles, only:[:show, :create]
       delete '/articles', to:'articles#delete_all'
 
       resources :article_types, only: :index

@@ -1,5 +1,10 @@
 class Repository
 
+  def article id:
+    a = Article.find(id).as_json
+    ns = notes(article_id:id).as_json
+    a.merge(notes:ns)
+  end
   def articles universe_id:
     Article.where(universe_id:universe_id).select(:id,:name,:type).to_a
   end
@@ -28,6 +33,9 @@ class Repository
     article = Article.find(article_id)
     raise ActiveRecord::RecordNotFound.new("Couldn't find Article with 'universe_id'=#{universe_id}") unless universe_id == article.universe_id.to_s 
     Note.create article_id:article_id
+  end
+  def notes article_id:
+    Note.where(article_id:article_id).select(:id)
   end
 
   def universe id

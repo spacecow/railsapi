@@ -12,6 +12,10 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       type 'Character'
     end
 
+    factory :note do
+      article
+    end
+
     factory :universe do
       sequence(:title){|n| "factory title#{n}"}
     end
