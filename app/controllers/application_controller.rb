@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
     column = ""
     if match = error.message.match(/param is missing or the value is empty: (.*)/) 
       column = match.captures.first
-      msg = 'is missing'
+      msg = 'has missing params'
     end
     render status: :bad_request,
            json:{column.to_sym => msg}

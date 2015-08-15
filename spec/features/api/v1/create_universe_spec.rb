@@ -33,7 +33,7 @@ describe 'Create universe' do
       expect(Universe.count).to be 0
       function
       expect(Universe.count).to be 0
-      expect(body['universe']).to eq 'is missing' 
+      expect(body['universe']).to eq 'has missing params' 
     end
   end
 

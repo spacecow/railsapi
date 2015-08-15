@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20150529083212) do
 
   create_table "notes", force: :cascade do |t|
     t.integer "article_id", null: false
-    t.integer "book_id",    null: false
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -83,5 +82,4 @@ ActiveRecord::Schema.define(version: 20150529083212) do
   add_foreign_key "articles", "universes"
   add_foreign_key "books", "universes"
   add_foreign_key "notes", "articles"
-  add_foreign_key "notes", "books"
 end

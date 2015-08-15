@@ -40,7 +40,7 @@ describe "ApplicationContoller" do
     before do
       expect(controller).to receive(:render).with(
         status: :bad_request,
-        json:{universe:'is missing'}){ :json }  
+        json:{universe:'has missing params'}){ :json }  
     end
     it{ is_expected.to eq :json }
   end
