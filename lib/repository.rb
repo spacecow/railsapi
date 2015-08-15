@@ -29,14 +29,14 @@ class Repository
   def delete_books; Book.destroy_all end
 
 
-  def create_note universe_id:, article_id:
+  def create_note article_id:
     article = Article.find(article_id)
-    raise ActiveRecord::RecordNotFound.new("Couldn't find Article with 'universe_id'=#{universe_id}") unless universe_id == article.universe_id.to_s 
     Note.create article_id:article_id
   end
   def notes article_id:
     Note.where(article_id:article_id).select(:id)
   end
+  def delete_notes; Note.destroy_all end
 
   def universe id
     u = Universe.find(id).as_json
