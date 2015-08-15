@@ -82,7 +82,35 @@ b4b95f: !ruby/object:Dooby::Task
   todo: create books :done
 30f97e: !ruby/object:Dooby::Task
   todo: delete books :done
-3f9e04: !ruby/object:Dooby::Task
-  todo: before creating a note, the article, book and note universe_id must be same
 '574586': !ruby/object:Dooby::Task
   todo: create note model :done
+099e8b: !ruby/object:Dooby::Task
+  todo: list notes under article with text
+39f9c5: !ruby/object:Dooby::Task
+  todo: add text to note :done
+9ecc25: !ruby/object:Dooby::Task
+  todo: add note_id to mention :done
+a94607: !ruby/object:Dooby::Task
+  todo: be able to save reference without image
+826e94: !ruby/object:Dooby::Task
+  todo: do no select inside the repository articles call
+f9fd1c: !ruby/object:Dooby::Task
+  todo: tag till notes
+79367d: !ruby/object:Dooby::Task
+  todo: tag till articles
+81b828: !ruby/object:Dooby::Task
+  todo: clickable url on the reference show page
+34877d: !ruby/object:Dooby::Task
+  todo: unconfirmed flag foer fakta som star emot varandra
+29c272: !ruby/object:Dooby::Task
+  todo: be able to edit notes
+0c32fa: !ruby/object:Dooby::Task
+  todo: leave out reference comment on note page if there is none
+b57446: !ruby/object:Dooby::Task
+  todo: foreign key on polymorphic association on tags
+6469be: !ruby/object:Dooby::Task
+  todo: check tagable_type to be article or note
+67b50e: !ruby/object:Dooby::Task
+  todo: delete all tags :done
+b20879: !ruby/object:Dooby::Task
+  todo: tag title is unique
