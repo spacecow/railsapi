@@ -21,6 +21,13 @@ describe Note do
     }} 
   end
 
+  context "text is blank" do
+    let(:params){{ article_id:article_id, text:'' }}
+    it{ expect{model}.to raise_error{|e|
+      expect(e).to be_a ActiveRecord::StatementInvalid
+    }} 
+  end
+
   context "article_id is nil" do
     let(:article_id){ nil }
     it{ expect{model}.to raise_error{|e|
