@@ -29,6 +29,11 @@ class Repository
   def delete_books; Book.destroy_all end
 
 
+  def create_mention params
+    Mention.create! params
+  end
+
+
   def create_note article_id:, params:{}
     article = Article.find(article_id)
     article.notes.create params

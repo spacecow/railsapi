@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529083212) do
+ActiveRecord::Schema.define(version: 20150816121249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,14 @@ ActiveRecord::Schema.define(version: 20150529083212) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string "title"
+    t.string  "title",       null: false
+    t.integer "universe_id", null: false
+  end
+
+  add_index "books", ["title", "universe_id"], name: "index_books_on_title_and_universe_id", unique: true, using: :btree
+
+  create_table "mentions", force: :cascade do |t|
+    t.string "image"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -78,5 +85,6 @@ ActiveRecord::Schema.define(version: 20150529083212) do
   add_index "universes", ["title"], name: "index_universes_on_title", unique: true, using: :btree
 
   add_foreign_key "articles", "universes"
+  add_foreign_key "books", "universes"
   add_foreign_key "notes", "articles"
 end
