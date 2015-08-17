@@ -10,7 +10,7 @@ module Api
       private
         
         def mention_params
-          params.require(:mention).permit(:image_data)
+          params.require(:mention).permit(:note_id, :image_data)
         end
 
     end

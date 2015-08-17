@@ -30,7 +30,8 @@ ActiveRecord::Schema.define(version: 20150816121249) do
   add_index "books", ["title", "universe_id"], name: "index_books_on_title_and_universe_id", unique: true, using: :btree
 
   create_table "mentions", force: :cascade do |t|
-    t.string "image"
+    t.integer "note_id", null: false
+    t.string  "image"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -86,5 +87,6 @@ ActiveRecord::Schema.define(version: 20150816121249) do
 
   add_foreign_key "articles", "universes"
   add_foreign_key "books", "universes"
+  add_foreign_key "mentions", "notes"
   add_foreign_key "notes", "articles"
 end
