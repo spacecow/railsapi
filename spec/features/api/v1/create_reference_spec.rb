@@ -20,8 +20,7 @@ describe "Create reference" do
       expect(response["reference"]).to eq({
         "id" => reference_id,
         "note_id" => note.id,
-        "image" => {
-          "url" => "/uploads/test/reference/image/#{reference_id}/photo.jpeg" }})
+        "image_data" => base64_image })
     end
   end
 
