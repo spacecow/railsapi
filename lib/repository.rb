@@ -32,6 +32,7 @@ class Repository
   def create_reference params
     Reference.create! params
   end
+  def delete_references; Reference.destroy_all end
 
 
   def create_note article_id:, params:{}

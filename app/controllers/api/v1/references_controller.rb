@@ -7,6 +7,11 @@ module Api
         render json:{reference:reference}
       end
       
+      def delete_all
+        references = repo.delete_references
+        render json:{references:references}
+      end
+
       private
         
         def reference_params
