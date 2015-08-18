@@ -29,8 +29,8 @@ class Repository
   def delete_books; Book.destroy_all end
 
 
-  def create_mention params
-    Mention.create! params
+  def create_reference params
+    Reference.create! params
   end
 
 

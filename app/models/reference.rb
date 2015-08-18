@@ -1,4 +1,4 @@
-class Mention < ActiveRecord::Base
+class Reference < ActiveRecord::Base
   mount_uploader :image, MentionUploader
 
   def image_data= data

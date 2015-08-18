@@ -29,11 +29,6 @@ ActiveRecord::Schema.define(version: 20150816121249) do
 
   add_index "books", ["title", "universe_id"], name: "index_books_on_title_and_universe_id", unique: true, using: :btree
 
-  create_table "mentions", force: :cascade do |t|
-    t.integer "note_id", null: false
-    t.string  "image"
-  end
-
   create_table "notes", force: :cascade do |t|
     t.integer "article_id", null: false
     t.string  "text",       null: false
@@ -79,6 +74,11 @@ ActiveRecord::Schema.define(version: 20150816121249) do
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
+  create_table "references", force: :cascade do |t|
+    t.integer "note_id", null: false
+    t.string  "image"
+  end
+
   create_table "universes", force: :cascade do |t|
     t.string "title", null: false
   end
@@ -87,6 +87,6 @@ ActiveRecord::Schema.define(version: 20150816121249) do
 
   add_foreign_key "articles", "universes"
   add_foreign_key "books", "universes"
-  add_foreign_key "mentions", "notes"
   add_foreign_key "notes", "articles"
+  add_foreign_key "references", "notes"
 end
