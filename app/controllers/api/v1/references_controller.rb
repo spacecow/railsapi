@@ -13,7 +13,7 @@ module Api
       end
       
       def delete_all
-        references = repo.references.map(&:to_json)
+        references = repo.references.as_json
         repo.delete_references
         render json:{references:references}
       end

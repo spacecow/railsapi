@@ -3,26 +3,29 @@ require 'rails_helper'
 describe 'Delete articles' do
 
   let(:driver){ Capybara.current_session.driver }
-  let(:function){ driver.submit :delete, api_articles_path, nil }
+  let(:function){ driver.submit :delete, path, nil }
   let(:response){ JSON.parse page.text }
 
-  describe 'success' do
-    it 'all articles are deleted' do
-      begin
-        article = create :article, name:'Kelsier'
-        expect(Article.count).to be 1
-        function
-        expect(Article.count).to be 0
-        expect(response['articles']).to eq([{
-          'id'          => article.id,
-          'name'        => 'Kelsier',
-          'type'        => 'Character',
-          'universe_id' => article.universe_id }])
-      ensure
-        Article.delete_all
-        Universe.delete_all
-      end
-    end
+  let(:path){ api_articles_path }
+  let(:universe){ article.universe }
+  let(:universe_id){ universe.id }
+  let(:article){ create :article, name:'Kelsier' }
+  let(:article_id){ article.id }
+
+  it 'existing articles are deleted' do
+    article
+    expect{ function }.to change(Article,:count).from(1).to(0)
+    expect(response['articles']).to eq([{
+      'id'          => article_id,
+      'universe_id' => universe_id,
+      'name'        => 'Kelsier',
+      'type'        => 'Character'
+    }])
+  end
+
+  after do
+    Article.delete_all
+    Universe.delete_all
   end
 
 end
