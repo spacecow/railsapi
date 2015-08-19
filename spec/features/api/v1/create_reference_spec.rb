@@ -5,7 +5,8 @@ describe "Create reference" do
   let(:file){ File.open('spec/apple.jpg').read }
   let(:base64_image){ Base64.encode64 file }
   let(:note){ create :note }
-  let(:params){{ reference:{ note_id:note.id, image_data:base64_image }}}
+  let(:params){{ reference:{ note_id:note.id, image_data:base64_image,
+    url:'www.example.com' }}}
   let(:driver){ Capybara.current_session.driver }
   let(:function){ driver.submit :post, api_references_path, params }
   let(:response){ JSON.parse page.text }
@@ -18,8 +19,9 @@ describe "Create reference" do
       function
       expect(Reference.count).to be 1
       expect(response["reference"]).to eq({
-        "id" => reference_id,
-        "note_id" => note.id,
+        "id"         => reference_id,
+        "note_id"    => note.id,
+        "url"        => 'www.example.com',
         "image_data" => base64_image })
     end
   end

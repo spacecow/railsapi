@@ -11,7 +11,7 @@ class Reference < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(:only => [:id, :note_id]).merge({image_data:image_data})
+    super(:only => [:id, :note_id, :url]).merge({image_data:image_data})
   end
 
   class CarrierStringIO < StringIO

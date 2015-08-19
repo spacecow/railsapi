@@ -4,6 +4,7 @@ class CreateReferences < ActiveRecord::Migration
     create_table :references do |t|
       t.integer :note_id, null:false
       t.string :image
+      t.string :url
     end
     add_foreign_key :references, :notes
   end

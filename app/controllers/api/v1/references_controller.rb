@@ -16,7 +16,9 @@ module Api
       private
         
         def reference_params
-          params.require(:reference).permit(:note_id, :image_data)
+          params.
+            require(:reference).
+            permit(:note_id, :image_data, :url)
         end
 
     end
