@@ -33,9 +33,16 @@ class Repository
     Reference.create! params
   end
   def delete_references; Reference.destroy_all end
-  def references; Reference.all.to_a end
+  def references note_id:
+    Reference.where(note_id:note_id)
+  end
 
 
+  def note id:
+    n = Note.find(id).as_json
+    rs = references(note_id:id).select(:id, :url).as_json 
+    n.merge(references:rs)
+  end
   def create_note article_id:, params:{}
     article = Article.find(article_id)
     article.notes.create params

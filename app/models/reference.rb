@@ -1,8 +1,10 @@
 class Reference < ActiveRecord::Base
+  belongs_to :note
+
   mount_uploader :image, MentionUploader
 
   def image_data
-    Base64.encode64 image.read
+    Base64.encode64(image.read) if image.url
   end
 
   def image_data= data
@@ -11,7 +13,9 @@ class Reference < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(:only => [:id, :note_id, :url]).merge({image_data:image_data})
+    ret = super(:only => [:id, :note_id, :url])
+    ret = ret.merge({image_data:image_data}) if image_data
+    ret
   end
 
   class CarrierStringIO < StringIO

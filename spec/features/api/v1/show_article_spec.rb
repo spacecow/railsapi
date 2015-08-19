@@ -10,21 +10,24 @@ describe 'Show article' do
   let(:note){ create :note, article:article, text:'a note' }
   let(:note_id){ note.id }
 
-  context 'Article exists' do
-    before do
-      note
-      visit api_article_path article
-    end
-    subject{ body }
-    it{ subject }
-    it{ is_expected.to eq({
+  before do
+    note
+    visit api_article_path article
+  end
+
+  subject{ body }
+
+  it "Article exists" do
+     is_expected.to eq({
       'id'          => article_id,
       'name'        => 'Vin',
       'universe_id' => universe_id,
       'type'        => 'Character',
       'notes'       => [
         'id'          => note_id,
-        'text'        => 'a note' ] }) }
+        'text'        => 'a note'
+      ]
+    })
   end
 
   after do

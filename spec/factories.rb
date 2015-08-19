@@ -17,6 +17,9 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       text 'factory text'
     end
 
+    factory :reference do
+    end
+
     factory :universe do
       sequence(:title){|n| "factory title#{n}"}
     end
