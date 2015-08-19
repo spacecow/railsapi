@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       resources :notes, only:[:show, :create]
       delete '/notes', to:'notes#delete_all'
   
-      resources :references, only:[:create]
+      resources :references, only:[:show, :create]
       delete '/references', to:'references#delete_all'
     end
   end

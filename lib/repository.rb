@@ -29,12 +29,19 @@ class Repository
   def delete_books; Book.destroy_all end
 
 
+  def reference id:
+    Reference.find(id).as_json
+  end
   def create_reference params
     Reference.create! params
   end
   def delete_references; Reference.destroy_all end
-  def references note_id:
-    Reference.where(note_id:note_id)
+  def references note_id:nil
+    if note_id.nil?
+      Reference.all
+    else
+      Reference.where(note_id:note_id)
+    end
   end
 
 

@@ -2,6 +2,11 @@ module Api
   module V1
     class ReferencesController < ApplicationController
 
+      def show
+        reference = repo.reference id:params[:id]
+        render json:{reference:reference}
+      end
+
       def create
         reference = repo.create_reference reference_params
         render json:{reference:reference}

@@ -17,17 +17,17 @@ describe 'Show note' do
 
   subject{ body }
     
-    it "Note exists" do
-      is_expected.to eq({
-        'id'         => note_id,
-        'article_id' => article_id,
-        'text'       => 'a note',
-        'references' => [
-          'id'         => reference_id,
-          'url'        => 'www.example.com'
-        ]
-      })
-    end
+  it "Note exists" do
+    is_expected.to eq({
+      'id'         => note_id,
+      'article_id' => article_id,
+      'text'       => 'a note',
+      'references' => [
+        'id'         => reference_id,
+        'url'        => 'www.example.com'
+      ]
+    })
+  end
 
   after do
     Reference.delete_all
