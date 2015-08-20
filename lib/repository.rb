@@ -35,6 +35,11 @@ class Repository
   def create_reference params
     Reference.create! params
   end
+  def update_reference id:, params:
+    reference = Reference.find(id)
+    reference.update params
+    reference
+  end
   def delete_references; Reference.destroy_all end
   def references note_id:nil
     if note_id.nil?
