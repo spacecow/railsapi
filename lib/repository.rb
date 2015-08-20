@@ -47,7 +47,7 @@ class Repository
 
   def note id:
     n = Note.find(id).as_json
-    rs = references(note_id:id).select(:id, :url).as_json 
+    rs = references(note_id:id).select(:id, :url, :comment).as_json 
     n.merge(references:rs)
   end
   def create_note article_id:, params:{}

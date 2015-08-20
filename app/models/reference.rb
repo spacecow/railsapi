@@ -13,7 +13,7 @@ class Reference < ActiveRecord::Base
   end
 
   def as_json(options={})
-    ret = super(:only => [:id, :note_id, :url])
+    ret = super(:only => [:id, :note_id, :url, :comment])
     ret = ret.merge({image_data:image_data}) if image_data
     ret
   end

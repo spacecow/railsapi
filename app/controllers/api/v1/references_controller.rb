@@ -23,7 +23,7 @@ module Api
         def reference_params
           params.
             require(:reference).
-            permit(:note_id, :image_data, :url)
+            permit(:note_id, :image_data, :url, :comment)
         end
 
     end

@@ -23,6 +23,7 @@ describe 'Delete references' do
       'id'         => reference_id,
       'note_id'    => note_id,
       'url'        => 'www.example.com',
+      'comment'    => nil,
       'image_data' => base64_image
     }])
   end

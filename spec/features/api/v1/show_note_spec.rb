@@ -7,7 +7,8 @@ describe 'Show note' do
   let(:article_id){ article.id }
   let(:note){ create :note, text:'a note' }
   let(:note_id){ note.id }
-  let(:reference){ create :reference, note:note, url:'www.example.com' }
+  let(:reference){ create :reference, params }
+  let(:params){{ comment:"smart", note:note, url:"www.example.com" }}
   let(:reference_id){ reference.id }
 
   before do
@@ -24,7 +25,8 @@ describe 'Show note' do
       'text'       => 'a note',
       'references' => [
         'id'         => reference_id,
-        'url'        => 'www.example.com'
+        'comment'    => "smart",
+        'url'        => "www.example.com"
       ]
     })
   end
