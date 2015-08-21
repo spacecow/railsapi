@@ -21,6 +21,9 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       note
     end
 
+    factory :tag do
+    end
+
     factory :universe do
       sequence(:title){|n| "factory title#{n}"}
     end

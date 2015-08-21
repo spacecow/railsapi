@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150816121249) do
+ActiveRecord::Schema.define(version: 20150821180644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,14 @@ ActiveRecord::Schema.define(version: 20150816121249) do
     t.string  "url"
     t.string  "comment"
   end
+
+  create_table "tags", force: :cascade do |t|
+    t.string  "title"
+    t.integer "tagable_id"
+    t.string  "tagable_type"
+  end
+
+  add_index "tags", ["tagable_id", "tagable_type"], name: "index_tags_on_tagable_id_and_tagable_type", using: :btree
 
   create_table "universes", force: :cascade do |t|
     t.string "title", null: false
