@@ -8,7 +8,8 @@ describe "Create reference" do
   let(:params){{ reference:{ note_id:note.id, image_data:base64_image,
     url:'www.example.com', comment:'smart' }}}
   let(:driver){ Capybara.current_session.driver }
-  let(:function){ driver.submit :post, api_references_path, params }
+  let(:function){ driver.submit :post, path, params }
+  let(:path){ api_references_path }
   let(:response){ JSON.parse page.text }
   let(:reference){ Reference.first }
   let(:reference_id){ reference.id }

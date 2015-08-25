@@ -5,3 +5,6 @@
 /vendor
 config/database.yml
 /public/uploads
+/public/*.epub
+/public/*.mobi
+/data/*.sql

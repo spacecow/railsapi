@@ -38,6 +38,7 @@ describe 'Show note' do
   end
 
   after do
+    Tag.delete_all
     Reference.delete_all
     Note.delete_all
     Article.delete_all

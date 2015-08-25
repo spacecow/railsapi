@@ -82,9 +82,9 @@ ActiveRecord::Schema.define(version: 20150821180644) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string  "title"
-    t.integer "tagable_id"
-    t.string  "tagable_type"
+    t.string  "title",        null: false
+    t.integer "tagable_id",   null: false
+    t.string  "tagable_type", null: false
   end
 
   add_index "tags", ["tagable_id", "tagable_type"], name: "index_tags_on_tagable_id_and_tagable_type", using: :btree

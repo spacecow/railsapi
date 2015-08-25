@@ -65,6 +65,11 @@ class Repository
   end
   def delete_notes; Note.destroy_all end
 
+  def create_tag tagable_id:, tagable_type:, params:
+    tagable_type.constantize.find(tagable_id).tags.create params
+  end
+  def delete_tags; Tag.destroy_all end
+
   def universe id
     u = Universe.find(id).as_json
     as = articles(universe_id:id).as_json
