@@ -42,6 +42,9 @@ class ApplicationController < ActionController::Base
     elsif match = error.message.match(/check constraint "(.*?)_cannot_be_blank.*INSERT INTO "(.*?)"/m)
       column, table = match.captures
       msg = 'cannot be blank'
+    elsif match = error.message.match(/enum (.*)_enum.*INSERT INTO "(.*?)"/m)
+      column, table = match.captures
+      msg = 'incorrect type'
     end
     render status: :bad_request,
            json:{table.singularize.to_sym => {column.to_sym => msg}}

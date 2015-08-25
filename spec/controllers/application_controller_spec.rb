@@ -1,3 +1,5 @@
+require 'active_support/all'
+
 describe "ApplicationContoller" do
 
   let(:controller){ ApplicationController.new }
@@ -12,6 +14,16 @@ describe "ApplicationContoller" do
 
   describe "#record_invalid" do
     let(:function){ :record_invalid }
+
+    context "value is invalid enum" do
+      let(:msg){ "PG::InvalidTextRepresentation: ERROR:  invalid input value for enum tagable_type_enum: \"basj\"\n: INSERT INTO \"tags\" (\"title\", \"tagable_id\", \"tagable_type\") VALUES ($1, $2, $3) RETURNING \"id\"" }
+      before do
+        expect(controller).to receive(:render).with(
+          status: :bad_request,
+          json:{tag:{tagable_type:'incorrect type'}}){ :json }  
+      end
+      it{ is_expected.to eq :json }
+    end
 
     context "value is null" do
       let(:msg){ 'null value in column "title" INSERT INTO "universes"' }
