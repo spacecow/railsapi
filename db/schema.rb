@@ -81,13 +81,8 @@ ActiveRecord::Schema.define(version: 20150821180644) do
     t.string  "comment"
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.string  "title",        null: false
-    t.integer "tagable_id",   null: false
-    t.string  "tagable_type", null: false
-  end
-
-  add_index "tags", ["tagable_id", "tagable_type"], name: "index_tags_on_tagable_id_and_tagable_type", using: :btree
+# Could not dump table "tags" because of following StandardError
+#   Unknown type 'tagable_type_enum' for column 'tagable_type'
 
   create_table "universes", force: :cascade do |t|
     t.string "title", null: false
