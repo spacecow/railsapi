@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
     rescue_from(ActionController::ParameterMissing){|e| nested_parameter_missing e}
     rescue_from(ActiveRecord::RecordNotFound){|e| record_not_found e}
     rescue_from(ActiveRecord::SubclassNotFound){|e| subclass_not_found e}
-    rescue_from(NoMethodError){|e| no_method_error e}
   #end
 
   def subclass_not_found error
@@ -67,13 +66,6 @@ class ApplicationController < ActionController::Base
     end
     render status: :bad_request,
            json:{table.downcase.to_sym => {column.to_sym => msg}}
-  end
-
-  def no_method_error error
-    msg = 'Internal server error.'
-    msg += " #{error}" if Rails.env.test?
-    render status: :bad_request,
-           json:msg
   end
 
   def repo
