@@ -8,18 +8,15 @@ describe "Delete tags" do
 
   let(:path){ api_tags_path }
   let(:tag){ create :tag }
+  let(:tag_id){ tag.id }
 
   it "existing tags are deleted" do
     tag
     expect{ function }.to change(Tag,:count).from(1).to(0)
     expect(response['tags']).to eq([{
-      'id'           => tag.id,
+      'id'           => tag_id,
       'title'        => 'factory title'
     }])
   end  
-
-  after do
-    Tag.delete_all
-  end
 
 end

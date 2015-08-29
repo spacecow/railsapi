@@ -26,6 +26,8 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
     end
 
     factory :tagging do
+      tag
+      association :tagable, factory: :note
     end
 
     factory :universe do
