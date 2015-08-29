@@ -14,8 +14,8 @@ describe "BooksController#index" do
       expect(controller).to receive(:repo){ repo }
       expect(controller).to receive(:universe_id){ :universe_id }
       expect(repo).to receive(:books).with(:universe_id){ :books }
-      expect(controller).to receive(:render).
-        with({json:{books: :books}}){ :json }
+      expect(controller).to receive(:render).with(
+        {json:{books: :books}}){ :json }
     end
     it{ is_expected.to be :json }
   end

@@ -65,6 +65,8 @@ class Repository
   end
   def delete_notes; Note.destroy_all end
 
+  
+  def tags; Tag.all end
   def create_tag params:
     #unless %w(Note).include?(tagable_type)
     #  raise ActiveRecord::StatementInvalid.new(

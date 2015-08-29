@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'List universes' do
+describe "List universes" do
 
   let(:universe){ create :universe, title:'Malazan' }
   let(:function){ visit api_universes_path }

@@ -2,16 +2,20 @@ require 'rails_helper'
 
 describe 'List books' do
   
+  let(:function){ visit path }
+  let(:response){ JSON.parse(page.text)['books'] }
+
+  let(:path){ api_books_path(universe_id:universe.id) }
+  let(:params){{ title:'Cryptonomicon', universe_id:universe.id }}
   let(:universe){ create :universe }
-  let(:book){ create :book, title:'Cryptonomicon', universe_id:universe.id }
-  let(:body){ JSON.parse(page.text)['books'] }
-  let(:function){ visit api_books_path(universe_id:universe.id) }
+  let(:book){ create :book, params }
+  let(:book_id){ book.id }
 
   context 'response' do
     before{ book; function } 
-    subject{ body }
+    subject{ response }
     it{ is_expected.to eq([{
-      'id'          => Book.first.id,
+      'id'          => book_id,
       'title'       => 'Cryptonomicon',
       'universe_id' => universe.id }]) }
   end
