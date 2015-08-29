@@ -7,8 +7,6 @@ describe "Delete tags" do
   let(:response){ JSON.parse page.text }
 
   let(:path){ api_tags_path }
-  let(:note){ tag.tagable }
-  let(:note_id){ note.id }
   let(:tag){ create :tag }
 
   it "existing tags are deleted" do
@@ -16,17 +14,12 @@ describe "Delete tags" do
     expect{ function }.to change(Tag,:count).from(1).to(0)
     expect(response['tags']).to eq([{
       'id'           => tag.id,
-      'title'        => 'factory title',
-      'tagable_id'   => note_id,
-      'tagable_type' => 'Note'
+      'title'        => 'factory title'
     }])
   end  
 
   after do
     Tag.delete_all
-    Note.delete_all
-    Article.delete_all
-    Universe.delete_all
   end
 
 end

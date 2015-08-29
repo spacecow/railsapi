@@ -65,12 +65,13 @@ class Repository
   end
   def delete_notes; Note.destroy_all end
 
-  def create_tag tagable_id:, tagable_type:, params:
-    unless %w(Note).include?(tagable_type)
-      raise ActiveRecord::StatementInvalid.new(
-        'enum tagable_type_enum INSERT INTO "tags"')
-    end
-    tagable_type.constantize.find(tagable_id).tags.create params
+  def create_tag params:
+    #unless %w(Note).include?(tagable_type)
+    #  raise ActiveRecord::StatementInvalid.new(
+    #    'enum tagable_type_enum INSERT INTO "tags"')
+    #end
+    #tagable_type.constantize.find(tagable_id).tags.create params
+    Tag.create params
   end
   def delete_tags; Tag.destroy_all end
 

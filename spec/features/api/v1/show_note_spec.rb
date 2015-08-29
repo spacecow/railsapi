@@ -7,14 +7,15 @@ describe 'Show note' do
   let(:article_id){ article.id }
   let(:note){ create :note, text:'a note' }
   let(:note_id){ note.id }
-  let(:tag){ create :tag, title:'TDP', tagable_id:note_id, tagable_type:'Note' }
+  let(:tag){ create :tag, title:'TDP' }
   let(:tag_id){ tag.id }
+  let(:tagging){ create :tagging, tag:tag, tagable:note }
   let(:reference){ create :reference, params }
   let(:params){{ comment:"smart", note:note, url:"www.example.com" }}
   let(:reference_id){ reference.id }
 
   before do
-    tag; reference
+    tagging; reference
     visit api_note_path note
   end
 
@@ -38,6 +39,7 @@ describe 'Show note' do
   end
 
   after do
+    Tagging.delete_all
     Tag.delete_all
     Reference.delete_all
     Note.delete_all

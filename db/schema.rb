@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821180644) do
+ActiveRecord::Schema.define(version: 20150827104531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,8 +81,12 @@ ActiveRecord::Schema.define(version: 20150821180644) do
     t.string  "comment"
   end
 
-# Could not dump table "tags" because of following StandardError
+# Could not dump table "taggings" because of following StandardError
 #   Unknown type 'tagable_type_enum' for column 'tagable_type'
+
+  create_table "tags", force: :cascade do |t|
+    t.string "title", null: false
+  end
 
   create_table "universes", force: :cascade do |t|
     t.string "title", null: false
@@ -94,4 +98,5 @@ ActiveRecord::Schema.define(version: 20150821180644) do
   add_foreign_key "books", "universes"
   add_foreign_key "notes", "articles"
   add_foreign_key "references", "notes"
+  add_foreign_key "taggings", "tags"
 end

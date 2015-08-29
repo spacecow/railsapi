@@ -11,7 +11,7 @@ describe "Create tag" do
   let(:tag){ Tag.first }
   let(:tag_id){ tag.id }
   let(:path){ api_tags_path }
-  let(:params){{ tag:{ tagable_id:note_id, tagable_type:'Note', title:'TDP'} }}
+  let(:params){{ tag:{ title:'TDP'} }}
 
   #TODO fyll i it text
   #TODO use {}.to change
@@ -22,8 +22,6 @@ describe "Create tag" do
     expect(response["tag"]).to eq({
       "id" => tag_id,
       "title" => 'TDP',
-      "tagable_id" => note_id,
-      "tagable_type" => "Note" 
     })
   end
 
