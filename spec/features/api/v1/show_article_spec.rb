@@ -9,9 +9,12 @@ describe 'Show article' do
   let(:universe_id){ universe.id }
   let(:note){ create :note, article:article, text:'a note' }
   let(:note_id){ note.id }
+  let(:tagging){ create :tagging, tagable_id:note_id, tag_id:tag_id, tagable_type:'Note' }
+  let(:tag){ create :tag, title:'TDP' }
+  let(:tag_id){ tag.id }
 
   before do
-    note
+    note; tagging
     visit api_article_path article
   end
 
@@ -25,12 +28,18 @@ describe 'Show article' do
       'type'        => 'Character',
       'notes'       => [
         'id'          => note_id,
-        'text'        => 'a note'
+        'text'        => 'a note',
+        'tags'        => [
+          'id'          => tag_id,
+          'title'       => 'TDP'
+        ]
       ]
     })
   end
 
   after do
+    Tagging.delete_all
+    Tag.delete_all
     Note.delete_all
     Article.delete_all
     Universe.delete_all

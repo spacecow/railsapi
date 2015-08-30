@@ -2,7 +2,7 @@ class Repository
 
   def article id:
     a = Article.find(id).as_json
-    ns = notes(article_id:id).as_json
+    ns = notes(article_id:id).select(:id, :text).as_json(include: :tags)
     a.merge(notes:ns)
   end
   def articles universe_id:
@@ -61,24 +61,23 @@ class Repository
     article.notes.create params
   end
   def notes article_id:
-    Note.where(article_id:article_id).select(:id, :text)
+    Note.where(article_id:article_id)
   end
   def delete_notes; Note.destroy_all end
 
   
   def tags; Tag.all end
   def create_tag params:
-    #unless %w(Note).include?(tagable_type)
-    #  raise ActiveRecord::StatementInvalid.new(
-    #    'enum tagable_type_enum INSERT INTO "tags"')
-    #end
-    #tagable_type.constantize.find(tagable_id).tags.create params
     Tag.create params
   end
   def delete_tags; Tag.destroy_all end
 
 
   def create_tagging tagable_type:, tagable_id:, params:
+    unless %w(Note).include?(tagable_type)
+      raise ActiveRecord::StatementInvalid.new(
+        'enum tagable_type_enum INSERT INTO "taggings"')
+    end
     tagable_type.constantize.find(tagable_id).taggings.create params
   end
   def delete_taggings; Tagging.destroy_all end
