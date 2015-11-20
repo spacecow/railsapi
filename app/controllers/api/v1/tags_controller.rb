@@ -2,6 +2,11 @@ module Api
   module V1
     class TagsController < ApplicationController
 
+      def show
+        tag = repo.tag params[:id]
+        render json:{tag:tag}
+      end
+
       def index
         tags = repo.tags
         render json:{tags:tags}

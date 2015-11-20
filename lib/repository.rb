@@ -1,5 +1,6 @@
 class Repository
 
+  #TODO show methods withot the id: param
   def article id:
     a = Article.find(id).as_json
     ns = notes(article_id:id).select(:id, :text).as_json(include: :tags)
@@ -66,6 +67,7 @@ class Repository
   def delete_notes; Note.destroy_all end
 
   
+  def tag id; Tag.find(id) end
   def tags; Tag.all end
   def create_tag params:
     Tag.create params
