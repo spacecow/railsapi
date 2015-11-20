@@ -67,7 +67,13 @@ class Repository
   def delete_notes; Note.destroy_all end
 
   
-  def tag id; Tag.find(id) end
+  def tag id
+    Tag.where(id:id).as_json(include:{
+      notes:{
+        only:[:id, :text],
+      }
+    }).first
+  end
   def tags; Tag.all end
   def create_tag params:
     Tag.create params
