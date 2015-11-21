@@ -30,6 +30,10 @@ class Repository
   def delete_books; Book.destroy_all end
 
 
+  def create_event
+    Event.create.as_json(only:[:id])
+  end
+
   def reference id:
     Reference.find(id).as_json
   end
