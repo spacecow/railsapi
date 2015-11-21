@@ -14,7 +14,9 @@ describe "EventsController#create" do
   before do
     expect(controller).to receive(:remove_universe_id).
       with(no_args){ :universe_id }
-    expect(repo).to receive(:create_event).with(:universe_id){ :event }
+    expect(controller).to receive(:event_params).
+      with(no_args){ :params }
+    expect(repo).to receive(:create_event).with(:universe_id, :params){ :event }
   end
 
   describe "successful" do

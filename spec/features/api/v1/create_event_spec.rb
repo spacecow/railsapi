@@ -11,11 +11,12 @@ describe "Create event" do
   subject{ ->{ driver.submit :post, api_events_path, params }}
 
   context "event is valid" do
-    let(:params){{ event:{universe_id:universe.id} }}
+    let(:params){{ event:{ universe_id:universe.id, title:"Red wedding" }}}
     it "an event is created" do
       should change(Event,:count).from(0).to(1)
       expect(response["event"]).to eq(
-      { 'id' => event.id })
+      { "id" => event.id,
+        "title" => "Red wedding" })
       expect(event.universe_id).to be universe.id 
     end
 

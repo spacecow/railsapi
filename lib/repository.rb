@@ -30,8 +30,8 @@ class Repository
   def delete_books; Book.destroy_all end
 
 
-  def create_event universe_id
-    Universe.find(universe_id).events.create.as_json(only:[:id])
+  def create_event universe_id, params
+    Universe.find(universe_id).events.create(params).as_json(only:[:id,:title])
   end
 
   def reference id:

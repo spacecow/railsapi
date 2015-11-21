@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20151121010701) do
 
   create_table "events", force: :cascade do |t|
     t.integer  "universe_id", null: false
+    t.string   "title",       null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
