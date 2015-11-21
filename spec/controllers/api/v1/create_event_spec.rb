@@ -12,7 +12,9 @@ describe "EventsController#create" do
   subject{ controller.create }
 
   before do
-    expect(repo).to receive(:create_event).with(no_args){ :event }
+    expect(controller).to receive(:remove_universe_id).
+      with(no_args){ :universe_id }
+    expect(repo).to receive(:create_event).with(:universe_id){ :event }
   end
 
   describe "successful" do

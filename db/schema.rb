@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(version: 20151121010701) do
   add_index "books", ["title", "universe_id"], name: "index_books_on_title_and_universe_id", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "universe_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "notes", force: :cascade do |t|
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(version: 20151121010701) do
 
   add_foreign_key "articles", "universes"
   add_foreign_key "books", "universes"
+  add_foreign_key "events", "universes"
   add_foreign_key "notes", "articles"
   add_foreign_key "references", "notes"
   add_foreign_key "taggings", "tags"
