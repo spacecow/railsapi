@@ -6,7 +6,7 @@ class CreateEvents < ActiveRecord::Migration
       t.timestamps null:false
     end
     execute "ALTER TABLE events ADD CONSTRAINT title_cannot_be_blank CHECK (char_length(title) <> 0)"
-    #TODO add_index :books, [:title, :universe_id], unique:true
+    add_index :events, [:title, :universe_id], unique:true
     add_foreign_key :events, :universes
   end
 

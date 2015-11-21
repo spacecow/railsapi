@@ -21,9 +21,20 @@ describe Event do
 
     context "Event is valid" do
       it{ should change(Event,:count).from(0).to(1) }
-      after do
-        Event.delete_all
-      end
+      after{ Event.delete_all }
+    end
+
+    context "Same title but in different universes" do
+      let(:universe2){ create :universe }
+      before{ create :event, universe_id:universe2.id, title:title }
+      it{ should change(Event,:count).from(1).to(2) }
+      after{ Event.delete_all }
+    end
+
+    context "Same universe but with different titles" do
+      before{ create :event, universe_id:universe.id, title:"Green wedding" }
+      it{ should change(Event,:count).from(1).to(2) }
+      after{ Event.delete_all }
     end
 
     context "Param universe_id is nil" do
@@ -56,6 +67,15 @@ describe Event do
         expect(e).to be_a ActiveRecord::StatementInvalid 
         expect(e.message).to include "PG::CheckViolation"
       }}
+    end
+
+    context "Pair universe_id and title is duplicated" do
+      before{ create :event, universe_id:universe_id, title:title }
+      it{ should raise_error{|e|
+        expect(e).to be_a ActiveRecord::StatementInvalid 
+        expect(e.message).to include "PG::UniqueViolation"
+      }}
+      after{ Event.delete_all }
     end
 
     after{ Universe.delete_all }

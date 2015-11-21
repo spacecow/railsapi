@@ -12,6 +12,9 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       type 'Character'
     end
 
+    factory :event do
+    end
+
     factory :note do
       article
       text 'factory text'
