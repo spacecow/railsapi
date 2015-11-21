@@ -12,7 +12,7 @@ module Api
       private
 
         def event_params
-          params.require(:event).permit(:title)
+          params.require(:event).permit(:title, :parent_id)
         end
 
         def remove_universe_id

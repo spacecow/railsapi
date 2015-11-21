@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20151121010701) do
 
   create_table "events", force: :cascade do |t|
     t.integer  "universe_id", null: false
+    t.integer  "parent_id"
     t.string   "title",       null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -105,6 +106,7 @@ ActiveRecord::Schema.define(version: 20151121010701) do
 
   add_foreign_key "articles", "universes"
   add_foreign_key "books", "universes"
+  add_foreign_key "events", "events", column: "parent_id"
   add_foreign_key "events", "universes"
   add_foreign_key "notes", "articles"
   add_foreign_key "references", "notes"

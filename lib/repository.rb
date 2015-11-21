@@ -31,7 +31,7 @@ class Repository
 
 
   def create_event universe_id, params
-    Universe.find(universe_id).events.create(params).as_json(only:[:id,:title])
+    Universe.find(universe_id).events.create(params).as_json(only:[:id,:title, :parent_id])
   end
 
   def reference id:
