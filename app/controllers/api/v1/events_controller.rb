@@ -2,9 +2,12 @@ module Api
   module V1
     class EventsController < ApplicationController
 
+      def show
+        event = repo.event params[:id]
+        render json:{event:event}
+      end
+
       def create
-        #TODO attach param
-#article = repo.create_article remove_universe_id, article_params
         event = repo.create_event remove_universe_id, event_params
         render json:{event:event} 
       end
