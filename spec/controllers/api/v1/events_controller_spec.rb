@@ -24,7 +24,6 @@ describe "EventsController" do
 
   describe "#create" do
     let(:function){ :create }
-
     before do
       expect(controller).to receive(:remove_universe_id).
         with(no_args){ :universe_id }
@@ -33,7 +32,15 @@ describe "EventsController" do
       expect(controller).to receive(:render).with(json:{event: :event}){ :render }
       expect(repo).to receive(:create_event).with(:universe_id, :params){ :event }
     end
+    it{ should eq :render }
+  end
 
+  describe "#delete_all" do
+    let(:function){ :delete_all }
+    before do
+      expect(controller).to receive(:render).with(json:{events: :events}){ :render }
+      expect(repo).to receive(:delete_events).with(no_args){ :events }
+    end
     it{ should eq :render }
   end
 

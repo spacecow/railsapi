@@ -36,6 +36,7 @@ class Repository
   def create_event universe_id, params
     Universe.find(universe_id).events.create(params).as_json(only:[:id,:title, :parent_id])
   end
+  def delete_events; Event.destroy_all end
 
   def reference id:
     Reference.find(id).as_json
