@@ -13,7 +13,7 @@ describe "List tags" do
   context "response" do
     before{ tag; function } 
     subject{ response }
-    it{ is_expected.to eq([{
+    it{ should eq([{
       'id'          => tag_id, 
       'title'       => 'TDP' }]) }
   end

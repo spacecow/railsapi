@@ -19,7 +19,16 @@ describe "EventsController" do
       expect(repo).to receive(:event).with(:id){ :event }
       expect(controller).to receive(:render).with(json:{event: :event}){ :render }
     end
-    it{ should eq :render }
+    it{ should be :render }
+  end
+
+  describe "#index" do
+    let(:function){ :index }
+    before do
+      expect(repo).to receive(:events).with(no_args){ :events }
+      expect(controller).to receive(:render).with(json:{events: :events}){ :render }
+    end
+    it{ should be :render }
   end
 
   describe "#create" do
@@ -32,7 +41,7 @@ describe "EventsController" do
       expect(controller).to receive(:render).with(json:{event: :event}){ :render }
       expect(repo).to receive(:create_event).with(:universe_id, :params){ :event }
     end
-    it{ should eq :render }
+    it{ should be :render }
   end
 
   describe "#delete_all" do
@@ -41,7 +50,7 @@ describe "EventsController" do
       expect(controller).to receive(:render).with(json:{events: :events}){ :render }
       expect(repo).to receive(:delete_events).with(no_args){ :events }
     end
-    it{ should eq :render }
+    it{ should be :render }
   end
 
 end

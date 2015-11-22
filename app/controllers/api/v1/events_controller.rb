@@ -7,6 +7,11 @@ module Api
         render json:{event:event}
       end
 
+      def index
+        events = repo.events
+        render json:{events:events}
+      end
+
       def create
         event = repo.create_event remove_universe_id, event_params
         render json:{event:event} 
