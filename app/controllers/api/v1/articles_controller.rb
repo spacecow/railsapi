@@ -7,6 +7,11 @@ module Api
         render json:{article:article}
       end
 
+      def index
+        articles = repo.articles universe_id:params[:universe_id]
+        render json:{articles:articles}
+      end
+
       def create
         article = repo.create_article remove_universe_id, article_params
         render json:{article:article} 
