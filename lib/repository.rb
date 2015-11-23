@@ -81,6 +81,11 @@ class Repository
   def delete_notes; Note.destroy_all end
 
   
+  def create_participation
+    Participation.create
+  end
+
+
   def tag id
     Tag.where(id:id).as_json(include:{
       notes:{
@@ -89,9 +94,7 @@ class Repository
     }).first
   end
   def tags; Tag.all end
-  def create_tag params:
-    Tag.create params
-  end
+  def create_tag params:; Tag.create params end
   def delete_tags; Tag.destroy_all end
 
 
