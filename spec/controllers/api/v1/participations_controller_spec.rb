@@ -5,7 +5,6 @@ describe "ParicipationsController" do
 
   before do
     module Api; module V1; class ApplicationController
-      def repo; NotImplementedError.new end
     end end end unless defined?(Rails)
     require './app/controllers/api/v1/participations_controller'
     allow(controller).to receive(:repo).with(no_args){ repo }
@@ -16,9 +15,11 @@ describe "ParicipationsController" do
   describe "#create" do
     let(:function){ :create }
     before do
+      expect(controller).to receive(:participation_params).
+        with(no_args){ :params }
       expect(repo).to receive(:create_participation).
-        with(no_args){ :participation } 
-      expect(controller).to receive(:render).with(json:{participation:{}}){ :render }
+        with(:params){ :participation } 
+      expect(controller).to receive(:render).with(json:{participation: :participation}){ :render }
     end
     it{ subject }
   end

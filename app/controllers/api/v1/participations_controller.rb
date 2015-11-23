@@ -3,9 +3,15 @@ module Api
     class ParticipationsController < ApplicationController
 
       def create
-        repo.create_participation
-        render json:{participation:{}}
+        participation = repo.create_participation participation_params
+        render json:{participation:participation}
       end
+
+      private
+
+        def participation_params
+          params.require(:participation).permit(:event_id)
+        end
 
     end
   end

@@ -81,8 +81,8 @@ class Repository
   def delete_notes; Note.destroy_all end
 
   
-  def create_participation
-    Participation.create
+  def create_participation params
+    Participation.create(params).as_json(only:[:id, :event_id])
   end
 
 
