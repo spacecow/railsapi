@@ -10,7 +10,7 @@ module Api
       private
 
         def participation_params
-          params.require(:participation).permit(:event_id)
+          params.require(:participation).permit(:event_id, :article_id)
         end
 
     end

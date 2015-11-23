@@ -8,24 +8,27 @@ describe "Create participation" do
   let(:path){ send("api_#{mdl.pluralize}_path") }
 
   let(:mode){ :post }
-  let(:params){{ participation:{ event_id:event.id }}}
+  let(:params){{ participation:{ event_id:event.id, article_id:article.id }}}
   let(:mdl){ "participation" }
 
   let(:participation){ Participation.last }
   let(:event){ create :event }
+  let(:article){ create :article }
 
   subject{ ->{ function }}
 
   it "a participation is created" do
     should change(Participation,:count).from(0).to(1)
     expect(response).to eq(
-    { 'id'       => participation.id,
-      'event_id' => event.id })
+    { 'id'         => participation.id,
+      'event_id'   => event.id,
+      'article_id' => article.id })
   end
 
   after do
     Participation.delete_all
     Event.delete_all
+    Article.delete_all
     Universe.delete_all
   end
 

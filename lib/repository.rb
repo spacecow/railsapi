@@ -82,7 +82,7 @@ class Repository
 
   
   def create_participation params
-    Participation.create(params).as_json(only:[:id, :event_id])
+    Participation.create(params).as_json(only:[:id, :event_id, :article_id])
   end
 
 
