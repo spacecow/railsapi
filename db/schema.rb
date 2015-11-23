@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 20151123151112) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "participations", ["event_id", "article_id"], name: "index_participations_on_event_id_and_article_id", unique: true, using: :btree
+
   create_table "references", force: :cascade do |t|
     t.integer "note_id", null: false
     t.string  "image"

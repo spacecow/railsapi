@@ -22,9 +22,33 @@ describe Participation do
     let(:article_id){ article.id }
     subject{ ->{ Participation.create event_id:event_id, article_id:article_id }}
 
-    #TODO make event and article unique
+    #TODO article and event should belong to the same universe
     context "Participation is valid" do
       it{ should change(Participation,:count).from(0).to(1) }
+      after{ Participation.delete_all }
+    end
+
+    context "Same event, but different articles" do
+      let(:article2){ create :article }
+      before{ create :participation, event_id:event.id, article_id:article2.id }
+      it{ should change(Participation,:count).from(1).to(2) }
+      after{ Participation.delete_all }
+    end
+
+    context "Same article, but different events" do
+      let(:event2){ create :event }
+      before{ create :participation, event_id:event2.id, article_id:article.id }
+      it{ should change(Participation,:count).from(1).to(2) }
+      after{ Participation.delete_all }
+    end
+
+
+    context "Pair event and article is duplicated" do
+      before{ create :participation, event_id:event.id, article_id:article.id }
+      it{ should raise_error{|e|
+        expect(e).to be_a ActiveRecord::StatementInvalid 
+        expect(e.message).to include "PG::UniqueViolation"
+      }}
       after{ Participation.delete_all }
     end
 

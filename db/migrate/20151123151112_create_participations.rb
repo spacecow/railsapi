@@ -7,6 +7,7 @@ class CreateParticipations < ActiveRecord::Migration
     end
     add_foreign_key :participations, :events
     add_foreign_key :participations, :articles
+    add_index :participations, [:event_id, :article_id], unique:true
   end
 
   def down
