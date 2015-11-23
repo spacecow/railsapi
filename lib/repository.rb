@@ -30,12 +30,19 @@ class Repository
   def delete_books; Book.destroy_all end
 
 
-  def event id; Event.find(id).as_json(only:[:id,:title]) end
+  def event id
+    Event.find(id).as_json(
+      only:[:id,:title],
+      include:
+      { parent:
+        { only:[:id,:title] }}) 
+  end
+  #TODO only events from the same universe
   def events; Event.all.as_json(only:[:id,:title]) end
   def create_event universe_id, params
     Universe.find(universe_id).events.create(params).as_json(only:[:id,:title, :parent_id])
   end
-  def delete_events; Event.destroy_all end
+  def delete_events; Event.delete_all end
 
   def reference id:
     Reference.find(id).as_json

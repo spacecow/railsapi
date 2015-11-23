@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe "Show event" do
 
-  let(:event){ create :event, title:"Red wedding" }
+  let(:parent){ create :event, title:"Green wedding" }
+  let(:event){ create :event, title:"Red wedding", parent:parent }
 
   before do
     visit api_event_path event
@@ -12,8 +13,11 @@ describe "Show event" do
 
   it "Event exists" do
     should eq(
-    { 'id'    => event.id,
-      'title' => "Red wedding" })
+    { 'id'     => event.id,
+      'title'  => "Red wedding",
+      'parent' =>
+      { 'id' => parent.id,
+        'title' => "Green wedding" }})
   end
 
   after do
