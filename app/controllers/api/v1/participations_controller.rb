@@ -7,6 +7,11 @@ module Api
         render json:{participation:participation}
       end
 
+      def delete_all
+        participations = repo.delete_participations
+        render json:{participations:participations}
+      end
+
       private
 
         def participation_params

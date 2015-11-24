@@ -19,7 +19,19 @@ describe "ParicipationsController" do
         with(no_args){ :params }
       expect(repo).to receive(:create_participation).
         with(:params){ :participation } 
-      expect(controller).to receive(:render).with(json:{participation: :participation}){ :render }
+      expect(controller).to receive(:render).
+        with(json:{participation: :participation}){ :render }
+    end
+    it{ should be :render }
+  end
+
+  describe "#delete_all" do
+    let(:function){ :delete_all }
+    before do
+      expect(controller).to receive(:render).
+        with(json:{participations: :participations}){ :render }
+      expect(repo).to receive(:delete_participations).
+        with(no_args){ :participations }
     end
     it{ subject }
   end

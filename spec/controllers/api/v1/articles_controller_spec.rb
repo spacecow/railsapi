@@ -8,9 +8,8 @@ describe "ArticlesController" do
   let(:repo){ double :repo }
 
   before do
-    #require './spec/controller_helper'
     module Api; module V1; class ApplicationController
-    end end end
+    end end end unless defined?(Rails)
     require './app/controllers/api/v1/articles_controller'
     allow(controller).to receive(:params).with(no_args){ params }
     allow(controller).to receive(:repo).with(no_args){ repo }

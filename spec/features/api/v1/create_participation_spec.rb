@@ -4,8 +4,7 @@ describe "Create participation" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:response){ JSON.parse(page.text)[mdl] }
-  let(:function){ driver.submit mode, path, params }
-  let(:path){ send("api_#{mdl.pluralize}_path") }
+  let(:path){ send "api_#{mdl.pluralize}_path" }
 
   let(:mode){ :post }
   let(:params){{ participation:{ event_id:event.id, article_id:article.id }}}
@@ -15,7 +14,7 @@ describe "Create participation" do
   let(:event){ create :event }
   let(:article){ create :article }
 
-  subject{ ->{ function }}
+  subject{ ->{ driver.submit mode, path, params }}
 
   it "a participation is created" do
     should change(Participation,:count).from(0).to(1)

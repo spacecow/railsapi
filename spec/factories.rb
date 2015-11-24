@@ -23,6 +23,8 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
     end
 
     factory :participation do
+      article
+      event
     end
 
     factory :reference do

@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       delete '/notes', to:'notes#delete_all'
   
       resources :participations, only:[:create]
+      delete '/participations', to:'participations#delete_all'
+
       resources :references, only:[:show, :create, :update]
       delete '/references', to:'references#delete_all'
 
