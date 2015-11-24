@@ -6,7 +6,7 @@ describe "Show event" do
   let(:event){ create :event, title:"Red wedding", parent:parent }
   let(:article){ create :article, name:"Ethenielle" }
   let(:participation){
-    create :participation, article_id:article.id, event_id:event.id }
+    create :participation, participant:article, event:event }
 
   before do
     participation
@@ -17,14 +17,14 @@ describe "Show event" do
 
   it "Event exists" do
     should eq(
-    { 'id'       => event.id,
-      'title'    => "Red wedding",
-      'parent'   =>
-      { 'id'       => parent.id,
-        'title'    => "Green wedding" },
-      'articles' => 
-      [{'id'       => article.id,
-        'name'     => "Ethenielle" }]})
+    { 'id'           => event.id,
+      'title'        => "Red wedding",
+      'parent'       =>
+      { 'id'           => parent.id,
+        'title'        => "Green wedding" },
+      'participants' => 
+      [{'id'           => article.id,
+        'name'         => "Ethenielle" }]})
   end
 
   after do

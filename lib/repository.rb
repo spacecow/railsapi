@@ -36,7 +36,7 @@ class Repository
       include:
       { parent:
         { only:[:id,:title] },
-        articles:
+        participants:
         { only:[:id, :name] }}) 
   end
   #TODO only events from the same universe
