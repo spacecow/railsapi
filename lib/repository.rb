@@ -35,7 +35,9 @@ class Repository
       only:[:id,:title],
       include:
       { parent:
-        { only:[:id,:title] }}) 
+        { only:[:id,:title] },
+        articles:
+        { only:[:id, :name] }}) 
   end
   #TODO only events from the same universe
   def events; Event.all.as_json(only:[:id,:title]) end
