@@ -39,8 +39,8 @@ class Repository
         participants:
         { only:[:id, :name] }}) 
   end
-  #TODO only events from the same universe
-  def events; Event.all.as_json(only:[:id,:title]) end
+  def events universe_id
+    Universe.find(universe_id).events.as_json(only:[:id,:title]) end
   def create_event universe_id, params
     Universe.find(universe_id).events.create(params).as_json(only:[:id,:title, :parent_id])
   end

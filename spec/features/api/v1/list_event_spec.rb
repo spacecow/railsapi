@@ -2,16 +2,17 @@ require 'rails_helper'
 
 describe "List events" do
 
-  let(:event){ create :event, title:"Red wedding" }
+  let(:event){ create :event, title:"The horse ride" }
+  let(:event2){ create :event, title:"Red wedding" }
+  let(:response){ JSON.parse(page.text)['events'] }
 
   context "events response" do
-    subject{ JSON.parse(page.text)['events'] }
     before do
-      event
-      visit api_events_path
+      event; event2
+      visit api_events_path(universe_id:event2.universe_id)
     end
-    it{ should eq(
-    [ "id"    => event.id,
+    it{ expect(response).to eq(
+    [ "id"    => event2.id,
       "title" => "Red wedding" ])}
   end
 

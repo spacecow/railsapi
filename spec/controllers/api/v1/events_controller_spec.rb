@@ -24,8 +24,9 @@ describe "EventsController" do
 
   describe "#index" do
     let(:function){ :index }
+    let(:params){{ universe_id: :universe_id }}
     before do
-      expect(repo).to receive(:events).with(no_args){ :events }
+      expect(repo).to receive(:events).with(:universe_id){ :events }
       expect(controller).to receive(:render).with(json:{events: :events}){ :render }
     end
     it{ should be :render }

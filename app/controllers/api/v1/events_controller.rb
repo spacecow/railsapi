@@ -8,7 +8,7 @@ module Api
       end
 
       def index
-        events = repo.events
+        events = repo.events params[:universe_id]
         render json:{events:events}
       end
 
