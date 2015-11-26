@@ -1,0 +1,2 @@
+class Item < Article
+end
