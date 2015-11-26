@@ -12,6 +12,17 @@ describe "StepsController" do
 
   subject{ controller.send function }
 
+  describe "#create" do
+    let(:function){ :create }
+    let(:params){{ }}
+    before do
+      expect(controller).to receive(:step_params).with(no_args){ :params }
+      expect(repo).to receive(:create_step).with(:params){ :step }
+      expect(controller).to receive(:render).with(json:{step: :step}){ :render }
+    end
+    it{ should be :render }
+  end
+
   describe "#delete_all" do
     let(:function){ :delete_all }
     before do

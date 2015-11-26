@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :references, only:[:show, :create, :update]
       delete '/references', to:'references#delete_all'
 
+      resources :steps, only:[:create]
       delete '/steps', to:'steps#delete_all'
 
       resources :tags, only:[:show, :index, :create]
