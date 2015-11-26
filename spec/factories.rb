@@ -32,6 +32,8 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
     end
 
     factory :step do
+      association :parent, factory: :event
+      association :child, factory: :event
     end
 
     factory :tag do

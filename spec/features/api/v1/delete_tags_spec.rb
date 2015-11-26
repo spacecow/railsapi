@@ -17,8 +17,8 @@ describe "Delete tags" do
   it "existing tags are deleted" do
     should change(Tag,:count).from(1).to(0)
     expect(response).to eq([{
-      'id'           => tag.id,
-      'title'        => 'factory title'
+      'id'    => tag.id,
+      'title' => 'factory title'
     }])
   end  
 
