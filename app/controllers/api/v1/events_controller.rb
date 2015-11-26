@@ -25,7 +25,7 @@ module Api
       private
 
         def event_params
-          params.require(:event).permit(:title, :parent_id)
+          params.require(:event).permit(:title, :parent_tokens, :child_tokens)
         end
 
         def remove_universe_id

@@ -16,40 +16,23 @@ describe Event do
     let(:universe){ create :universe }
     let(:universe_id){ universe.id }
     let(:title){ "Red Wedding" }
-    let(:parent){ create :event }
-    let(:parent_id){ parent.id }
-    let(:params){{ universe_id:universe_id, title:title, parent_id:parent_id }}
+    let(:params){{ universe_id:universe_id, title:title }}
     
-    before{ parent }
-
     subject{ ->{ Event.create params }}
 
     context "Event is valid" do
-      it{ should change(Event,:count).from(1).to(2) }
-    end
-
-    context "Event has no parent" do
-      let(:parent_id){ nil }
-      it{ should change(Event,:count).from(1).to(2) }
+      it{ should change(Event,:count).from(0).to(1) }
     end
 
     context "Same title but in different universes" do
       let(:universe2){ create :universe }
       before{ create :event, universe_id:universe2.id, title:title }
-      it{ should change(Event,:count).from(2).to(3) }
+      it{ should change(Event,:count).from(1).to(2) }
     end
 
     context "Same universe but with different titles" do
       before{ create :event, universe_id:universe.id, title:"Green wedding" }
-      it{ should change(Event,:count).from(2).to(3) }
-    end
-
-    context "Parent is set to a non-existing one" do
-      let(:parent_id){ -1 }
-      it{ should raise_error{|e|
-        expect(e).to be_a ActiveRecord::StatementInvalid 
-        expect(e.message).to include "PG::ForeignKeyViolation"
-      }}
+      it{ should change(Event,:count).from(1).to(2) }
     end
 
     context "Param universe_id is nil" do
@@ -60,7 +43,7 @@ describe Event do
       }}
     end
 
-    context "Param universe_id is nil" do
+    context "Universe is pointing at a non-existing universe" do
       let(:universe_id){ -1 }
       it{ should raise_error{|e|
         expect(e).to be_a ActiveRecord::InvalidForeignKey

@@ -7,24 +7,32 @@ describe "Create event" do
   
   let(:universe){ create :universe }
   let(:parent){ create :event }
+  let(:child){ create :event }
   let(:event){ Event.last }
 
   subject{ ->{ driver.submit :post, api_events_path, params }}
 
   context "event is valid" do
     let(:params){{ event:
-    { universe_id:universe.id, title:"Red wedding", parent_id:parent.id }}}
-    before{ parent }
-    it "an event is created" do
-      should change(Event,:count).from(1).to(2)
+    { universe_id:universe.id, title:"Red wedding",
+      parent_tokens:parent.id, child_tokens:child.id }}}
+    before{ parent; child }
+    it "creates an event" do
+      should change(Event,:count).from(2).to(3)
       expect(response["event"]).to eq(
       { "id" => event.id,
-        "title" => "Red wedding",
-        "parent_id" => parent.id })
+        "title" => "Red wedding" })
       expect(event.universe_id).to be universe.id 
+      parent_step = Step.first
+      expect(parent_step.parent_id).to be parent.id
+      expect(parent_step.child_id).to be event.id
+      child_step = Step.last
+      expect(child_step.parent_id).to be event.id
+      expect(child_step.child_id).to be child.id
     end
 
     after do
+      Step.delete_all
       Event.delete_all
       Universe.delete_all
     end

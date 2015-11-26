@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151123151112) do
+ActiveRecord::Schema.define(version: 20151126010553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20151123151112) do
 
   create_table "events", force: :cascade do |t|
     t.integer  "universe_id", null: false
-    t.integer  "parent_id"
     t.string   "title",       null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -100,6 +99,15 @@ ActiveRecord::Schema.define(version: 20151123151112) do
     t.string  "comment"
   end
 
+  create_table "steps", force: :cascade do |t|
+    t.integer  "parent_id",  null: false
+    t.integer  "child_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "steps", ["parent_id", "child_id"], name: "index_steps_on_parent_id_and_child_id", unique: true, using: :btree
+
 # Could not dump table "taggings" because of following StandardError
 #   Unknown type 'tagable_type_enum' for column 'tagable_type'
 
@@ -115,11 +123,12 @@ ActiveRecord::Schema.define(version: 20151123151112) do
 
   add_foreign_key "articles", "universes"
   add_foreign_key "books", "universes"
-  add_foreign_key "events", "events", column: "parent_id"
   add_foreign_key "events", "universes"
   add_foreign_key "notes", "articles"
   add_foreign_key "participations", "articles"
   add_foreign_key "participations", "events"
   add_foreign_key "references", "notes"
+  add_foreign_key "steps", "events", column: "child_id"
+  add_foreign_key "steps", "events", column: "parent_id"
   add_foreign_key "taggings", "tags"
 end

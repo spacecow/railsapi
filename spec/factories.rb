@@ -31,6 +31,9 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       note
     end
 
+    factory :step do
+    end
+
     factory :tag do
       title 'factory title'
     end

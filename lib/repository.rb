@@ -34,7 +34,9 @@ class Repository
     Event.find(id).as_json(
       only:[:id,:title],
       include:
-      { parent:
+      { parents:
+        { only:[:id,:title] },
+        children:
         { only:[:id,:title] },
         participants:
         { only:[:id, :name] }}) 
