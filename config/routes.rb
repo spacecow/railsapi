@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       delete '/references', to:'references#delete_all'
 
       resources :relations, only:[:create]
+      delete '/relations', to:'relations#delete_all'
 
       resources :steps, only:[:create]
       delete '/steps', to:'steps#delete_all'

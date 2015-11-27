@@ -23,4 +23,14 @@ describe "RelationsController" do
     it{ should be :render }
   end
 
+  describe "#delete_all" do
+    let(:function){ :delete_all }
+    before do
+      expect(repo).to receive(:delete_relations).with(no_args){ :relations }
+      expect(controller).to receive(:render).
+        with(json:{relations: :relations}){ :render }
+    end
+    it{ should be :render }
+  end
+
 end

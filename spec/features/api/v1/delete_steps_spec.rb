@@ -8,9 +8,7 @@ describe "Delete steps" do
 
   let(:mode){ :delete }
   let(:mdls){ "steps" }
-  let(:parent){ create :event }
-  let(:child){ create :event }
-  let(:step){ create :step, parent:parent, child:child }
+  let(:step){ create :step }
 
   before{ step }
 
@@ -20,8 +18,8 @@ describe "Delete steps" do
     should change(Step,:count).from(1).to(0)
     expect(response).to eq([{
       'id'        => step.id,
-      'parent_id' => parent.id,
-      'child_id'  => child.id
+      'parent_id' => step.parent_id,
+      'child_id'  => step.child_id
     }])
   end
 

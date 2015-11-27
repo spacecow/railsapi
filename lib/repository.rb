@@ -48,26 +48,6 @@ class Repository
   end
   def delete_events; Event.delete_all end
 
-  def reference id:
-    Reference.find(id).as_json
-  end
-  def create_reference params
-    Reference.create! params
-  end
-  def update_reference id:, params:
-    reference = Reference.find(id)
-    reference.update params
-    reference
-  end
-  def delete_references; Reference.destroy_all end
-  def references note_id:nil
-    if note_id.nil?
-      Reference.all
-    else
-      Reference.where(note_id:note_id)
-    end
-  end
-
 
   def note id:
     n = Note.find(id)
@@ -93,10 +73,33 @@ class Repository
   end
 
 
+  def reference id:
+    Reference.find(id).as_json
+  end
+  def create_reference params
+    Reference.create! params
+  end
+  def update_reference id:, params:
+    reference = Reference.find(id)
+    reference.update params
+    reference
+  end
+  def delete_references; Reference.destroy_all end
+  def references note_id:nil
+    if note_id.nil?
+      Reference.all
+    else
+      Reference.where(note_id:note_id)
+    end
+  end
+
+
   def create_relation params
     Relation.create(params).as_json(only:[:id, :origin_id, :target_id])
   end
-
+  def delete_relations
+    Relation.destroy_all.as_json(only:[:id, :origin_id, :target_id])
+  end
 
   def create_step params
     Step.create(params).as_json(only:[:id, :parent_id, :child_id])

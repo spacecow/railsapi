@@ -7,6 +7,11 @@ module Api
         render json:{relation:relation}
       end
 
+      def delete_all
+        relations = repo.delete_relations
+        render json:{relations:relations}
+      end
+
       private
 
         def relation_params

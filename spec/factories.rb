@@ -33,6 +33,8 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
 
     factory :relation do
       type "Owner"
+      association :origin, factory: :article
+      association :target, factory: :article
     end
 
     factory :step do
