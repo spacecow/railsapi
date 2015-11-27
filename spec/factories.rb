@@ -31,6 +31,10 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       note
     end
 
+    factory :relation do
+      type "Owner"
+    end
+
     factory :step do
       association :parent, factory: :event
       association :child, factory: :event

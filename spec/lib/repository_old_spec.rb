@@ -1,6 +1,6 @@
 require 'model_helper'
 require './app/models/article'
-require './app/models/article/character'
+require './app/models/articles/character'
 require './app/models/note'
 require './app/models/universe'
 require './lib/repository'

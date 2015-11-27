@@ -6,6 +6,7 @@ require './app/models/universe'
 require './app/models/event'
 require './app/models/article'
 
+#TODO factory helper
 require 'factory_girl'
 require './spec/factories'
 RSpec.configure do |config|
@@ -20,7 +21,8 @@ describe Participation do
     let(:event_id){ event.id }
     let(:article){ create :article }
     let(:article_id){ article.id }
-    subject{ ->{ Participation.create event_id:event_id, article_id:article_id }}
+    let(:params){{ event_id:event_id, article_id:article_id }}
+    subject{ ->{ Participation.create params }}
 
     #TODO article and event should belong to the same universe
     context "Participation is valid" do
@@ -41,7 +43,6 @@ describe Participation do
       it{ should change(Participation,:count).from(1).to(2) }
       after{ Participation.delete_all }
     end
-
 
     context "Pair event and article is duplicated" do
       before{ create :participation, event_id:event.id, article_id:article.id }

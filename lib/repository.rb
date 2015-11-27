@@ -16,7 +16,7 @@ class Repository
 
 
   def article_types
-    Dir.entries("./app/models/article").
+    Dir.entries("./app/models/articles").
       grep(/.*\.rb/).map{|e| e[0..-4].capitalize}
   end
 
@@ -90,6 +90,11 @@ class Repository
   end
   def delete_participations; Participation.destroy_all.as_json({
     only:[:id, :article_id, :event_id] })
+  end
+
+
+  def create_relation params
+    Relation.create(params).as_json(only:[:id, :origin_id, :target_id])
   end
 
 

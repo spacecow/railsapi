@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126010553) do
+ActiveRecord::Schema.define(version: 20151127010546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,16 @@ ActiveRecord::Schema.define(version: 20151126010553) do
     t.string  "comment"
   end
 
+  create_table "relations", force: :cascade do |t|
+    t.integer  "origin_id",  null: false
+    t.integer  "target_id",  null: false
+    t.string   "type",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "relations", ["origin_id", "target_id"], name: "index_relations_on_origin_id_and_target_id", unique: true, using: :btree
+
   create_table "steps", force: :cascade do |t|
     t.integer  "parent_id",  null: false
     t.integer  "child_id",   null: false
@@ -128,6 +138,8 @@ ActiveRecord::Schema.define(version: 20151126010553) do
   add_foreign_key "participations", "articles"
   add_foreign_key "participations", "events"
   add_foreign_key "references", "notes"
+  add_foreign_key "relations", "articles", column: "origin_id"
+  add_foreign_key "relations", "articles", column: "target_id"
   add_foreign_key "steps", "events", column: "child_id"
   add_foreign_key "steps", "events", column: "parent_id"
   add_foreign_key "taggings", "tags"
