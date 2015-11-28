@@ -2,17 +2,23 @@ class Repository
 
   #TODO show methods withot the id: param
   def article id:
-    a = Article.find(id).as_json
-    ns = notes(article_id:id).select(:id, :text).as_json(include: :tags)
-    a.merge(notes:ns)
+    Article.find(id).as_json(
+      only:[:id,:name,:universe_id,:type],
+      include:
+      { notes:
+        { only:[:id,:text],
+          include: :tags }})
   end
   def articles universe_id:
-    Article.where(universe_id:universe_id).select(:id,:name,:type).to_a
+    Article.where(universe_id:universe_id).as_json(only:[:id,:name,:type]).to_a
   end
   def create_article universe_id, params
-    Universe.find(universe_id).articles.create! params
+    Universe.find(universe_id).articles.create!(params).as_json(
+      only:[:id,:name,:type,:universe_id])
   end
-  def delete_articles; Article.destroy_all end
+  def delete_articles
+    Article.destroy_all.as_json(only:[:id,:name,:type,:universe_id])
+  end
 
 
   def article_types
