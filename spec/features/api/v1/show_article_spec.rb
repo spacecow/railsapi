@@ -3,6 +3,8 @@ require 'rails_helper'
 describe 'Show article' do
 
   let(:body){ JSON.parse(page.text)['article'] }
+  let(:dog){ create :article, name:"dog" }
+  let(:relation){ create :relation, origin:dog, target:article }
   let(:article){ create :article, name:'Vin' }
   let(:article_id){ article.id }
   let(:universe){ article.universe }
@@ -15,6 +17,7 @@ describe 'Show article' do
 
   before do
     note; tagging
+    relation
     visit api_article_path article
   end
 
@@ -31,13 +34,16 @@ describe 'Show article' do
         'text'        => 'a note',
         'tags'        => [
           'id'          => tag_id,
-          'title'       => 'TDP'
-        ]
-      ]
-    })
+          'title'       => 'TDP' ] ],
+      'relatives' => [{
+        'type'      => 'Owns',
+        'origin'    => {
+          'id'        => dog.id,
+          'name'      => "dog" } }] })
   end
 
   after do
+    Relation.delete_all
     Tagging.delete_all
     Tag.delete_all
     Note.delete_all

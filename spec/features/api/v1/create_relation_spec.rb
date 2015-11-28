@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+#TODO create inverse relation
 describe "Create relation" do
 
   let(:driver){ Capybara.current_session.driver }

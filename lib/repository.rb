@@ -2,12 +2,13 @@ class Repository
 
   #TODO show methods withot the id: param
   def article id:
-    Article.find(id).as_json(
-      only:[:id,:name,:universe_id,:type],
-      include:
-      { notes:
-        { only:[:id,:text],
-          include: :tags }})
+    a = Article.find(id)
+    a.as_json({
+      only:[:id,:name,:universe_id,:type,:relatives],
+      include: { notes: {
+                   only:[:id,:text],
+                   include: :tags }}
+    }).merge(a.relatives.empty? ? {} : {relatives:a.relatives})
   end
   def articles universe_id:
     Article.where(universe_id:universe_id).as_json(only:[:id,:name,:type]).to_a

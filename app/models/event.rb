@@ -4,7 +4,6 @@ class Event < ActiveRecord::Base
 
   has_many :steps, foreign_key:"child_id"
   has_many :parents, through: :steps
-
   has_many :inverse_steps, class_name:"Step", foreign_key:"parent_id"
   has_many :children, through: :inverse_steps, source: :child 
 
