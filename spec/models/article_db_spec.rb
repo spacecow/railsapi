@@ -26,7 +26,7 @@ describe Article do
     { "type"=>"Owner",
       "target"=>{"id"=>swordswoman.id, "name"=>"Swordswoman"}},
     { "type"=>"Owns",
-      "origin"=>{"id"=>blade.id, "name"=>"Blade"}}])}
+      "target"=>{"id"=>blade.id, "name"=>"Blade"}}])}
     after{ Relation.delete_all }
   end
 

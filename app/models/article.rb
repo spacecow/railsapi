@@ -11,12 +11,21 @@ class Article < ActiveRecord::Base
   def relatives
     relations.as_json({
       only:[:type],
-      include:{ target:{ only:[:id,:name] }}
-    }) +
+      include:{ target:{ only:[:id,:name] }} }) +
     inverse_relations.as_json({
       only:[:type],
-      include:{ origin:{ only:[:id,:name] }}
-    }).map{|e| Hash[e.map{|k,v| k=="type" ? [k,Relation.inverse_type(v)] : [k,v]}]}
+      include:{ origin:{ only:[:id,:name] }} }).
+    map do |e|
+      Hash[e.map do |k,v|
+        if k=="type"
+          [k,Relation.inverse_type(v)]
+        elsif k=="origin"
+          ["target",v]
+        else
+          [k,v]
+        end
+      end ]
+    end
   end
 
 end

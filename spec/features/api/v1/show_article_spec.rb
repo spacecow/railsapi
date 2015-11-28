@@ -37,7 +37,7 @@ describe 'Show article' do
           'title'       => 'TDP' ] ],
       'relatives' => [{
         'type'      => 'Owns',
-        'origin'    => {
+        'target'    => {
           'id'        => dog.id,
           'name'      => "dog" } }] })
   end
