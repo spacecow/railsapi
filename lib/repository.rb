@@ -9,6 +9,7 @@ class Repository
                    only:[:id,:text],
                    include: :tags }}
     }).merge(a.relatives.empty? ? {} : {relatives:a.relatives})
+    #TODO return relations instead of relatives
   end
   def articles universe_id:
     Article.where(universe_id:universe_id).as_json(only:[:id,:name,:type]).to_a
@@ -37,8 +38,9 @@ class Repository
   def delete_books; Book.destroy_all end
 
 
-  def event id
-    Event.find(id).as_json(
+  def event id; Event.find(id) end
+  def event_as_json event
+    event.as_json(
       only:[:id,:title],
       include:
       { parents:

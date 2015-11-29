@@ -4,7 +4,8 @@ module Api
 
       def show
         event = repo.event params[:id]
-        render json:{event:event}
+        json = repo.event_as_json(event)
+        render json:{event:json}
       end
 
       def index
@@ -15,6 +16,12 @@ module Api
       def create
         event = repo.create_event remove_universe_id, event_params
         render json:{event:event} 
+      end
+
+      def destroy
+        event = repo.event(params[:id]).delete
+        json = repo.event_as_json(event)
+        render json:{event:json}
       end
 
       def delete_all

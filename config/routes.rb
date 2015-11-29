@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :books, only:[:index, :create]
       delete '/books', to:'books#delete_all'
 
-      resources :events, only:[:show, :index, :create]
+      resources :events, only:[:show, :index, :create, :destroy]
       delete '/events', to:'events#delete_all'
 
       resources :notes, only:[:show, :create]

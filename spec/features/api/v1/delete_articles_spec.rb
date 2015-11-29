@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Delete articles' do
+describe "Delete articles" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:function){ driver.submit :delete, path, nil }
