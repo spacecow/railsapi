@@ -59,10 +59,10 @@ class Repository
   def delete_events; Event.delete_all end
 
 
-  def note id:
-    n = Note.find(id)
-    ts = Note.find(id).tags.select(:id, :title).as_json
-    rs = references(note_id:id).select(:id, :url, :comment).as_json 
+  def note id; Note.find(id) end
+  def note_as_json n
+    ts = n.tags.select(:id, :title).as_json
+    rs = references(note_id:n.id).select(:id, :url, :comment).as_json 
     n.as_json.merge(tags:ts).merge(references:rs)
   end
   def create_note article_id:, params:{}
@@ -72,6 +72,7 @@ class Repository
   def notes article_id:
     Note.where(article_id:article_id)
   end
+  def update_note note, params; note.update params end
   def delete_notes; Note.destroy_all end
 
   

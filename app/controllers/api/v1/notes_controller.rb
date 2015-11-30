@@ -3,14 +3,21 @@ module Api
     class NotesController < ApplicationController
 
       def show
-        note = repo.note id:params[:id]
-        render json:{note:note}
+        note = repo.note params[:id]
+        json = repo.note_as_json(note)
+        render json:{note:json}
       end
 
       def create
-        note = repo.create_note(
-          article_id:remove_article_id, params:note_params)
+        note = repo.create_note(article_id:remove_article_id, params:note_params)
         render json:{note:note}
+      end
+
+      def update
+        note = repo.note params[:id]
+        repo.update_note note, note_params 
+        json = repo.note_as_json(note)
+        render json:{note:json}
       end
 
       def delete_all

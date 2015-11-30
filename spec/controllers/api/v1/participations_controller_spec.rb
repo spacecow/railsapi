@@ -4,8 +4,7 @@ describe "ParicipationsController" do
   let(:repo){ double :repo }
 
   before do
-    module Api; module V1; class ApplicationController
-    end end end unless defined?(Rails)
+    class ApplicationController; end unless defined?(Rails)
     require './app/controllers/api/v1/participations_controller'
     allow(controller).to receive(:repo).with(no_args){ repo }
   end
