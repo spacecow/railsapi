@@ -6,18 +6,18 @@ describe 'Show article' do
   let(:dog){ create :article, name:"dog" }
   let(:relation){ create :relation, origin:dog, target:article }
   let(:article){ create :article, name:'Vin' }
-  let(:article_id){ article.id }
   let(:universe){ article.universe }
-  let(:universe_id){ universe.id }
   let(:note){ create :note, article:article, text:'a note' }
-  let(:note_id){ note.id }
-  let(:tagging){ create :tagging, tagable_id:note_id, tag_id:tag_id, tagable_type:'Note' }
+  let(:tagging){ create :tagging, tagable_id:note.id, tag_id:tag.id, tagable_type:'Note' }
   let(:tag){ create :tag, title:'TDP' }
-  let(:tag_id){ tag.id }
+  let(:participation){ create :participation, participant:article, event:event }
+  let(:event){ create :event, title:"an event" }
 
   before do
-    note; tagging
+    note
+    tagging
     relation
+    participation
     visit api_article_path article
   end
 
@@ -25,28 +25,33 @@ describe 'Show article' do
 
   it "Article exists" do
      is_expected.to eq({
-      'id'          => article_id,
+      'id'          => article.id,
       'name'        => 'Vin',
-      'universe_id' => universe_id,
+      'universe_id' => universe.id,
       'type'        => 'Character',
       'notes'       => [
-        'id'          => note_id,
+        'id'          => note.id,
         'text'        => 'a note',
         'tags'        => [
-          'id'          => tag_id,
+          'id'          => tag.id,
           'title'       => 'TDP' ] ],
       'relatives' => [{
         'type'      => 'Owns',
         'target'    => {
           'id'        => dog.id,
-          'name'      => "dog" } }] })
+          'name'      => "dog" } }],
+      'events'    => [
+        'id'        => event.id,
+        'title'     => "an event" ] })
   end
 
   after do
+    Participation.delete_all
     Relation.delete_all
     Tagging.delete_all
     Tag.delete_all
     Note.delete_all
+    Event.delete_all
     Article.delete_all
     Universe.delete_all
   end

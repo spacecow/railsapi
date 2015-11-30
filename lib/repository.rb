@@ -5,7 +5,8 @@ class Repository
     a = Article.find(id)
     a.as_json({
       only:[:id,:name,:universe_id,:type,:relatives],
-      include: { notes: {
+      include: { events: { only:[:id,:title] },
+                 notes: {
                    only:[:id,:text],
                    include: :tags }}
     }).merge(a.relatives.empty? ? {} : {relatives:a.relatives})

@@ -8,6 +8,10 @@ class Article < ActiveRecord::Base
   has_many :inverse_relations, class_name:"Relation", foreign_key:"target_id"
   has_many :origins, through: :inverse_relations, source: :origin
 
+  has_many :participations
+  has_many :events, through: :participations
+
+
   def relatives
     relations.as_json({
       only:[:type],
