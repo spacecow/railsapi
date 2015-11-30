@@ -111,6 +111,13 @@ class Repository
     Relation.destroy_all.as_json(only:[:id, :origin_id, :target_id])
   end
 
+
+  def relation_types
+    Dir.entries("./app/models/relations").
+      grep(/.*\.rb/).map{|e| e[0..-4].capitalize}
+  end
+
+
   def create_step params
     Step.create(params).as_json(only:[:id, :parent_id, :child_id])
   end

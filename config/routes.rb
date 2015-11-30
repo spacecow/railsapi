@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       resources :relations, only:[:create]
       delete '/relations', to:'relations#delete_all'
 
+      resources :relation_types, only: :index
+
       resources :steps, only:[:create]
       delete '/steps', to:'steps#delete_all'
 
