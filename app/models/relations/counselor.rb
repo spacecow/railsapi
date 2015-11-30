@@ -1,0 +1,2 @@
+class Counselor < Relation
+end

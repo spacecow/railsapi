@@ -4,7 +4,8 @@ class Relation < ActiveRecord::Base
   belongs_to :origin, class_name:"Article"
 
   def self.inverse_type s
-    {"Owner" => "Owns"}[s]
+    { "Owner"     => "Owns",
+      "Counselor" => "Counsels"}[s]
   end
 
 end
