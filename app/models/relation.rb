@@ -5,6 +5,7 @@ class Relation < ActiveRecord::Base
 
   def self.inverse_type s
     { "Owner"     => "Owns",
+      "Husband"   => "Wife",
       "Counselor" => "Counsels"}[s]
   end
 

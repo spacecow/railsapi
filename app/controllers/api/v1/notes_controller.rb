@@ -20,6 +20,12 @@ module Api
         render json:{note:json}
       end
 
+      def destroy
+        note = repo.note(params[:id]).delete
+        json = repo.note_as_json(note)
+        render json:{note:json}
+      end
+
       def delete_all
         notes = repo.delete_notes
         render json:{notes:notes}
