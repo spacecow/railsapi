@@ -62,7 +62,8 @@ class Repository
   def note id; Note.find(id) end
   def note_as_json n
     ts = n.tags.select(:id, :title).as_json
-    rs = references(note_id:n.id).select(:id, :url, :comment).as_json 
+  #TODO reference type Note as well
+    rs = references(referenceable_id:n.id).select(:id, :url, :comment).as_json 
     n.as_json.merge(tags:ts).merge(references:rs)
   end
   def create_note article_id:, params:{}
@@ -96,11 +97,11 @@ class Repository
     reference
   end
   def delete_references; Reference.destroy_all end
-  def references note_id:nil
-    if note_id.nil?
+  def references referenceable_id:nil
+    if referenceable_id.nil?
       Reference.all
     else
-      Reference.where(note_id:note_id)
+      Reference.where(referenceable_id:referenceable_id)
     end
   end
 

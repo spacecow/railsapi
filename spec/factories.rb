@@ -28,7 +28,7 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
     end
 
     factory :reference do
-      note
+      association :referenceable, factory: :note
     end
 
     factory :relation do

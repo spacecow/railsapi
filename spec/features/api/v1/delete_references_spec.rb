@@ -7,8 +7,7 @@ describe 'Delete references' do
   let(:response){ JSON.parse page.text }
 
   let(:path){ api_references_path }
-  let(:note){ reference.note }
-  let(:note_id){ note.id }
+  let(:note){ reference.referenceable }
   let(:reference){ create :reference, params }
   let(:reference_id){ reference.id }
 
@@ -20,11 +19,12 @@ describe 'Delete references' do
     reference
     expect{ function }.to change(Reference,:count).from(1).to(0)
     expect(response['references']).to eq([{
-      'id'         => reference_id,
-      'note_id'    => note_id,
-      'url'        => 'www.example.com',
-      'comment'    => nil,
-      'image_data' => base64_image
+      'id'                 => reference_id,
+      'referenceable_id'   => note.id,
+      'referenceable_type' => "Note",
+      'url'                => 'www.example.com',
+      'comment'            => nil,
+      'image_data'         => base64_image
     }])
   end
 

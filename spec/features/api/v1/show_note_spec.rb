@@ -8,7 +8,7 @@ describe "Show note" do
   let(:tag){ create :tag, title:'TDP' }
   let(:tagging){ create :tagging, tag:tag, tagable:note }
   let(:reference){ create :reference, params }
-  let(:params){{ comment:"smart", note:note, url:"www.example.com" }}
+  let(:params){{ comment:"smart", referenceable:note, url:"www.example.com" }}
 
   before do
     tagging; reference

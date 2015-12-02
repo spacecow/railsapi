@@ -1,5 +1,5 @@
 class Reference < ActiveRecord::Base
-  belongs_to :note
+  belongs_to :referenceable, polymorphic:true 
 
   mount_uploader :image, MentionUploader
 
@@ -13,8 +13,8 @@ class Reference < ActiveRecord::Base
   end
 
   def as_json(options={})
-    ret = super(:only => [:id, :note_id, :url, :comment])
-    ret = ret.merge({image_data:image_data}) if image_data
+    ret = super(:only => [:id, :referenceable_id, :referenceable_type, :url, :comment])
+    ret = ret.merge({"image_data" => image_data}) if image_data
     ret
   end
 

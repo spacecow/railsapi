@@ -6,8 +6,7 @@ describe "Edit reference" do
   let(:function){ driver.submit :put, path, params }
   let(:response){ JSON.parse page.text }
 
-  let(:note){ reference.note }
-  let(:note_id){ note.id }
+  let(:note){ reference.referenceable }
   let(:reference){ create :reference }
   let(:reference_id){ reference.id }
   let(:path){ api_reference_path reference }
@@ -18,11 +17,12 @@ describe "Edit reference" do
   it "new reference is valid" do
     function
     expect(response["reference"]).to eq({
-      "id" => reference_id,
-      "note_id" => note_id,
-      "url" => nil,
-      "comment" => nil,
-      "image_data" => base64_image
+      "id"                 => reference_id,
+      "referenceable_id"   => note.id,
+      "referenceable_type" => "Note",
+      "url"                => nil,
+      "comment"            => nil,
+      "image_data"         => base64_image
     })
   end
 
