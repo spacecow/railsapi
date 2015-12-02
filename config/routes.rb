@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       resources :references, only:[:show, :create, :update]
       delete '/references', to:'references#delete_all'
 
-      resources :relations, only:[:create]
+      resources :relations, only:[:show, :create]
       delete '/relations', to:'relations#delete_all'
 
       resources :relation_types, only: :index

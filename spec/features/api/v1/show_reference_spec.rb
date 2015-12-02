@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Show reference' do
+describe "Show reference" do
 
   let(:file){ File.open('spec/apple.jpg').read }
   let(:base64_image){ Base64.encode64 file }

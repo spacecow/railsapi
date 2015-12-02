@@ -2,6 +2,11 @@ module Api
   module V1
     class RelationsController < ApplicationController
 
+      def show
+        relation = repo.relation params[:id]
+        render json:{relation:relation.full_json}
+      end
+
       def create
         relation = repo.create_relation relation_params
         render json:{relation:relation}

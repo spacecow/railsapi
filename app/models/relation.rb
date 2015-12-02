@@ -9,4 +9,6 @@ class Relation < ActiveRecord::Base
       "Counselor" => "Counsels"}[s]
   end
 
+  def full_json; as_json only:[:type] end
+
 end

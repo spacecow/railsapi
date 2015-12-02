@@ -4,13 +4,27 @@ describe "RelationsController" do
   let(:repo){ double :repo }
 
   before do
-    module Api; module V1; class ApplicationController
-    end end end unless defined?(Rails)
+    class ApplicationController; end unless defined?(Rails)
     require './app/controllers/api/v1/relations_controller'
     allow(controller).to receive(:repo).with(no_args){ repo }
+    def controller.params; raise NotImplementedError end
+    allow(controller).to receive(:params).with(no_args){ params }
   end
 
   subject{ controller.send function }
+
+  describe "#show" do
+    let(:function){ :show }
+    let(:params){{ id: :id }}
+    let(:relation){ double :relation }
+    before do
+      expect(controller).to receive(:render).
+        with(json:{relation: :json}){ :render }
+      expect(repo).to receive(:relation).with(:id){ relation }
+      expect(relation).to receive(:full_json).with(no_args){ :json }
+    end
+    it{ subject }
+  end
 
   describe "#create" do
     let(:function){ :create }

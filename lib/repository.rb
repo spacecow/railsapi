@@ -106,6 +106,7 @@ class Repository
   end
 
 
+  def relation id; Relation.find(id) end
   def create_relation params
     Relation.create(params).as_json(only:[:id, :origin_id, :target_id])
   end
