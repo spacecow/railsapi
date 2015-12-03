@@ -1,0 +1,2 @@
+class RightHand < Relation
+end

@@ -7,7 +7,7 @@ describe 'List relation types' do
   before{ visit api_relation_types_path }
 
   context 'response' do
-    it{ expect(response).to eq(%w(Counselor Husband Owner)) }
+    it{ expect(response).to eq(%w(Counselor Husband Owner Right_hand)) }
   end
 
 end

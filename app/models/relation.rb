@@ -6,9 +6,10 @@ class Relation < ActiveRecord::Base
   has_many :references, as: :referenceable
 
   def self.inverse_type s
-    { "Owner"     => "Owns",
-      "Husband"   => "Wife",
-      "Counselor" => "Counsels"}[s]
+    { "Owner"      => "Owns",
+      "Husband"    => "Wife",
+      "RightHand" => "Commander",
+      "Counselor"  => "Counsels"}[s]
   end
 
   def full_json; as_json({

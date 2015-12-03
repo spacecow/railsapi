@@ -20,7 +20,9 @@ module Api
       private
 
         def relation_params
-          params.require(:relation).permit(:origin_id, :target_id, :type)
+          params.require(:relation).
+            tap{|e| e[:type]=e[:type].camelcase}.
+            permit(:origin_id, :target_id, :type)
         end
 
     end
