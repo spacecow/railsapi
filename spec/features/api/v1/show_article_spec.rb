@@ -11,6 +11,7 @@ describe 'Show article' do
   let(:tagging){ create :tagging, tagable_id:note.id, tag_id:tag.id, tagable_type:'Note' }
   let(:tag){ create :tag, title:'TDP' }
   let(:participation){ create :participation, participant:article, event:event }
+  let(:reference){ create :reference, referenceable:relation, comment:"a comment" }
   let(:event){ create :event, title:"an event" }
 
   before do
@@ -18,6 +19,7 @@ describe 'Show article' do
     tagging
     relation
     participation
+    reference
     visit api_article_path article
   end
 
@@ -36,7 +38,11 @@ describe 'Show article' do
           'id'          => tag.id,
           'title'       => 'TDP' ] ],
       'relatives' => [{
+        'id'        => relation.id,
         'type'      => 'Owns',
+        'references' => [{
+          'id'      => reference.id,
+          'comment' => 'a comment' }],
         'target'    => {
           'id'        => dog.id,
           'name'      => "dog" } }],
@@ -46,6 +52,7 @@ describe 'Show article' do
   end
 
   after do
+    Reference.delete_all
     Participation.delete_all
     Relation.delete_all
     Tagging.delete_all

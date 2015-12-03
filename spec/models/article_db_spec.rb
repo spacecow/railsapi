@@ -1,9 +1,4 @@
-require 'model_helper'
-require './app/models/article'
-require './app/models/articles/character'
-require './app/models/universe'
-require './app/models/relation'
-require './app/models/relations/owner'
+require 'rails_helper'
 
 describe Article do
 
@@ -21,11 +16,11 @@ describe Article do
     let(:blade){ create :article, name:"Blade" }
     before{ owner; owner2; owns }
     it{ should eq([
-    { "type"=>"Owner",
+    { "id" => owner.id, "type"=>"Owner", "references" => [],
       "target"=>{"id"=>swordsman.id, "name"=>"Swordsman"}},
-    { "type"=>"Owner",
+    { "id" => owner2.id, "type"=>"Owner", "references" => [],
       "target"=>{"id"=>swordswoman.id, "name"=>"Swordswoman"}},
-    { "type"=>"Owns",
+    { "id" => owns.id, "type"=>"Owns", "references" => [],
       "target"=>{"id"=>blade.id, "name"=>"Blade"}}])}
     after{ Relation.delete_all }
   end

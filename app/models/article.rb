@@ -11,14 +11,17 @@ class Article < ActiveRecord::Base
   has_many :participations
   has_many :events, through: :participations
 
-
   def relatives
     relations.as_json({
-      only:[:type],
-      include:{ target:{ only:[:id,:name] }} }) +
+      only:[:id,:type],
+      include:{
+        references:{ only:[:id,:comment] },
+        target:{ only:[:id,:name] }} }) +
     inverse_relations.as_json({
-      only:[:type],
-      include:{ origin:{ only:[:id,:name] }} }).
+      only:[:id,:type],
+      include:{
+        references:{ only:[:id,:comment] },
+        origin:{ only:[:id,:name] }} }).
     map do |e|
       Hash[e.map do |k,v|
         if k=="type"
