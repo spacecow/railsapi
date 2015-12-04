@@ -2,6 +2,31 @@ require 'rails_helper'
 
 describe Article do
 
+  describe "Validations" do
+    let(:universe){ create :universe }
+    let(:gender){ "f" }
+    let(:params){{ name:"Ethenielle", universe_id:universe.id, type:"Character",
+      gender:gender }}
+    subject{ ->{ Article.create params }}
+
+    context "Article is valid" do
+      it{ should change(Article,:count).from(0).to(1) }
+    end
+
+    context "Article gender is set too long" do
+      let(:gender){ "female" }
+      it{ should raise_error{|e|
+        expect(e).to be_a ActiveRecord::StatementInvalid 
+        expect(e.message).to include "PG::StringDataRightTruncation"
+      }}
+    end
+
+    after do
+      Article.delete_all
+      Universe.delete_all
+    end
+  end
+
   let(:article){ create :article }
 
   subject{ article.send function }

@@ -17,7 +17,9 @@ describe 'Show universe' do
       'articles' => [
         'id'     => Article.first.id,
         'type'   => 'Character',
-        'name'   => 'Vin' ] }) }
+        'name'   => 'Vin',
+        'gender' => 'n'
+      ] }) }
   end
 
   after do

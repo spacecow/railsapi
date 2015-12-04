@@ -12,12 +12,17 @@ class Repository
     }).merge(a.relatives.empty? ? {} : {relatives:a.relatives})
     #TODO return relations instead of relatives
   end
+  def article_as_json article
+    article.as_json(only:[:id,:name,:type,:universe_id,:gender])
+  end
   def articles universe_id:
-    Article.where(universe_id:universe_id).as_json(only:[:id,:name,:type]).to_a
+    Article.where(universe_id:universe_id)
+  end
+  def articles_as_json articles
+    articles.as_json(only:[:id,:name,:type,:gender])
   end
   def create_article universe_id, params
-    Universe.find(universe_id).articles.create!(params).as_json(
-      only:[:id,:name,:type,:universe_id])
+    Universe.find(universe_id).articles.create(params)
   end
   def delete_articles
     Article.destroy_all.as_json(only:[:id,:name,:type,:universe_id])
@@ -148,10 +153,13 @@ class Repository
   end
   def delete_taggings; Tagging.destroy_all end
 
-  def universe id
-    u = Universe.find(id).as_json
-    as = articles(universe_id:id).as_json
-    u.merge(articles:as)
+
+  def universe id; Universe.find(id) end
+  def universe_as_json universe
+    universe.as_json(
+      only:[:id,:title],
+      include:{ articles:{ only:[:id,:name,:type,:gender] }}
+    )
   end
   def universes; Universe.all end
   def create_universe params; Universe.create! params end

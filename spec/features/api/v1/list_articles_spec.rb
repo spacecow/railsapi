@@ -7,15 +7,16 @@ describe "List articles" do
   subject{ response }
 
   context "events response" do
-    let(:article){ create :article, name:"Ethenielle" }
+    let(:article){ create :article, name:"Ethenielle", gender:'f' }
     before do
       article
       visit api_articles_path(universe_id:article.universe_id)
     end
     it{ should eq(
-    [ 'id'    => article.id,
-      'name'  => "Ethenielle",
-      'type'  => "Character" ])}
+    [ 'id'     => article.id,
+      'name'   => "Ethenielle",
+      'gender' => 'f',
+      'type'   => "Character" ])}
   end
 
   after do

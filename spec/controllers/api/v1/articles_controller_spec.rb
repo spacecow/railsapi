@@ -4,12 +4,11 @@ describe "ArticlesController" do
 
   let(:controller){ Api::V1::ArticlesController.new }
   let(:article_params){ double :article_params }
-  let(:permitted_params){ %i(name type) }
+  let(:permitted_params){ %i(name type gender) }
   let(:repo){ double :repo }
 
   before do
-    module Api; module V1; class ApplicationController
-    end end end unless defined?(Rails)
+    class ApplicationController; end unless defined?(Rails)
     require './app/controllers/api/v1/articles_controller'
     allow(controller).to receive(:params).with(no_args){ params }
     allow(controller).to receive(:repo).with(no_args){ repo }
@@ -17,14 +16,51 @@ describe "ArticlesController" do
 
   subject{ controller.send function }
 
+  describe "#show" do
+    let(:function){ :show }
+    let(:params){{ id: :id }}
+    before do
+      expect(repo).to receive(:article).with(id: :id){ :article }
+      expect(controller).to receive(:render).
+        with(json:{article: :article}){ :render }
+    end
+    it{ should be :render }
+  end
+
   describe "#index" do
     let(:function){ :index }
     let(:params){{ universe_id: :universe_id }}
     before do
       expect(repo).to receive(:articles).
         with(universe_id: :universe_id){ :articles }
+      expect(repo).to receive(:articles_as_json).
+        with(:articles){ :json }
+      expect(controller).to receive(:render).
+        with(json:{articles: :json}){ :render }
+    end
+    it{ should be :render }
+  end
+
+  describe "#create" do
+    let(:function){ :create }
+    before do
+      expect(controller).to receive(:remove_universe_id).
+        with(no_args){ :universe_id }
+      expect(controller).to receive(:article_params).with(no_args){ :params }
+      expect(controller).to receive(:render).with(json:{article: :json}){ :render }
+      expect(repo).to receive(:create_article).
+        with(:universe_id,:params){ :article }
+      expect(repo).to receive(:article_as_json).with(:article){ :json }
+    end
+    it{ should be :render }
+  end
+
+  describe "#delete_all" do
+    let(:function){ :delete_all }
+    before do
       expect(controller).to receive(:render).
         with(json:{articles: :articles}){ :render }
+      expect(repo).to receive(:delete_articles).with(no_args){ :articles }
     end
     it{ should be :render }
   end
