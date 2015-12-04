@@ -1,19 +1,17 @@
 class Repository
 
   #TODO show methods withot the id: param
-  def article id:
-    a = Article.find(id)
-    a.as_json({
-      only:[:id,:name,:universe_id,:type,:relatives],
-      include: { events: { only:[:id,:title] },
-                 notes: {
-                   only:[:id,:text],
-                   include: :tags }}
-    }).merge(a.relatives.empty? ? {} : {relatives:a.relatives})
-    #TODO return relations instead of relatives
-  end
+  def article id; Article.find(id) end
   def article_as_json article
-    article.as_json(only:[:id,:name,:type,:universe_id,:gender])
+    article.as_json({
+      only:[:id,:name,:type,:universe_id,:gender],
+      include:{ 
+        notes:{
+          only:[:id,:text],
+          include:{ tags:{ only:[:id,:title] }}},
+        events:{ only:[:id,:title] },
+      }
+    }).merge(article.relatives.empty? ? {} : {relatives:article.relatives})
   end
   def articles universe_id:
     Article.where(universe_id:universe_id)
@@ -24,6 +22,7 @@ class Repository
   def create_article universe_id, params
     Universe.find(universe_id).articles.create(params)
   end
+  def update_article article, params; article.update params end
   def delete_articles
     Article.destroy_all.as_json(only:[:id,:name,:type,:universe_id])
   end

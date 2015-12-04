@@ -20,9 +20,10 @@ describe "ArticlesController" do
     let(:function){ :show }
     let(:params){{ id: :id }}
     before do
-      expect(repo).to receive(:article).with(id: :id){ :article }
+      expect(repo).to receive(:article).with(:id){ :article }
+      expect(repo).to receive(:article_as_json).with(:article){ :json }
       expect(controller).to receive(:render).
-        with(json:{article: :article}){ :render }
+        with(json:{article: :json}){ :render }
     end
     it{ should be :render }
   end
@@ -51,6 +52,20 @@ describe "ArticlesController" do
       expect(repo).to receive(:create_article).
         with(:universe_id,:params){ :article }
       expect(repo).to receive(:article_as_json).with(:article){ :json }
+    end
+    it{ should be :render }
+  end
+
+  describe "#update" do
+    let(:function){ :update }
+    let(:params){{ id: :id }}
+    before do
+      expect(repo).to receive(:article).with(:id){ :article } 
+      expect(repo).to receive(:update_article).with(:article,:params)
+      expect(repo).to receive(:article_as_json).with(:article){ :json }
+      expect(controller).to receive(:article_params).with(no_args){ :params }
+      expect(controller).to receive(:render).
+        with(json:{article: :json}){ :render }
     end
     it{ should be :render }
   end

@@ -28,15 +28,17 @@ describe 'Show article' do
   it "Article exists" do
      is_expected.to eq({
       'id'          => article.id,
-      'name'        => 'Vin',
+      'name'        => "Vin",
       'universe_id' => universe.id,
-      'type'        => 'Character',
+      'type'        => "Character",
+      'gender'      => 'n',
       'notes'       => [
         'id'          => note.id,
         'text'        => 'a note',
         'tags'        => [
           'id'          => tag.id,
-          'title'       => 'TDP' ] ],
+          'title'       => 'TDP' ]
+      ],
       'relatives' => [{
         'id'        => relation.id,
         'type'      => 'Owns',
@@ -48,7 +50,8 @@ describe 'Show article' do
           'name'      => "dog" } }],
       'events'    => [
         'id'        => event.id,
-        'title'     => "an event" ] })
+        'title'     => "an event" ] 
+    })
   end
 
   after do

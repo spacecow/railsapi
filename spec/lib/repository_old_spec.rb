@@ -12,7 +12,7 @@ describe Repository do
   let(:article_id){ article.id }
 
   describe "#article" do
-    let(:function){ repo.article id:article_id.to_s }
+    let(:function){ repo.article article_id.to_s }
 
     context "valid article" do
       it{ expect{function}.not_to raise_error }

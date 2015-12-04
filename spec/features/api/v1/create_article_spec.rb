@@ -24,7 +24,10 @@ describe 'Create article' do
         'name'        => 'Kelsier',
         'type'        => 'Character',
         'universe_id' => universe.id,
-        'gender'      => 'm' })
+        'gender'      => 'm',
+        'events'      => [],
+        'notes'       => [] 
+      })
     end
   end
 

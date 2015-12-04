@@ -107,13 +107,11 @@ ActiveRecord::Schema.define(version: 20151204005713) do
   add_index "relations", ["origin_id", "target_id"], name: "index_relations_on_origin_id_and_target_id", unique: true, using: :btree
 
   create_table "steps", force: :cascade do |t|
-    t.integer  "parent_id",  null: false
-    t.integer  "child_id",   null: false
+    t.integer  "parent_id"
+    t.integer  "child_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "steps", ["parent_id", "child_id"], name: "index_steps_on_parent_id_and_child_id", unique: true, using: :btree
 
 # Could not dump table "taggings" because of following StandardError
 #   Unknown type 'tagable_type_enum' for column 'tagable_type'
@@ -136,7 +134,5 @@ ActiveRecord::Schema.define(version: 20151204005713) do
   add_foreign_key "participations", "events"
   add_foreign_key "relations", "articles", column: "origin_id"
   add_foreign_key "relations", "articles", column: "target_id"
-  add_foreign_key "steps", "events", column: "child_id"
-  add_foreign_key "steps", "events", column: "parent_id"
   add_foreign_key "taggings", "tags"
 end

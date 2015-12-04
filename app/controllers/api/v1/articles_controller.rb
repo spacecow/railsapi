@@ -3,8 +3,9 @@ module Api
     class ArticlesController < ApplicationController
     
       def show
-        article = repo.article id:params[:id]
-        render json:{article:article}
+        article = repo.article params[:id]
+        json = repo.article_as_json(article)
+        render json:{article:json}
       end
 
       def index
@@ -17,6 +18,13 @@ module Api
         article = repo.create_article remove_universe_id, article_params
         json = repo.article_as_json(article)
         render json:{article:json} 
+      end
+
+      def update
+        article = repo.article params[:id]
+        repo.update_article article, article_params 
+        json = repo.article_as_json(article)
+        render json:{article:json}
       end
 
       def delete_all

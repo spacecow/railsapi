@@ -8,7 +8,7 @@ describe "Update note" do
 
   let(:mdl){ "note" }
   let(:mode){ :put }
-  let(:params){{ "note" => {text:"a new note"} }}
+  let(:params){{ note:{ text:"a new note" }}}
   let(:note){ create :note, text:"an old note" }
 
   before{ note }
