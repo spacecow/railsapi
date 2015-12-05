@@ -1,0 +1,2 @@
+class Sister < Relation
+end
