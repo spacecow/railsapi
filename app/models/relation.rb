@@ -5,11 +5,19 @@ class Relation < ActiveRecord::Base
 
   has_many :references, as: :referenceable
 
-  def self.inverse_type s
-    { "Owner"      => "Owns",
-      "Husband"    => "Wife",
+  def self.inverse_type s, gender='n'
+    mapping = {
+      "Owner"     => "Owns",
+      "Husband"   => "Wife",
       "RightHand" => "Commander",
-      "Counselor"  => "Counsels"}[s]
+      "Uncle"     => ["Nephew", "Niece"],
+      "Advisor"   => "Advises",
+      "Counselor" => "Counsels"}[s]
+    case mapping
+    when String; mapping
+    when Array; mapping[{'n' => 0, 'm' => 0, 'f' => 1}[gender]]
+    else nil
+    end
   end
 
   def full_json; as_json({

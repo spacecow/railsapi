@@ -1,0 +1,2 @@
+class Advisor < Relation
+end

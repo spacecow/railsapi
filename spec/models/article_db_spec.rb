@@ -33,8 +33,8 @@ describe Article do
 
   describe "#relatives" do
     let(:function){ :relatives }
-    let(:swordswoman){ create :article, name:"Swordswoman" }
-    let(:swordsman){ create :article, name:"Swordsman" }
+    let(:swordswoman){ create :article, name:"Swordswoman", gender:'f' }
+    let(:swordsman){ create :article, name:"Swordsman", gender:'m' }
     let(:owner2){ create :relation, origin:article, target:swordswoman }
     let(:owner){ create :relation, origin:article, target:swordsman }
     let(:owns){ create :relation, origin:blade, target:article }
@@ -42,11 +42,11 @@ describe Article do
     before{ owner; owner2; owns }
     it{ should eq([
     { "id" => owner.id, "type"=>"Owner", "references" => [],
-      "target"=>{"id"=>swordsman.id, "name"=>"Swordsman"}},
+      "target"=>{"id"=>swordsman.id, "name"=>"Swordsman", "gender" => 'm'}},
     { "id" => owner2.id, "type"=>"Owner", "references" => [],
-      "target"=>{"id"=>swordswoman.id, "name"=>"Swordswoman"}},
+      "target"=>{"id"=>swordswoman.id, "name"=>"Swordswoman", "gender" => 'f'}},
     { "id" => owns.id, "type"=>"Owns", "references" => [],
-      "target"=>{"id"=>blade.id, "name"=>"Blade"}}])}
+      "target"=>{"id"=>blade.id, "name"=>"Blade", "gender" => 'n'}}])}
     after{ Relation.delete_all }
   end
 

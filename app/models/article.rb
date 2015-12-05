@@ -16,16 +16,16 @@ class Article < ActiveRecord::Base
       only:[:id,:type],
       include:{
         references:{ only:[:id,:comment] },
-        target:{ only:[:id,:name] }} }) +
+        target:{ only:[:id,:name,:gender] }} }) +
     inverse_relations.as_json({
       only:[:id,:type],
       include:{
         references:{ only:[:id,:comment] },
-        origin:{ only:[:id,:name] }} }).
+        origin:{ only:[:id,:name,:gender] }} }).
     map do |e|
       Hash[e.map do |k,v|
         if k=="type"
-          [k,Relation.inverse_type(v)]
+          [k,Relation.inverse_type(v,e["origin"]["gender"])]
         elsif k=="origin"
           ["target",v]
         else

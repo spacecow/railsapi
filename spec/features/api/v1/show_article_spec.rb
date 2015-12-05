@@ -3,9 +3,9 @@ require 'rails_helper'
 describe 'Show article' do
 
   let(:body){ JSON.parse(page.text)['article'] }
-  let(:dog){ create :article, name:"dog" }
+  let(:dog){ create :article, name:"dog", gender:'n' }
   let(:relation){ create :relation, origin:dog, target:article }
-  let(:article){ create :article, name:'Vin' }
+  let(:article){ create :article, name:'Vin', gender:'f' }
   let(:universe){ article.universe }
   let(:note){ create :note, article:article, text:'a note' }
   let(:tagging){ create :tagging, tagable_id:note.id, tag_id:tag.id, tagable_type:'Note' }
@@ -31,7 +31,7 @@ describe 'Show article' do
       'name'        => "Vin",
       'universe_id' => universe.id,
       'type'        => "Character",
-      'gender'      => 'n',
+      'gender'      => 'f',
       'notes'       => [
         'id'          => note.id,
         'text'        => 'a note',
@@ -47,6 +47,7 @@ describe 'Show article' do
           'comment' => 'a comment' }],
         'target'    => {
           'id'        => dog.id,
+          'gender'    => 'n',
           'name'      => "dog" } }],
       'events'    => [
         'id'        => event.id,
