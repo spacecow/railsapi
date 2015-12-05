@@ -9,6 +9,7 @@ class Relation < ActiveRecord::Base
     mapping = {
       "Owner"     => "Owns",
       "Husband"   => "Wife",
+      "Follower"  => "Commander",
       "RightHand" => "Commander",
       "Uncle"     => ["Nephew", "Niece"],
       "Advisor"   => "Advises",
