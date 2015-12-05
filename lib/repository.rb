@@ -121,6 +121,9 @@ class Repository
   end
 
 
+  def create_remark params; Remark.create(params) end
+
+
   def create_step params
     Step.create(params).as_json(only:[:id, :parent_id, :child_id])
   end

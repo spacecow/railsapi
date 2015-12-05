@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
 
   belongs_to :universe
+  belongs_to :remarkable
 
   has_many :steps, foreign_key:"child_id"
   has_many :parents, through: :steps
