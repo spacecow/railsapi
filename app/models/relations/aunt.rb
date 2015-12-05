@@ -1,0 +1,2 @@
+class Aunt < Relation
+end

@@ -16,6 +16,7 @@ class Relation < ActiveRecord::Base
       "Queen"     => "Rules",
       "RightHand" => "Commander",
       "Uncle"     => ["Nephew", "Niece"],
+      "Aunt"      => ["Nephew", "Niece"],
       "Advisor"   => "Advises",
       "Counselor" => "Counsels"}[s]
     case mapping
