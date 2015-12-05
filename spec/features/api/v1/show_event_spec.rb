@@ -24,14 +24,15 @@ describe "Show event" do
     should eq(
     { 'id'           => event.id,
       'title'        => "Red wedding",
-      'parents'      =>
-      [{'id'           => parent.id,
+      'parents'      => [{
+        'id'           => parent.id,
         'title'        => "Green wedding" }],
-      'children'     =>
-      [{'id'           => child.id,
+      'children'     => [{
+        'id'           => child.id,
         'title'        => "Yellow wedding" }],
-      'participants' => 
-      [{'id'           => article.id,
+      'participants' => [{
+        'id'           => article.id,
+        'gender'       => 'n',
         'name'         => "Ethenielle" }]})
   end
 

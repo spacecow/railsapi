@@ -53,7 +53,7 @@ class Repository
         children:
         { only:[:id,:title] },
         participants:
-        { only:[:id, :name] }}) 
+        { only:[:id,:name,:gender] }}) 
   end
   def events universe_id
     Universe.find(universe_id).events.as_json(only:[:id,:title]) end
