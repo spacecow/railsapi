@@ -1,0 +1,2 @@
+class Acquaintance < Relation
+end
