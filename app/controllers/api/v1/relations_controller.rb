@@ -9,12 +9,12 @@ module Api
 
       def create
         relation = repo.create_relation relation_params
-        render json:{relation:relation}
+        render json:{relation:relation.full_json}
       end
 
       def delete_all
         relations = repo.delete_relations
-        render json:{relations:relations}
+        render json:{relations:relations.map(&:full_json)}
       end
 
       private

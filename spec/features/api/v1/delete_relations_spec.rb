@@ -17,9 +17,17 @@ describe "Delete relations" do
   it "existing steps are deleted" do
     should change(Relation,:count).from(1).to(0)
     expect(response).to eq([{
-      'id'        => relation.id,
-      'origin_id' => relation.origin_id,
-      'target_id' => relation.target_id }])
+      'id'         => relation.id,
+      'type'       => "Owner",
+      'references' => [],
+      'origin'     => {
+        'id'         => relation.origin_id,
+        'gender'     => 'n',
+        'name'       => "factory name" },
+      'target'     => {
+        'id'         => relation.target_id,
+        'gender'     => 'n',
+        'name'       => "factory name" } }])
   end
 
   after do

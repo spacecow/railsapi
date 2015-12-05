@@ -29,7 +29,11 @@ class Relation < ActiveRecord::Base
 
   def full_json; as_json({
     only:[:id,:type],
-    include:{ references:{ only:[:id, :comment] }} })
+    include:{ 
+      references:{ only:[:id, :comment] },
+      origin:{ only:[:id,:name,:gender] },
+      target:{ only:[:id,:name,:gender] }
+    } })
   end
 
 end

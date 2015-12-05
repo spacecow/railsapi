@@ -8,8 +8,8 @@ describe "Create relation" do
   let(:path){ send "api_#{mdl.pluralize}_path" }
 
   let(:mode){ :post }
-  let(:origin){ create :article }
-  let(:target){ create :article }
+  let(:origin){ create :article, name:"The Dog" }
+  let(:target){ create :article, name:"The Owner", gender:'m' }
   let(:params){{ relation:{ origin_id:origin.id, target_id:target.id, type:"Owner" }}}
   let(:mdl){ "relation" }
   let(:relation){ Relation.first }
@@ -19,9 +19,18 @@ describe "Create relation" do
   it "a relation is created" do
     should change(Relation,:count).from(0).to(1)
     expect(response).to eq(
-    { 'id'        => relation.id,
-      'origin_id' => origin.id,
-      'target_id' => target.id })
+    { 'id'         => relation.id,
+      'references' => [],
+      'type'       => "Owner",
+      'origin'     => {
+        'id'         => origin.id,
+        'name'       => "The Dog",
+        'gender'     => 'n'},
+      'target'     => {
+        'id'         => target.id,
+        'name'       => "The Owner",
+        'gender'     => 'm'}
+    })
   end
 
   after do

@@ -3,7 +3,9 @@ require 'rails_helper'
 describe "Show relation" do
 
   let(:response){ JSON.parse(page.text)['relation'] }
-  let(:relation){ create :relation, type:"Husband" }
+  let(:wife){ create :article, name:"The Wife", gender:'f' } 
+  let(:husband){ create :article, name:"The Husband", gender:'m' }
+  let(:relation){ create :relation, type:"Husband", origin:wife, target:husband }
   let(:reference){ create :reference, referenceable:relation, comment:"yeah" }
 
   before do
@@ -17,7 +19,16 @@ describe "Show relation" do
       'type'       => "Husband",
       'references' => [{
         'id'         => reference.id,
-        'comment'    => "yeah" }] })
+        'comment'    => "yeah" }],
+      'origin'     => {
+        'id'         => relation.origin_id,
+        'gender'     => 'f',
+        'name'       => "The Wife" },
+      'target'     => {
+        'id'         => relation.target_id,
+        'gender'     => 'm',
+        'name'       => "The Husband" }
+    })
   end
 
   after do

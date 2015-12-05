@@ -111,12 +111,8 @@ class Repository
 
 
   def relation id; Relation.find(id) end
-  def create_relation params
-    Relation.create(params).as_json(only:[:id, :origin_id, :target_id])
-  end
-  def delete_relations
-    Relation.destroy_all.as_json(only:[:id, :origin_id, :target_id])
-  end
+  def create_relation params; Relation.create(params) end
+  def delete_relations; Relation.destroy_all end
 
 
   def relation_types
