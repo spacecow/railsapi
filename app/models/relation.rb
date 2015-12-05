@@ -10,6 +10,8 @@ class Relation < ActiveRecord::Base
       "Owner"     => "Owns",
       "Husband"   => "Wife",
       "Follower"  => "Commander",
+      "King"      => "Rules",
+      "Queen"     => "Rules",
       "RightHand" => "Commander",
       "Uncle"     => ["Nephew", "Niece"],
       "Advisor"   => "Advises",

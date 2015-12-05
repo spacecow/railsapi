@@ -1,0 +1,2 @@
+class King < Relation
+end
