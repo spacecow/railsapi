@@ -8,6 +8,11 @@ module Api
         render json:{remark:remark.full_json}
       end
 
+      def delete_all
+        remarks = repo.delete_remarks
+        render json:{remarks:remarks.map(&:full_json)}
+      end
+
       private
 
         def remark_params event 

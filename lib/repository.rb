@@ -122,6 +122,7 @@ class Repository
 
 
   def create_remark params; Remark.create(params) end
+  def delete_remarks; Remark.destroy_all end
 
 
   def create_step params

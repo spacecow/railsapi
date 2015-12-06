@@ -5,8 +5,8 @@ describe "Delete participations" do
   let(:driver){ Capybara.current_session.driver }
   let(:response){ JSON.parse(page.text)[mdls] }
   let(:path){ send "api_#{mdls}_path" }
-
   let(:mode){ :delete }
+
   let(:mdls){ "participations" }
   let(:participation){ create :participation }
 
@@ -14,7 +14,7 @@ describe "Delete participations" do
 
   subject{ ->{ driver.submit mode, path, nil }}
 
-  it "existing tags are deleted" do
+  it "Existing tags are deleted" do
     should change(Participation,:count).from(1).to(0)
     expect(response).to eq(
     [{'id'         => participation.id,
