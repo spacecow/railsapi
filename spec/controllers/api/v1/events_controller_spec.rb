@@ -15,10 +15,12 @@ describe "EventsController" do
   describe "#show" do
     let(:function){ :show }
     let(:params){{ id: :id }}
+    let(:event){ double :event }
     before do
-      expect(repo).to receive(:event).with(:id){ :event }
-      expect(repo).to receive(:event_as_json).with(:event){ :json }
+      expect(repo).to receive(:event).with(:id){ event }
       expect(controller).to receive(:render).with(json:{event: :json}){ :render }
+      expect(event).to receive(:remarks).with(no_args){ :remarks }
+      expect(event).to receive(:full_json).with(remarks: :remarks){ :json }
     end
     it{ should be :render }
   end
