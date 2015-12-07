@@ -3,7 +3,11 @@ require './lib/api_constraints'
 Rails.application.routes.draw do
   use_doorkeeper
   namespace :api do
-    scope module: :v1, constraints: ApiConstraints.new(version:1, default:true) do
+    scope module: :t1, constraints: ApiConstraints.new(version:"t1") do
+      resources :remarkables, only:[:create]
+    end
+
+    scope module: :v1, constraints: ApiConstraints.new(version:"v1", default:true) do
       resources :universes, only: [:show, :index, :create]
       delete '/universes', to:'universes#delete_all'
 

@@ -4,7 +4,7 @@ describe "Create remark" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:path){ send "api_#{mdl.pluralize}_path" }
-  let(:response){ JSON.parse(page.text)['remark'] }
+  let(:response){ JSON.parse(page.text)[mdl] }
 
   let(:mode){ :post }
   let(:params){{ event_id:event.id, remark:{ content:"some content" }}}
