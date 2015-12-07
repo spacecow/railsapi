@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
     self.child_ids = Event.ids_from_tokens(tokens) 
   end
 
-  def remarks; remarkable.remarks end
+  def remarks; remarkable.try(:remarks) || [] end
  
   def self.ids_from_tokens tokens; tokens.split(",") end
 
@@ -30,7 +30,7 @@ class Event < ActiveRecord::Base
         parents:{ only:[:id,:title] },
         children:{ only:[:id,:title] },
         participants:{ only:[:id,:name,:gender] }}
-      ).merge(remarks:remarks.map(&:full_json)) 
+      ).merge("remarks" => remarks.map(&:full_json)) 
   end
   
 end

@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
       resources :relation_types, only: :index
 
+      delete '/remarkables', to:'remarkables#delete_all'
+
       resources :remarks, only:[:create]
       delete '/remarks', to:'remarks#delete_all'
 

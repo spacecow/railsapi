@@ -125,6 +125,9 @@ class Repository
   def delete_remarks; Remark.destroy_all end
 
 
+  def delete_remarkables; Remarkable.destroy_all end
+
+
   def create_step params
     Step.create(params).as_json(only:[:id, :parent_id, :child_id])
   end
