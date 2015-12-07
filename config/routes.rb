@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   use_doorkeeper
   namespace :api do
     scope module: :t1, constraints: ApiConstraints.new(version:"t1", default:false) do
+      resources :events, only:[:create]
       resources :remarkables, only:[:create]
       resources :remarks, only:[:create]
     end

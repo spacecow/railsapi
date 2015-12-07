@@ -3,7 +3,7 @@ module Api
     class RemarkablesController < ApplicationController
   
       def create
-        remarkable = FactoryGirl.create :remarkable 
+        remarkable = FactoryGirl.create :remarkable, params[:remarkable]
         render json:{remarkable:remarkable.full_json}
       end
 

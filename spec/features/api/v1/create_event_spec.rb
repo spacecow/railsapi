@@ -4,11 +4,14 @@ describe "Create event" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:response){ JSON.parse(page.text) }
+  let(:header){ driver.header 'Accept', 'application/vnd.example.v1' }
   
   let(:universe){ create :universe }
   let(:parent){ create :event }
   let(:child){ create :event }
   let(:event){ Event.last }
+
+  before{ header }
 
   subject{ ->{ driver.submit :post, api_events_path, params }}
 
