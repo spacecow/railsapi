@@ -5,15 +5,16 @@ describe "Create remark" do
   let(:driver){ Capybara.current_session.driver }
   let(:path){ send "api_#{mdl.pluralize}_path" }
   let(:response){ JSON.parse(page.text)[mdl] }
-
+  let(:header){ driver.header 'Accept', 'application/vnd.example.v1' }
   let(:mode){ :post }
+
   let(:params){{ event_id:event.id, remark:{ content:"some content" }}}
   let(:mdl){ "remark" }
   let(:remark){ Remark.first }
   let(:remarkable){ create :remarkable }
   let(:event){ create :event, remarkable_id:remarkable_id }
 
-  before{ event }
+  before{ header; event }
 
   subject{ ->{ driver.submit mode, path, params }}
 

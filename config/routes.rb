@@ -3,8 +3,9 @@ require './lib/api_constraints'
 Rails.application.routes.draw do
   use_doorkeeper
   namespace :api do
-    scope module: :t1, constraints: ApiConstraints.new(version:"t1") do
+    scope module: :t1, constraints: ApiConstraints.new(version:"t1", default:false) do
       resources :remarkables, only:[:create]
+      resources :remarks, only:[:create]
     end
 
     scope module: :v1, constraints: ApiConstraints.new(version:"v1", default:true) do

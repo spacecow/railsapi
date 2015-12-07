@@ -1,4 +1,4 @@
-describe "Api::T1::RemarkableController" do
+describe "Api::T1::RemarkablesController" do
 
   let(:controller){ Api::T1::RemarkablesController.new }
   let(:repo){ double :repo }
