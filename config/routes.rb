@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :events, only:[:create]
       resources :remarkables, only:[:create]
       resources :remarks, only:[:create]
+      resources :universes, only:[:create]
     end
 
     scope module: :v1, constraints: ApiConstraints.new(version:"v1", default:true) do

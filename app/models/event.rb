@@ -32,5 +32,12 @@ class Event < ActiveRecord::Base
         participants:{ only:[:id,:name,:gender] }}
       ).merge("remarks" => remarks.map(&:full_json)) 
   end
+
+  def factory_json
+    as_json(
+      only:[:id,:title],
+      include:{
+        universe:{ only:[:id,:title] }})
+  end
   
 end

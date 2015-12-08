@@ -19,12 +19,12 @@ describe "Create event" do
   it "Successfully" do
     should change(Event,:count).from(0).to(1)
     expect(response).to eq({
-      'id'           => event.id,
-      'title'        => "a title",
-      'children'     => [],
-      'parents'      => [],
-      'participants' => [],
-      'remarks'      => [] })
+      'id'       => event.id,
+      'title'    => "a title",
+      'universe' => {
+        'id'       => event.universe_id,
+        'title'    => "factory title1" }
+    })
   end
 
   after do

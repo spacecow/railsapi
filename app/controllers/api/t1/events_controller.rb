@@ -4,7 +4,7 @@ module Api
   
       def create
         event = FactoryGirl.create :event, params[:event]
-        render json:{event:event.full_json}
+        render json:{event:event.factory_json}
       end
 
     end
