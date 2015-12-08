@@ -4,7 +4,10 @@ describe 'Create universe' do
   let(:params){ {universe:{title:'Malazan'}} }
   let(:driver){ Capybara.current_session.driver }
   let(:function){ driver.submit :post, api_universes_path, params }
+  let(:header){ driver.header 'Accept', 'application/vnd.example.v1' }
   let(:body){ JSON.parse page.text }
+
+  before{ header }
 
   context "universe is valid" do
     it "a universe is created" do

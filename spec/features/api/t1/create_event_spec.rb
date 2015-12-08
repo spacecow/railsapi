@@ -23,7 +23,7 @@ describe "Create event" do
       'title'    => "a title",
       'universe' => {
         'id'       => event.universe_id,
-        'title'    => "factory title1" }
+        'title'    => event.universe_title }
     })
   end
 

@@ -68,8 +68,8 @@ class ApplicationController < ActionController::Base
            json:{table.downcase.to_sym => {column.to_sym => msg}}
   end
 
-  def repo
-    @repo ||= Repository.new
-  end
+  def repo; @repo ||= Repository.new end
+
+  def factory; @factory ||= Factory.new end
 
 end

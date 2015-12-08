@@ -6,8 +6,9 @@ describe "Delete remarkables" do
   let(:response){ JSON.parse(page.text)[mdls] }
   let(:path){ send "api_#{mdls}_path" }
   let(:mode){ :delete }
+  let(:mdls){ mdl.pluralize }
 
-  let(:mdls){ "remarkables" }
+  let(:mdl){ "remarkable" }
   let(:remarkable){ create :remarkable }
 
   before{ remarkable } 

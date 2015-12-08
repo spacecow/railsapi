@@ -19,11 +19,6 @@ module Api
         render json:{universe:universe}
       end
 
-      def delete_all
-        universes = repo.delete_universes
-        render json:{universes:universes}
-      end
-
       private
 
         def universe_params

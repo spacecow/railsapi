@@ -1,13 +1,13 @@
 describe "Api::T1::RemarkablesController" do
 
   let(:controller){ Api::T1::RemarkablesController.new }
-  let(:repo){ double :repo }
+  let(:factory){ double :factory }
 
   before do
     class ApplicationController; end unless defined?(Rails)
     class FactoryGirl; end unless defined?(Rails)
     require './app/controllers/api/t1/remarkables_controller'
-    allow(controller).to receive(:repo).with(no_args){ repo }
+    expect(controller).to receive(:factory).with(no_args){ factory }
     allow(controller).to receive(:params).with(no_args){ params }
   end
 
@@ -18,8 +18,7 @@ describe "Api::T1::RemarkablesController" do
     let(:params){{ remarkable: :params }}
     let(:remarkable){ double :remarkable }
     before do
-      expect(FactoryGirl).to receive(:create).
-        with(:remarkable,:params){ remarkable } 
+      expect(factory).to receive(:create_remarkable).with(:params){ remarkable } 
       expect(remarkable).to receive(:full_json).with(no_args){ :json }
       expect(controller).to receive(:render).
         with(json:{remarkable: :json}){ :render }

@@ -23,11 +23,6 @@ module Api
         render json:{event:json}
       end
 
-      def delete_all
-        events = repo.delete_events
-        render json:{events:events}
-      end
-
       private
 
         def event_params

@@ -48,16 +48,6 @@ describe "UniversesController" do
     it{ should be :render }
   end
 
-  describe "#delete_all" do
-    let(:function){ :delete_all }
-    before do
-      expect(repo).to receive(:delete_universes).with(no_args){ :universes }
-      expect(controller).to receive(:render).
-        with(json:{universes: :universes}){ :render }
-    end
-    it{ should be :render }
-  end
-
   describe "#universe_params" do
     let(:function){ :universe_params }
     before do

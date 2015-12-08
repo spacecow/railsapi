@@ -5,14 +5,15 @@ Rails.application.routes.draw do
   namespace :api do
     scope module: :t1, constraints: ApiConstraints.new(version:"t1", default:false) do
       resources :events, only:[:create]
+      delete '/events', to:'events#delete_all'
       resources :remarkables, only:[:create]
       resources :remarks, only:[:create]
       resources :universes, only:[:create]
+      delete '/universes', to:'universes#delete_all'
     end
 
     scope module: :v1, constraints: ApiConstraints.new(version:"v1", default:true) do
       resources :universes, only: [:show, :index, :create]
-      delete '/universes', to:'universes#delete_all'
 
       resources :articles, only:[:show, :index, :create, :update]
       delete '/articles', to:'articles#delete_all'
@@ -23,7 +24,6 @@ Rails.application.routes.draw do
       delete '/books', to:'books#delete_all'
 
       resources :events, only:[:show, :index, :create, :destroy]
-      delete '/events', to:'events#delete_all'
 
       resources :notes, only:[:show, :create, :update, :destroy]
       delete '/notes', to:'notes#delete_all'

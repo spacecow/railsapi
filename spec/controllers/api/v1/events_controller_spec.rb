@@ -61,13 +61,4 @@ describe "EventsController" do
     it{ should be :render }
   end
 
-  describe "#delete_all" do
-    let(:function){ :delete_all }
-    before do
-      expect(controller).to receive(:render).with(json:{events: :events}){ :render }
-      expect(repo).to receive(:delete_events).with(no_args){ :events }
-    end
-    it{ should be :render }
-  end
-
 end

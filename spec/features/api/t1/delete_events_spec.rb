@@ -4,17 +4,19 @@ describe "Delete events" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:response){ JSON.parse(page.text)[mdls] }
+  let(:header){ driver.header 'Accept', 'application/vnd.example.t1' }
   let(:path){ send "api_#{mdls}_path" }
-
   let(:mode){ :delete }
-  let(:mdls){ "events" }
+  let(:mdls){ mdl.pluralize }
+
+  let(:mdl){ "event" }
   let(:event){ create :event }
 
-  before{ event }
+  before{ header; event }
 
   subject{ ->{ driver.submit mode, path, nil }}
 
-  it "existing events are deleted" do
+  it "Existing remarks are deleted" do
     should change(Event,:count).from(1).to(0)
     expect(response).to be 1 
   end

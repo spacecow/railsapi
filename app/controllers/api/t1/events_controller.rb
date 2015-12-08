@@ -3,8 +3,13 @@ module Api
     class EventsController < ApplicationController
   
       def create
-        event = FactoryGirl.create :event, params[:event]
+        event = factory.create_event params[:event]
         render json:{event:event.factory_json}
+      end
+
+      def delete_all
+        events = factory.delete_events
+        render json:{events:events}
       end
 
     end

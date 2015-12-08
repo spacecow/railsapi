@@ -33,11 +33,11 @@ class Event < ActiveRecord::Base
       ).merge("remarks" => remarks.map(&:full_json)) 
   end
 
-  def factory_json
-    as_json(
-      only:[:id,:title],
-      include:{
-        universe:{ only:[:id,:title] }})
+  def factory_json; as_json(
+    only:[:id,:title],
+    include:{ universe:{ only:[:id,:title] }})
   end
   
+  def universe_title; universe.title end
+
 end
