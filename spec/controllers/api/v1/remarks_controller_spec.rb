@@ -12,6 +12,18 @@ describe "Api::V1::RemarksController" do
 
   subject{ controller.send function }
 
+  describe "#show" do
+    let(:function){ :show }
+    let(:params){{ id: :id }}
+    let(:remark){ double :remark }
+    before do
+      expect(repo).to receive(:remark).with(:id){ remark }
+      expect(remark).to receive(:full_json).with(no_args){ :json }
+      expect(controller).to receive(:render).with(json:{remark: :json}){ :render }
+    end
+    it{ should be :render }
+  end
+
   describe "#create" do
     let(:function){ :create }
     let(:params){{ event_id: :event_id }}

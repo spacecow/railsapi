@@ -2,6 +2,11 @@ module Api
   module V1
     class RemarksController < ApplicationController
 
+      def show
+        remark = repo.remark params[:id]
+        render json:{remark:remark.full_json}
+      end
+
       def create
         event = repo.event params[:event_id]
         remark = repo.create_remark remark_params(event)
