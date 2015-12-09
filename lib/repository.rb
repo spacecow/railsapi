@@ -121,7 +121,9 @@ class Repository
   end
 
 
+  def remark id; Remark.find id end
   def create_remark params; Remark.create(params) end
+  def update_remark remark, params; remark.update params end
   def delete_remarks; Remark.destroy_all end
 
 

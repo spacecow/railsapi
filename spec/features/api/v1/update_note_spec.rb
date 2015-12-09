@@ -23,7 +23,7 @@ describe "Update note" do
       'text'        => "a new note",
       'tags'        => [],
       'references'  => [] })
-    expect(Note.first.text).to eq "a new note"
+    expect(note.reload.text).to eq "a new note"
   end
 
   after do

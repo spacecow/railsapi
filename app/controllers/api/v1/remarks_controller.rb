@@ -8,6 +8,12 @@ module Api
         render json:{remark:remark.full_json}
       end
 
+      def update
+        remark = repo.remark params[:id]
+        repo.update_remark remark, remark_params 
+        render json:{remark:remark.full_json}
+      end
+
       def delete_all
         remarks = repo.delete_remarks
         render json:{remarks:remarks.map(&:full_json)}
@@ -15,12 +21,16 @@ module Api
 
       private
 
-        def remark_params event 
-          remarkable_id = event.remarkable_id.nil? ?
-            event.create_remarkable.id.tap{ event.save } : 
-            event.remarkable_id
-          params.require(:remark).permit(:content).
-            merge(remarkable_id:remarkable_id)
+        def remark_params event=nil 
+          if event
+            remarkable_id = event.remarkable_id.nil? ?
+              event.create_remarkable.id.tap{ event.save } : 
+              event.remarkable_id
+            params.require(:remark).permit(:content).
+              merge(remarkable_id:remarkable_id)
+          else
+            params.require(:remark).permit(:content)
+          end
         end
 
     end

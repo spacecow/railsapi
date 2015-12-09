@@ -26,6 +26,20 @@ describe "Api::V1::RemarksController" do
     it{ should be :render }
   end
 
+  describe "#update" do
+    let(:function){ :update }
+    let(:params){{ id: :id }}
+    let(:remark){ double :remark }
+    before do
+      expect(controller).to receive(:remark_params).with(no_args){ :params }
+      expect(controller).to receive(:render).with(json:{remark: :json}){ :render }
+      expect(repo).to receive(:remark).with(:id){ remark }
+      expect(repo).to receive(:update_remark).with(remark,:params)
+      expect(remark).to receive(:full_json).with(no_args){ :json }
+    end
+    it{ should be :render }
+  end
+
   describe "#delete_all" do
     let(:function){ :delete_all }
     let(:remark){ double :remark }

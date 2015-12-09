@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
       delete '/remarkables', to:'remarkables#delete_all'
 
-      resources :remarks, only:[:create]
+      resources :remarks, only:[:create,:update]
       delete '/remarks', to:'remarks#delete_all'
 
       resources :steps, only:[:create]
