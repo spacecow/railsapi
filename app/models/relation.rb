@@ -12,6 +12,8 @@ class Relation < ActiveRecord::Base
       "Husband"      => "Wife",
       "Acquaintance" => "Acquaintance",
       "Follower"     => "Commander",
+      "Warder"       => "Commander",
+      "Guide"        => "Commander",
       "King"         => "Rules",
       "Sister"       => ["Brother","Sister"],
       "Brother"      => ["Brother","Sister"],

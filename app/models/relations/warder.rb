@@ -1,0 +1,2 @@
+class Warder < Relation
+end
