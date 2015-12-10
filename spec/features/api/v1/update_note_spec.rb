@@ -21,6 +21,7 @@ describe "Update note" do
       'id'          => Note.first.id,
       'article_id'  => note.article_id,
       'text'        => "a new note",
+      'articles'    => [],
       'tags'        => [],
       'references'  => [] })
     expect(note.reload.text).to eq "a new note"

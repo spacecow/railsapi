@@ -8,9 +8,11 @@ describe "Show note" do
   let(:tag){ create :tag, title:'TDP' }
   let(:tagging){ create :tagging, tag:tag, tagable:note }
   let(:reference){ create :reference, params }
+  let(:article_note){ create :article_note, article:article, note:note }
   let(:params){{ comment:"smart", referenceable:note, url:"www.example.com" }}
 
   before do
+    article_note
     tagging; reference
     visit api_note_path note
   end
@@ -22,6 +24,9 @@ describe "Show note" do
       'id'         => note.id,
       'article_id' => article.id,
       'text'       => 'a note',
+      'articles'   => [
+        'id'         => article.id,
+        'name'      => "factory name" ],
       'tags'       => [
         'id'       => tag.id,
         'title'    => "TDP"

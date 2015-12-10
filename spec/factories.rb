@@ -12,6 +12,9 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       type 'Character'
     end
 
+    factory :article_note do
+    end
+
     factory :event do
       universe
       title 'factory title'

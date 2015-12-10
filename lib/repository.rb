@@ -68,7 +68,7 @@ class Repository
     ts = n.tags.select(:id, :title).as_json
   #TODO reference type Note as well
     rs = references(referenceable_id:n.id).select(:id, :url, :comment).as_json 
-    n.as_json.merge(tags:ts).merge(references:rs)
+    n.as_json(include:{articles:{only:[:id,:name]}}).merge(tags:ts).merge(references:rs)
   end
   def create_note article_id:, params:{}
     article = Article.find(article_id)
