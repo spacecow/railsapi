@@ -1,30 +1,29 @@
 require 'rails_helper'
 
-describe "Delete note" do
+describe "Delete remark" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:response){ JSON.parse(page.text)[mdl_name] }
-  let(:path){ send "api_#{mdl_name}_path", mdl.id }
   let(:mode){ :delete }
+  let(:path){ send "api_#{mdl_name}_path", mdl }
   let(:mdl_name){ mdl.class.to_s.downcase }
 
-  let(:mdl){ create :note, text:"Everyone got killed" }
+  let(:mdl){ create :remark, content:"a remark" }
 
   before{ mdl }
 
   subject{ ->{ driver.submit mode, path, nil }}
 
   it "note is deleted" do
-    should change(Note,:count).from(1).to(0)
+    should change(Remark,:count).from(1).to(0)
     expect(response).to eq({
-      'id'         => mdl.id,
-      'text'       => "Everyone got killed" })
+      'id'      => mdl.id,
+      'content' => "a remark" })
   end
 
   after do
-    Note.delete_all
-    Article.delete_all
-    Universe.delete_all
+    Remarkable.delete_all
+    Remark.delete_all
   end
 
 end

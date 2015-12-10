@@ -19,6 +19,12 @@ module Api
         render json:{remark:remark.full_json}
       end
 
+      def destroy
+        remark = repo.remark(params[:id]).delete
+        render json:{remark:remark.full_json}
+      end
+
+      #TODO move to t1
       def delete_all
         remarks = repo.delete_remarks
         render json:{remarks:remarks.map(&:full_json)}

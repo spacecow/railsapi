@@ -8,6 +8,7 @@ class Relation < ActiveRecord::Base
   def self.inverse_type s, gender='n'
     mapping = {
       "Owner"        => "Owns",
+      "Courter"      => "Courts",
       "Husband"      => "Wife",
       "Acquaintance" => "Acquaintance",
       "Follower"     => "Commander",

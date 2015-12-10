@@ -1,0 +1,2 @@
+class Courter < Relation
+end
