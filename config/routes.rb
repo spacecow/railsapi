@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   use_doorkeeper
   namespace :api do
     scope module: :t1, constraints: ApiConstraints.new(version:"t1", default:false) do
+      delete '/article_notes', to:'article_notes#delete_all'
       resources :events, only:[:create]
       delete '/events', to:'events#delete_all'
       resources :remarkables, only:[:create]

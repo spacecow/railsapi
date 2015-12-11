@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Delete events" do
+describe "Delete article notes" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:mode){ :delete }
@@ -9,21 +9,17 @@ describe "Delete events" do
   let(:header){ driver.header 'Accept', 'application/vnd.example.t1' }
   let(:response){ JSON.parse(page.text)[mdls] }
 
-  let(:mdl){ "event" }
-  let(:event){ create :event }
+  let(:mdl){ "article_note" }
+  let(:article_note){ create :article_note }
 
-  before{ header; event }
+  before{ header; article_note }
 
   subject{ ->{ driver.submit mode, path, nil }}
 
   it "Successfully" do
-    should change(Event,:count).from(1).to(0)
-    expect(response).to be 1 
-  end
-
-  after do
-    Event.delete_all
-    Universe.delete_all
+    should change(ArticleNote,:count).from(1).to(0)
+    expect(response).to eq([{
+      'id'    => article_note.id }])
   end
 
 end
