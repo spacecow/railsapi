@@ -2,15 +2,18 @@ require 'rails_helper'
 
 describe "Create note" do
 
-  let(:response){ JSON.parse(page.text)[mdl_name] }
   let(:driver){ Capybara.current_session.driver }
-  let(:path){ send "api_#{mdl_name.pluralize}_path" }
   let(:mode){ :post }
+  let(:path){ send "api_#{mdl_name.pluralize}_path" }
+  let(:header){ driver.header 'Accept', 'application/vnd.example.v1' }
+  let(:response){ JSON.parse(page.text)[mdl_name] }
+  let(:mdl){ mdl_name.camelize.constantize.first }
 
-  let(:article){ create :article }
   let(:mdl_name){ "note" }
-  let(:mdl){ Note.first }
+  let(:article){ create :article }
   let(:params){{ mdl_name => { article_id:article.id, text:"a note" }}}
+
+  before{ header }
 
   subject{ ->{ driver.submit mode, path, params }}
 
@@ -21,6 +24,8 @@ describe "Create note" do
       'id'          => Note.first.id,
       'article_id'  => article.id,
       'text'        => "a note" })
+    expect(mdl.text).to eq "a note"
+    expect(mdl.article_id).to be article.id 
   end
 
   after do

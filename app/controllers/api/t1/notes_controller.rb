@@ -7,6 +7,11 @@ module Api
         render json:{notes:notes.map(&:factory_json)}
       end
 
+      def create
+        note = factory.create_note params[:note]
+        render json:{note:note.factory_json}
+      end
+
     end
   end
 end

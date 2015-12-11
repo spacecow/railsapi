@@ -6,11 +6,11 @@ describe "T1 Create event" do
   let(:mode){ :post }
   let(:path){ send "api_#{mdl_name.pluralize}_path" }
   let(:header){ driver.header 'Accept', 'application/vnd.example.t1' }
-  let(:mdl){ mdl_name.camelize.constantize.first }
   let(:response){ JSON.parse(page.text)[mdl_name] }
+  let(:mdl){ mdl_name.camelize.constantize.first }
 
   let(:mdl_name){ "event" }
-  let(:params){{ event:{ title:"a title" }}}
+  let(:params){{ mdl_name => { title:"a title" }}}
 
   before{ header }
 
