@@ -7,6 +7,7 @@ class Note < ActiveRecord::Base
   has_many :taggings, as: :tagable
   has_many :tags, through: :taggings
 
+  def factory_json; as_json(only:[:id,:text]) end
   def full_json; as_json(only:[:id,:text]) end
 
 end
