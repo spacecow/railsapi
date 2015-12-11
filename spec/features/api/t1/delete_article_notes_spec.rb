@@ -19,7 +19,16 @@ describe "Delete article notes" do
   it "Successfully" do
     should change(ArticleNote,:count).from(1).to(0)
     expect(response).to eq([{
-      'id'    => article_note.id }])
+      'id'         => article_note.id,
+      'article_id' => Article.first.id,
+      'note_id'    => Note.first.id }])
+  end
+
+  after do
+    ArticleNote.delete_all
+    Note.delete_all
+    Article.delete_all
+    Universe.delete_all
   end
 
 end

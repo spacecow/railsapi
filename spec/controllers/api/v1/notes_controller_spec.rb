@@ -4,7 +4,7 @@ describe "NotesController" do
   let(:repo){ double :repo }
   
   before do
-    class ApplicationController; end
+    class ApplicationController; end unless defined?(Rails)
     require './app/controllers/api/v1/notes_controller'
     expect(controller).to receive(:repo).with(no_args).at_least(1){ repo }
     expect(controller).to receive(:params).with(no_args).at_least(1){ params }

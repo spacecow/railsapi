@@ -19,11 +19,16 @@ describe "T1 Create article note" do
   it "Successfully" do
     should change(ArticleNote,:count).from(0).to(1)
     expect(response).to eq({
-      'id' => mdl.id })
+      'id' => mdl.id,
+      'article_id' => Article.first.id,
+      'note_id' => Note.first.id })
   end
 
   after do
     ArticleNote.delete_all
+    Note.delete_all
+    Article.delete_all
+    Universe.delete_all
   end
 
 end

@@ -13,6 +13,8 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
     end
 
     factory :article_note do
+      article
+      note
     end
 
     factory :event do

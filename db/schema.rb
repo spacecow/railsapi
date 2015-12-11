@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20151211011829) do
   enable_extension "plpgsql"
 
   create_table "article_notes", force: :cascade do |t|
-    t.integer  "article_id"
-    t.integer  "note_id"
+    t.integer  "article_id", null: false
+    t.integer  "note_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -148,6 +148,8 @@ ActiveRecord::Schema.define(version: 20151211011829) do
 
   add_index "universes", ["title"], name: "index_universes_on_title", unique: true, using: :btree
 
+  add_foreign_key "article_notes", "articles"
+  add_foreign_key "article_notes", "notes"
   add_foreign_key "articles", "universes"
   add_foreign_key "books", "universes"
   add_foreign_key "events", "remarkables"
