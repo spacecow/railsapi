@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Article do
+describe "Article DB" do
 
   describe "Validations" do
     let(:universe){ create :universe }

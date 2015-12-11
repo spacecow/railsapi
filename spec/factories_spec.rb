@@ -2,7 +2,7 @@ require './spec/model_helper'
 require './app/models/article'
 require './app/models/universe'
 
-describe Universe do
+describe "Factory Universe" do
 
   describe "creation" do
     it "of one" do
@@ -21,7 +21,7 @@ describe Universe do
 
 end
 
-describe Article do
+describe "Factory Article" do
 
   describe "creation" do
     it "of one" do

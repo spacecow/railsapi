@@ -7,7 +7,8 @@ describe 'Show article' do
   let(:relation){ create :relation, origin:dog, target:article }
   let(:article){ create :article, name:'Vin', gender:'f' }
   let(:universe){ article.universe }
-  let(:note){ create :note, article:article, text:'a note' }
+  let(:article_note){ create :article_note, article:article, note:note }
+  let(:note){ create :note, text:'a note' }
   let(:tagging){ create :tagging, tagable_id:note.id, tag_id:tag.id, tagable_type:'Note' }
   let(:tag){ create :tag, title:'TDP' }
   let(:participation){ create :participation, participant:article, event:event }
@@ -15,7 +16,7 @@ describe 'Show article' do
   let(:event){ create :event, title:"an event" }
 
   before do
-    note
+    article_note
     tagging
     relation
     participation
@@ -56,6 +57,7 @@ describe 'Show article' do
   end
 
   after do
+    ArticleNote.delete_all
     Reference.delete_all
     Participation.delete_all
     Relation.delete_all

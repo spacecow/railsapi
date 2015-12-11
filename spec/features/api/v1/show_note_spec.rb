@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe "Show note" do
 
-  let(:body){ JSON.parse(page.text)['note'] }
+  let(:body){ JSON.parse(page.text)["note"] }
   let(:article){ note.article }
-  let(:note){ create :note, text:'a note' }
+  let(:note){ create :note, text:"a note" }
   let(:tag){ create :tag, title:'TDP' }
   let(:tagging){ create :tagging, tag:tag, tagable:note }
   let(:reference){ create :reference, params }
@@ -23,7 +23,7 @@ describe "Show note" do
     is_expected.to eq({
       'id'         => note.id,
       'article_id' => article.id,
-      'text'       => 'a note',
+      'text'       => "a note",
       'articles'   => [
         'id'         => article.id,
         'name'      => "factory name" ],
@@ -40,6 +40,7 @@ describe "Show note" do
   end
 
   after do
+    ArticleNote.delete_all
     Tagging.delete_all
     Tag.delete_all
     Reference.delete_all

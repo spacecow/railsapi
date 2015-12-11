@@ -1,11 +1,12 @@
 require 'model_helper'
 require './app/models/article'
+require './app/models/article_note'
 require './app/models/articles/character'
 require './app/models/note'
 require './app/models/universe'
 require './lib/repository'
 
-describe Repository do
+describe "Repository old" do
 
   let(:repo){ Repository.new }
   let(:article){ create :article }
@@ -47,6 +48,7 @@ describe Repository do
   end
 
   after do
+    ArticleNote.delete_all
     Note.delete_all
     Article.delete_all
     Universe.delete_all

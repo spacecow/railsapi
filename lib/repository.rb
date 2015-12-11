@@ -72,7 +72,7 @@ class Repository
   end
   def create_note article_id:, params:{}
     article = Article.find(article_id)
-    article.notes.create params
+    article.notes.create params.merge(article_id:article.id)
   end
   def notes article_id:
     Note.where(article_id:article_id)

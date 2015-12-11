@@ -1,7 +1,7 @@
 require './spec/model_helper'
 require './app/models/universe'
 
-describe Universe do
+describe "Universe new" do
 
   let(:title){ 'Malazan' }
   let(:model){ Universe.create title:title } 

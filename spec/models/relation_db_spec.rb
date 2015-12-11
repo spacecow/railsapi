@@ -11,7 +11,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 end
 
-describe Relation do
+describe "Relation DB" do
 
   describe "Validations" do
     

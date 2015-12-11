@@ -1,4 +1,4 @@
-describe "Api::T1::RemarksController" do
+describe "Api::T1::EventsController" do
 
   let(:controller){ Api::T1::EventsController.new }
   let(:factory){ double :factory }

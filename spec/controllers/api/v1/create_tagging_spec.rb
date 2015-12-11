@@ -1,4 +1,4 @@
-describe "TagsController#create" do
+describe "TaggingsController#create" do
 
   let(:controller){ Api::V1::TaggingsController.new }
   let(:repo){ double :repo }

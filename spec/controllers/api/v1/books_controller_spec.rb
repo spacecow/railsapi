@@ -1,4 +1,4 @@
-describe "BooksController#index" do
+describe "BooksController" do
 
   let(:controller){ Api::V1::BooksController.new }
   let(:params){ double :params }

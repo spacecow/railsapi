@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Create event" do
+describe "T1 Create event" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:path){ send "api_#{mdl.pluralize}_path" }

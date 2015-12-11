@@ -1,7 +1,10 @@
 class Article < ActiveRecord::Base
 
   belongs_to :universe
-  has_many :notes
+
+  #has_many :notes
+  has_many :notings, class_name:"ArticleNote"
+  has_many :notes, through: :notings
 
   has_many :relations, foreign_key:"origin_id"
   has_many :targets, through: :relations
