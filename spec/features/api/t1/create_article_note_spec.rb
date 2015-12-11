@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "T1 Create remark" do
+describe "T1 Create article note" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:mode){ :post }
@@ -9,24 +9,21 @@ describe "T1 Create remark" do
   let(:mdl){ mdl_name.camelize.constantize.first }
   let(:response){ JSON.parse(page.text)[mdl_name] }
 
-  let(:mdl_name){ "remark" }
-  let(:params){{ remark:{ content:"a remark" }}}
+  let(:mdl_name){ "article_note" }
+  let(:params){{}}
 
   before{ header }
 
   subject{ ->{ driver.submit mode, path, params }}
 
   it "Successfully" do
-    should change(Remark,:count).from(0).to(1)
+    should change(ArticleNote,:count).from(0).to(1)
     expect(response).to eq({
-      'id'      => mdl.id,
-      'content' => "a remark" })
-    expect(mdl.content).to eq "a remark"
+      'id' => mdl.id })
   end
 
   after do
-    Remark.delete_all
-    Remarkable.delete_all
+    ArticleNote.delete_all
   end
 
 end

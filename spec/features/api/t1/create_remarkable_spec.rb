@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-describe "Create remarkable" do
+describe "T1 Create remarkable" do
 
   let(:driver){ Capybara.current_session.driver }
-  let(:path){ send "api_#{mdl.pluralize}_path" }
-  let(:response){ JSON.parse(page.text)[mdl] }
-  let(:header){ driver.header 'Accept', 'application/vnd.example.t1' }
   let(:mode){ :post }
+  let(:path){ send "api_#{mdl_name.pluralize}_path" }
+  let(:header){ driver.header 'Accept', 'application/vnd.example.t1' }
+  let(:mdl){ mdl_name.camelize.constantize.first }
+  let(:response){ JSON.parse(page.text)[mdl_name] }
 
-  let(:mdl){ "remarkable" }
+  let(:mdl_name){ "remarkable" }
   let(:params){{}}
-  let(:remarkable){ Remarkable.first }
 
   before{ header }
 
@@ -19,7 +19,7 @@ describe "Create remarkable" do
   it "Successfully" do
     should change(Remarkable,:count).from(0).to(1)
     expect(response).to eq({
-      'id' => remarkable.id })
+      'id' => mdl.id })
   end
 
   after do
