@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-describe "Delete events" do
+describe "T1 Delete events" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:mode){ :delete }
-  let(:path){ send "api_#{mdls}_path" }
-  let(:mdls){ mdl.pluralize }
+  let(:path){ send "api_#{mdls_name}_path" }
+  let(:mdls_name){ mdl_name.pluralize }
   let(:header){ driver.header 'Accept', 'application/vnd.example.t1' }
-  let(:response){ JSON.parse(page.text)[mdls] }
+  let(:response){ JSON.parse(page.text)[mdls_name] }
+  let(:mdl){ create mdl_name }
 
-  let(:mdl){ "event" }
-  let(:event){ create :event }
+  let(:mdl_name){ "event" }
 
-  before{ header; event }
+  before{ header; mdl }
 
   subject{ ->{ driver.submit mode, path, nil }}
 

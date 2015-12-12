@@ -28,6 +28,18 @@ describe "Api::T1::EventNotesController" do
       end
       it{ should be :render }
     end
+
+    describe "#delete_all" do
+      let(:function){ :delete_all }
+      before do
+        expect(factory).to receive(:delete_event_notes).with(no_args){ [event_note] }
+        expect(event_note).to receive(:factory_json).with(no_args){ :json }
+        expect(controller).to receive(:render).
+          with(json:{event_notes:[:json]}){ :render }
+      end
+      it{ should be :render }
+    end
+
   end
 
   describe "Private" do

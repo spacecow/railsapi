@@ -7,6 +7,7 @@ class Factory
   def delete_events; Event.delete_all end
 
   def create_event_note params; FactoryGirl.create :event_note, params end
+  def delete_event_notes; EventNote.destroy_all end
 
   def create_note params; FactoryGirl.create :note, params end 
 
