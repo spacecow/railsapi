@@ -13,17 +13,6 @@ describe "Api::T1::NotesController" do
 
   subject{ controller.send function }
 
-  describe "#index" do
-    let(:function){ :index }
-    before do
-      expect(factory).to receive(:notes).with(no_args){ [note] }
-      expect(note).to receive(:factory_json).with(no_args){ :json }
-      expect(controller).to receive(:render).
-        with(json:{notes:[:json]}){ :render }
-    end
-    it{ should be :render }
-  end
-
   describe "#create" do
     let(:function){ :create }
     let(:params){{ note: :note }}
