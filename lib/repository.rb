@@ -68,22 +68,22 @@ class Repository
     ts = n.tags.select(:id, :title).as_json
   #TODO reference type Note as well
     rs = references(referenceable_id:n.id).select(:id, :url, :comment).as_json 
-    as = n.articles.first.as_json(only:[:id,:name])
-    json = n.as_json(only:[:id,:text])
-    json = json.merge(article:as) if as
-    json.merge(tags:ts).merge(references:rs)
+    n.as_json(only:[:id,:text], include:{article:{only:[:id,:name]}}).
+      merge(tags:ts).
+      merge(references:rs)
   end
   def create_note article_id:, params:{}
     article = Article.find(article_id)
-    article.notes.create params.merge(article_id:article.id)
+    article.notes.create params
   end
   def notes article_id:
     Note.where(article_id:article_id)
   end
   def update_note note, params; note.update params end
   def delete_note id
-    note(id).notings.first.delete
-    note(id).delete
+    n = note(id)
+    n.noting.delete
+    n.delete
   end
   def delete_notes; Note.destroy_all end
 

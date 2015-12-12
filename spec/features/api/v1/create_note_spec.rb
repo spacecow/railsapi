@@ -22,10 +22,8 @@ describe "Create note" do
            change(ArticleNote,:count).from(0).to(1))
     expect(response).to eq({
       'id'          => Note.first.id,
-      'article_id'  => article.id,
       'text'        => "a note" })
     expect(mdl.text).to eq "a note"
-    expect(mdl.article_id).to be article.id 
   end
 
   after do

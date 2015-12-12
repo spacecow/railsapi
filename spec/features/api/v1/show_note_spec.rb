@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Show note" do
 
   let(:body){ JSON.parse(page.text)["note"] }
-  let(:article){ note.article }
+  let(:article){ create :article, name:"a name" }
   let(:note){ create :note, text:"a note" }
   let(:tag){ create :tag, title:'TDP' }
   let(:tagging){ create :tagging, tag:tag, tagable:note }
@@ -25,7 +25,7 @@ describe "Show note" do
       'text'       => "a note",
       'article'    => {
         'id'         => article.id,
-        'name'      => "factory name" },
+        'name'      => "a name" },
       'tags'       => [
         'id'       => tag.id,
         'title'    => "TDP"

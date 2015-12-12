@@ -1,8 +1,8 @@
 class Note < ActiveRecord::Base
   belongs_to :article
 
-  has_many :notings, class_name:"ArticleNote"
-  has_many :articles, through: :notings
+  has_one :noting, class_name:"ArticleNote"
+  has_one :article, through: :noting
 
   has_many :taggings, as: :tagable
   has_many :tags, through: :taggings

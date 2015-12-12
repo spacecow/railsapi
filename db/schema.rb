@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211011829) do
+ActiveRecord::Schema.define(version: 20151212041342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,8 +50,7 @@ ActiveRecord::Schema.define(version: 20151211011829) do
   add_index "events", ["title", "universe_id"], name: "index_events_on_title_and_universe_id", unique: true, using: :btree
 
   create_table "notes", force: :cascade do |t|
-    t.integer "article_id", null: false
-    t.string  "text",       null: false
+    t.string "text", null: false
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -156,7 +155,6 @@ ActiveRecord::Schema.define(version: 20151211011829) do
   add_foreign_key "books", "universes"
   add_foreign_key "events", "remarkables"
   add_foreign_key "events", "universes"
-  add_foreign_key "notes", "articles"
   add_foreign_key "participations", "articles"
   add_foreign_key "participations", "events"
   add_foreign_key "relations", "articles", column: "origin_id"
