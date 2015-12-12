@@ -10,7 +10,7 @@ describe "Create note" do
   let(:mdl){ mdl_name.camelize.constantize.first }
 
   let(:mdl_name){ "note" }
-  let(:article){ create :article }
+  let(:article){ create :article, name:"a name" }
   let(:params){{ mdl_name => { article_id:article.id, text:"a note" }}}
 
   before{ header }
@@ -21,9 +21,13 @@ describe "Create note" do
     should change(Note,:count).from(0).to(1).and(
            change(ArticleNote,:count).from(0).to(1))
     expect(response).to eq({
-      'id'          => Note.first.id,
-      'text'        => "a note" })
+      'id'      => Note.first.id,
+      'text'    => "a note",
+      'article' => {
+        'id'      => article.id,
+        'name'    => "a name" }})
     expect(mdl.text).to eq "a note"
+    expect(mdl.article.id).to eq article.id
   end
 
   after do

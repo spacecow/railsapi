@@ -10,7 +10,7 @@ module Api
 
       def create
         note = repo.create_note(article_id:remove_article_id, params:note_params)
-        render json:{note:note}
+        render json:{note:note.full_json}
       end
 
       def update

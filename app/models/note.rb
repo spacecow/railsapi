@@ -1,5 +1,4 @@
 class Note < ActiveRecord::Base
-  belongs_to :article
 
   has_one :noting, class_name:"ArticleNote"
   has_one :article, through: :noting
@@ -8,6 +7,8 @@ class Note < ActiveRecord::Base
   has_many :tags, through: :taggings
 
   def factory_json; as_json(only:[:id,:text]) end
-  def full_json; as_json(only:[:id,:text]) end
+  def full_json
+    as_json(only:[:id,:text], include:{article:{only:[:id,:name]}})
+  end
 
 end

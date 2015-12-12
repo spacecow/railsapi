@@ -7,7 +7,7 @@ describe "NotesController" do
     class ApplicationController; end unless defined?(Rails)
     require './app/controllers/api/v1/notes_controller'
     expect(controller).to receive(:repo).with(no_args).at_least(1){ repo }
-    expect(controller).to receive(:params).with(no_args).at_least(1){ params }
+    allow(controller).to receive(:params).with(no_args).at_least(1){ params }
   end
 
   subject{ controller.send function }
@@ -20,7 +20,21 @@ describe "NotesController" do
       expect(repo).to receive(:note_as_json).with(:note){ :json }
       expect(controller).to receive(:render).with(json:{note: :json}){ :render }
     end
-    it{ subject }
+    it{ should be :render }
+  end
+
+  describe "#create" do
+    let(:function){ :create }
+    let(:note){ double :note }
+    before do
+      expect(controller).to receive(:remove_article_id).with(no_args){ :article_id }
+      expect(controller).to receive(:note_params).with(no_args){ :params }
+      expect(repo).to receive(:create_note).
+        with(article_id: :article_id, params: :params){ note }
+      expect(note).to receive(:full_json).with(no_args){ :json }
+      expect(controller).to receive(:render).with(json:{note: :json}){ :render }
+    end
+    it{ should be :render }
   end
 
   describe "#update" do
@@ -33,7 +47,7 @@ describe "NotesController" do
       expect(repo).to receive(:update_note).with(:note,:params){ :updated_note }
       expect(repo).to receive(:note_as_json).with(:note){ :json }
     end
-    it{ subject }
+    it{ should be :render }
   end
 
   describe "#destroy" do
