@@ -42,9 +42,8 @@ describe "NotesController" do
     let(:note){ double :note }
     before do
       expect(controller).to receive(:render).with(json:{note: :json}){ :render }
-      expect(repo).to receive(:note).with(:id){ note }
+      expect(repo).to receive(:delete_note).with(:id){ note }
       expect(note).to receive(:full_json).with(no_args){ :json }
-      expect(note).to receive(:delete).with(no_args){ note }
     end
     it{ should eq :render }
   end

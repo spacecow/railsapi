@@ -81,6 +81,10 @@ class Repository
     Note.where(article_id:article_id)
   end
   def update_note note, params; note.update params end
+  def delete_note id
+    note(id).notings.first.delete
+    note(id).delete
+  end
   def delete_notes; Note.destroy_all end
 
   
