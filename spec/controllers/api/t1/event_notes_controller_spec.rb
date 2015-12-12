@@ -1,16 +1,16 @@
 require 'action_controller'
 
-describe "Api::T1::NotesController" do
+describe "Api::T1::EventNotesController" do
 
-  let(:controller){ Api::T1::NotesController.new }
+  let(:controller){ Api::T1::EventNotesController.new }
   let(:factory){ double :factory }
-  let(:note){ double :note }
+  let(:event_note){ double :event_note }
 
   before do
     class ApplicationController; end unless defined?(Rails)
-    require './app/controllers/api/t1/notes_controller'
+    require './app/controllers/api/t1/event_notes_controller'
   end
-
+  
   subject{ controller.send function }
 
   describe "REST" do
@@ -20,11 +20,11 @@ describe "Api::T1::NotesController" do
     describe "#create" do
       let(:function){ :create }
       before do
-        expect(controller).to receive(:note_params).with(no_args){ :params }
-        expect(factory).to receive(:create_note).with(:params){ note }
-        expect(note).to receive(:factory_json).with(no_args){ :json }
+        expect(controller).to receive(:event_note_params).with(no_args){ :params }
+        expect(factory).to receive(:create_event_note).with(:params){ event_note }
+        expect(event_note).to receive(:factory_json).with(no_args){ :json }
         expect(controller).to receive(:render).
-          with(json:{note: :json}){ :render }
+          with(json:{event_note: :json}){ :render }
       end
       it{ should be :render }
     end
@@ -34,8 +34,8 @@ describe "Api::T1::NotesController" do
 
     before{ expect(controller).to receive(:params).with(no_args){ params }}
 
-    describe "#note_params" do
-      let(:function){ :note_params }
+    describe "#event_note_params" do
+      let(:function){ :event_note_params }
       let(:params){ ActionController::Parameters.new(params_hash) }
     
       context "no params" do
@@ -44,9 +44,9 @@ describe "Api::T1::NotesController" do
       end
 
       context "with params" do
-        let(:params_hash){{ note:{
-          text: :text, xxx: :xxx }}} 
-        it{ should eq({ "text" => :text }) }
+        let(:params_hash){{ event_note:{
+          event_id: :event_id, note_id: :note_id, xxx: :xxx }}} 
+        it{ should eq({ "event_id" => :event_id, "note_id" => :note_id }) }
       end
 
     end

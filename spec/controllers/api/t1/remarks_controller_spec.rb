@@ -5,7 +5,6 @@ describe "Api::T1::RemarksController" do
 
   before do
     class ApplicationController; end unless defined?(Rails)
-    class FactoryGirl; end unless defined?(Rails)
     require './app/controllers/api/t1/remarks_controller'
     expect(controller).to receive(:factory).with(no_args){ factory }
     allow(controller).to receive(:params).with(no_args){ params }

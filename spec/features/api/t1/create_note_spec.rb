@@ -6,8 +6,8 @@ describe "T1 Create note" do
   let(:mode){ :post }
   let(:path){ send "api_#{mdl_name.pluralize}_path" }
   let(:header){ driver.header 'Accept', 'application/vnd.example.t1' }
-  let(:response){ JSON.parse(page.text)[mdl_name] }
   let(:mdl){ mdl_name.camelize.constantize.first }
+  let(:response){ JSON.parse(page.text)[mdl_name] }
 
   let(:mdl_name){ "note" }
   let(:params){{ mdl_name => { text:"a note" }}}

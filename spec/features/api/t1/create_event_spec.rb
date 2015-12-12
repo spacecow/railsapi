@@ -11,6 +11,7 @@ describe "T1 Create event" do
 
   let(:mdl_name){ "event" }
   let(:params){{ mdl_name => { title:"a title" }}}
+  let(:universe){ Universe.first }
 
   before{ header }
 
@@ -22,10 +23,11 @@ describe "T1 Create event" do
       'id'       => mdl.id,
       'title'    => "a title",
       'universe' => {
-        'id'       => mdl.universe_id,
-        'title'    => mdl.universe_title }
+        'id'       => universe.id,
+        'title'    => universe.title }
     })
     expect(mdl.title).to eq "a title"
+    expect(mdl.universe_id).to eq universe.id 
   end
 
   after do
