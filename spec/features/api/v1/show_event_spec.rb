@@ -11,9 +11,14 @@ describe "Show event" do
   let(:remark){ create :remark, remarkable:remarkable, content:"a remark" }
   let(:article){ create :article, name:"Ethenielle" }
   let(:participation){ create :participation, participant:article, event:event }
+  let(:note){ create :note, text:"a note" }
+  let(:noting){ create :event_note, event:event, note:note }
+  let(:tagging){ create :tagging, tagable_id:note.id, tag_id:tag.id, tagable_type:'Note' }
+  let(:tag){ create :tag, title:'TDP' }
 
   subject(:response){ JSON.parse(page.text)['event'] }
 
+  #TODO remove when remarks disappear
   describe "Without remarks" do
     let(:remarkable_id){ nil }
     before do
@@ -27,7 +32,8 @@ describe "Show event" do
         'children'     => [],
         'parents'      => [],
         'participants' => [],
-        'remarks'      => []
+        'remarks'      => [],
+        'notes'        => []
       })
     end
   end
@@ -35,6 +41,8 @@ describe "Show event" do
   describe "With remarks" do
     let(:remarkable_id){ remarkable.id }
     before do
+      tagging
+      noting
       remark
       parent_step
       child_step
@@ -58,11 +66,21 @@ describe "Show event" do
         'participants' => [{
           'id'           => article.id,
           'gender'       => 'n',
-          'name'         => "Ethenielle" }]})
+          'name'         => "Ethenielle" }],
+        'notes'        => [
+          'id'           => note.id,
+          'text'         => "a note",
+          'tags'         => [
+            'id'           => tag.id,
+            'title'        => "TDP" ]]})
     end
   end
 
   after do
+    Tagging.delete_all
+    Tag.delete_all
+    EventNote.delete_all
+    Note.delete_all
     Remark.delete_all
     Step.delete_all
     Participation.delete_all

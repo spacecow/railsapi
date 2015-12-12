@@ -3,6 +3,9 @@ class Event < ActiveRecord::Base
   belongs_to :universe
   belongs_to :remarkable
 
+  has_many :notings, class_name:"EventNote"
+  has_many :notes, through: :notings
+
   has_many :steps, foreign_key:"child_id"
   has_many :parents, through: :steps
   has_many :inverse_steps, class_name:"Step", foreign_key:"parent_id"
@@ -29,8 +32,13 @@ class Event < ActiveRecord::Base
       include:{
         parents:{ only:[:id,:title] },
         children:{ only:[:id,:title] },
-        participants:{ only:[:id,:name,:gender] }}
-      ).merge("remarks" => remarks.map(&:full_json)) 
+        participants:{ only:[:id,:name,:gender] },
+        notes:{
+          only:[:id,:text],
+          include:{ tags:{ only:[:id,:title] }}
+        }
+      }
+    ).merge("remarks" => remarks.map(&:full_json)) 
   end
 
   def factory_json; as_json(
