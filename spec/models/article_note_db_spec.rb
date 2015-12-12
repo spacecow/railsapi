@@ -22,9 +22,24 @@ describe "ArticleNote DB, Validations" do
 
   subject{ ->{ ArticleNote.create params }}
 
-  context "Participation is valid" do
+  context "ArticleNote is valid" do
     it{ should change(ArticleNote,:count).from(0).to(1) }
   end
+
+  context "Same article, but different notes" do
+    let(:note2){ create :note }
+    before{ create :article_note, note:note2, article:article }
+    it{ should change(ArticleNote,:count).from(1).to(2) }
+  end
+
+  context "Same note, but different articles" do
+    let(:article2){ create :article }
+    before{ create :article_note, note:note, article:article2 }
+    it{ should raise_error{|e|
+      expect(e).to be_a ActiveRecord::StatementInvalid 
+      expect(e.message).to include "PG::UniqueViolation" }}
+  end
+
 
   context "Param note_id is nil" do
     let(:note_id){ nil }

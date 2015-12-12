@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20151211011829) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "article_notes", ["note_id"], name: "index_article_notes_on_note_id", unique: true, using: :btree
+
   create_table "articles", force: :cascade do |t|
     t.string  "name",                                null: false
     t.integer "universe_id",                         null: false

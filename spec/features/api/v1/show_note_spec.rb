@@ -22,11 +22,10 @@ describe "Show note" do
   it "Note exists" do
     is_expected.to eq({
       'id'         => note.id,
-      'article_id' => article.id,
       'text'       => "a note",
-      'articles'   => [
+      'article'    => {
         'id'         => article.id,
-        'name'      => "factory name" ],
+        'name'      => "factory name" },
       'tags'       => [
         'id'       => tag.id,
         'title'    => "TDP"

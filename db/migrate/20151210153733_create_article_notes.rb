@@ -8,6 +8,7 @@ class CreateArticleNotes < ActiveRecord::Migration
     end
     add_foreign_key :article_notes, :articles
     add_foreign_key :article_notes, :notes
+    add_index :article_notes, :note_id, unique:true
   end
 
   def down

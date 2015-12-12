@@ -19,9 +19,7 @@ describe "Update note" do
     should_not change(Note, :count) 
     expect(response).to eq({
       'id'          => Note.first.id,
-      'article_id'  => note.article_id,
       'text'        => "a new note",
-      'articles'    => [],
       'tags'        => [],
       'references'  => [] })
     expect(note.reload.text).to eq "a new note"
