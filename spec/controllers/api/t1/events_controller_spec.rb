@@ -4,7 +4,7 @@ describe "Api::T1::EventsController" do
 
   let(:controller){ Api::T1::EventsController.new }
   let(:factory){ double :factory }
-  let(:event){ double :remark }
+  let(:event){ double :event }
 
   before do
     class ApplicationController; end unless defined?(Rails)

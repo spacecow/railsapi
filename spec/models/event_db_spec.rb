@@ -2,7 +2,6 @@ require 'active_record'
 require './config/database'
 require './app/models/event'
 require './app/models/universe'
-require './app/models/remarkable'
 
 require 'factory_girl'
 require './spec/factories'
@@ -17,27 +16,12 @@ describe Event do
     let(:universe){ create :universe }
     let(:universe_id){ universe.id }
     let(:title){ "Red Wedding" }
-    let(:remarkable){ create :remarkable }
-    let(:remarkable_id){ remarkable.id }
-    let(:params){{ universe_id:universe_id, title:title, remarkable_id:remarkable_id }}
+    let(:params){{ universe_id:universe_id, title:title }}
     
     subject{ ->{ Event.create params }}
 
     context "Event is valid" do
       it{ should change(Event,:count).from(0).to(1) }
-    end
-
-    context "Remarkable is not set" do
-      let(:remarkable_id){ nil }
-      it{ should change(Event,:count).from(0).to(1) }
-    end
-
-    context "Remarkable is pointing at a non-existing remarkable" do
-      let(:remarkable_id){ -1 }
-      it{ should raise_error{|e|
-        expect(e).to be_a ActiveRecord::InvalidForeignKey
-        expect(e.message).to include "PG::ForeignKeyViolation"
-      }}
     end
 
     context "Same title but in different universes" do
@@ -93,7 +77,6 @@ describe Event do
 
     after do
       Event.delete_all
-      Remarkable.delete_all
       Universe.delete_all
     end
 

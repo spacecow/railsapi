@@ -15,9 +15,8 @@ module Api
       private
 
         def event_params
-          #TODO remove remarkable_id
           (params[:event] || ActionController::Parameters.new()).
-            permit(:title, :universe_id, :remarkable_id) 
+            permit(:title, :universe_id) 
         end
 
     end

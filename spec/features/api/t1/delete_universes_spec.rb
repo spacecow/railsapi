@@ -16,7 +16,7 @@ describe "T1 Delete universes" do
 
   subject{ ->{ driver.submit mode, path, nil }}
 
-  it "Existing remarks are deleted" do
+  it "Existing universes are deleted" do
     should change(Universe,:count).from(1).to(0)
     expect(response).to eq([{
       'id'    => mdl.id,

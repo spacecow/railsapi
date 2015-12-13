@@ -11,8 +11,6 @@ Rails.application.routes.draw do
       resources :event_notes, only:[:create]
       delete '/event_notes', to:'event_notes#delete_all'
       resources :notes, only:[:create]
-      resources :remarkables, only:[:create]
-      resources :remarks, only:[:create]
       resources :universes, only:[:create]
       delete '/universes', to:'universes#delete_all'
     end
@@ -43,11 +41,6 @@ Rails.application.routes.draw do
       delete '/relations', to:'relations#delete_all'
 
       resources :relation_types, only: :index
-
-      delete '/remarkables', to:'remarkables#delete_all'
-
-      resources :remarks, only:[:show,:create,:update,:destroy]
-      delete '/remarks', to:'remarks#delete_all'
 
       resources :steps, only:[:create]
       delete '/steps', to:'steps#delete_all'

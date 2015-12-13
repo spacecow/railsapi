@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213002457) do
+ActiveRecord::Schema.define(version: 20151213214541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,11 +49,10 @@ ActiveRecord::Schema.define(version: 20151213002457) do
   add_index "event_notes", ["note_id"], name: "index_event_notes_on_note_id", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.integer  "universe_id",   null: false
-    t.string   "title",         null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "remarkable_id"
+    t.integer  "universe_id", null: false
+    t.string   "title",       null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "events", ["title", "universe_id"], name: "index_events_on_title_and_universe_id", unique: true, using: :btree
@@ -124,18 +123,6 @@ ActiveRecord::Schema.define(version: 20151213002457) do
 
   add_index "relations", ["origin_id", "target_id"], name: "index_relations_on_origin_id_and_target_id", unique: true, using: :btree
 
-  create_table "remarkables", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "remarks", force: :cascade do |t|
-    t.integer  "remarkable_id", null: false
-    t.string   "content",       null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
   create_table "steps", force: :cascade do |t|
     t.integer  "parent_id",  null: false
     t.integer  "child_id",   null: false
@@ -164,13 +151,11 @@ ActiveRecord::Schema.define(version: 20151213002457) do
   add_foreign_key "books", "universes"
   add_foreign_key "event_notes", "events"
   add_foreign_key "event_notes", "notes"
-  add_foreign_key "events", "remarkables"
   add_foreign_key "events", "universes"
   add_foreign_key "participations", "articles"
   add_foreign_key "participations", "events"
   add_foreign_key "relations", "articles", column: "origin_id"
   add_foreign_key "relations", "articles", column: "target_id"
-  add_foreign_key "remarks", "remarkables"
   add_foreign_key "steps", "events", column: "child_id"
   add_foreign_key "steps", "events", column: "parent_id"
   add_foreign_key "taggings", "tags"

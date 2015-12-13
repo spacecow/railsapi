@@ -46,14 +46,6 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       association :target, factory: :article
     end
 
-    factory :remark do
-      remarkable
-      content "factory content"
-    end
-
-    factory :remarkable do
-    end
-
     factory :step do
       association :parent, factory: :event
       association :child, factory: :event

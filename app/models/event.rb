@@ -1,7 +1,6 @@
 class Event < ActiveRecord::Base
 
   belongs_to :universe
-  belongs_to :remarkable
 
   has_many :notings, class_name:"EventNote"
   has_many :notes, through: :notings
@@ -18,15 +17,13 @@ class Event < ActiveRecord::Base
     self.child_ids = Event.ids_from_tokens(tokens) 
   end
 
-  def remarks; remarkable.try(:remarks) || [] end
- 
   def self.ids_from_tokens tokens; tokens.split(",") end
 
   def parent_tokens= tokens
     self.parent_ids = Event.ids_from_tokens(tokens) 
   end
 
-  def full_json remarks:[]
+  def full_json
     as_json(
       only:[:id,:title],
       include:{
@@ -35,10 +32,7 @@ class Event < ActiveRecord::Base
         participants:{ only:[:id,:name,:gender] },
         notes:{
           only:[:id,:text],
-          include:{ tags:{ only:[:id,:title] }}
-        }
-      }
-    ).merge("remarks" => remarks.map(&:full_json)) 
+          include:{ tags:{ only:[:id,:title] }} }})
   end
 
   def factory_json; as_json(

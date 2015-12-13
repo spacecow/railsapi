@@ -4,7 +4,7 @@ module Api
 
       def show
         event = repo.event params[:id]
-        render json:{event:event.full_json(remarks:event.remarks)}
+        render json:{event:event.full_json}
       end
 
       def index
