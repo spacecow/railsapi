@@ -72,9 +72,10 @@ class Repository
       merge(tags:ts).
       merge(references:rs)
   end
-  def create_note article_id:, params:{}
-    article = Article.find(article_id)
-    article.notes.create params
+  def create_note article_id:, event_id:, params:{}
+    parent = Article.find(article_id) unless article_id.blank?
+    parent = Event.find(event_id) unless event_id.blank?
+    parent.notes.create params
   end
   def notes article_id:
     Note.where(article_id:article_id)

@@ -1,6 +1,7 @@
+
 require 'rails_helper'
 
-describe "Create note" do
+describe "Create event note" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:mode){ :post }
@@ -10,8 +11,8 @@ describe "Create note" do
   let(:mdl){ mdl_name.camelize.constantize.first }
 
   let(:mdl_name){ "note" }
-  let(:article){ create :article, name:"a name" }
-  let(:params){{ mdl_name => { article_id:article.id, text:"a note" }}}
+  let(:event){ create :event, title:"a title" }
+  let(:params){{ mdl_name => { event_id:event.id, text:"a note" }}}
 
   before{ header }
 
@@ -19,21 +20,22 @@ describe "Create note" do
 
   it "Successfully" do
     should change(Note,:count).from(0).to(1).and(
-           change(ArticleNote,:count).from(0).to(1))
+           change(EventNote,:count).from(0).to(1))
     expect(response).to eq({
-      'id'      => Note.first.id,
-      'text'    => "a note",
-      'article' => {
-        'id'      => article.id,
-        'name'    => "a name" }})
+      'id'    => Note.first.id,
+      'text'  => "a note",
+      'event' => {
+        'id'    => event.id,
+        'title' => "a title" }})
     expect(mdl.text).to eq "a note"
-    expect(mdl.article.id).to eq article.id
+    expect(mdl.article_id).to be nil 
+    expect(mdl.event_id).to eq event.id
   end
 
   after do
-    ArticleNote.delete_all
+    EventNote.delete_all
     Note.delete_all
-    Article.delete_all
+    Event.delete_all
     Universe.delete_all
   end
 

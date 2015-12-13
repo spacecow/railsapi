@@ -9,6 +9,9 @@ class Note < ActiveRecord::Base
   has_many :taggings, as: :tagable
   has_many :tags, through: :taggings
 
+  def article_id; article.try(:id) end
+  def event_id; event.try(:id) end
+
   def factory_json; as_json(only:[:id,:text]) end
   def full_json
     as_json(

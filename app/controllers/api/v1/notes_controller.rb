@@ -9,7 +9,10 @@ module Api
       end
 
       def create
-        note = repo.create_note(article_id:remove_article_id, params:note_params)
+        note = repo.create_note(
+          article_id:remove_article_id, 
+          event_id:remove_event_id,
+          params:note_params)
         render json:{note:note.full_json}
       end
 
@@ -38,6 +41,10 @@ module Api
       
         def remove_article_id
           params.require(:note).delete(:article_id)
+        end
+
+        def remove_event_id
+          params.require(:note).delete(:event_id)
         end
 
     end
