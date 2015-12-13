@@ -1,7 +1,10 @@
 class Note < ActiveRecord::Base
 
-  has_one :noting, class_name:"ArticleNote"
-  has_one :article, through: :noting
+  has_one :article_note, class_name:"ArticleNote"
+  has_one :article, through: :article_note
+
+  has_one :event_note, class_name:"EventNote"
+  has_one :event, through: :event_note
 
   has_many :taggings, as: :tagable
   has_many :tags, through: :taggings
