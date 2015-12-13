@@ -82,9 +82,11 @@ class Repository
   def update_note note, params; note.update params end
   def delete_note id
     n = note(id)
+    json = n.full_json
     n.article_note.try(:delete)
     n.event_note.try(:delete)
     n.delete
+    json
   end
   def delete_notes; Note.destroy_all end
 

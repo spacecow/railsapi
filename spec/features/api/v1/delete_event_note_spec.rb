@@ -8,7 +8,7 @@ describe "Delete event note" do
   let(:mode){ :delete }
 
   let(:mdl_name){ "note" }
-  let(:event){ create :event }
+  let(:event){ create :event, title:"a title" }
   let(:noting){ create :event_note, event:event, note:mdl }
   let(:mdl){ create mdl_name, text:"Everyone got killed" }
 
@@ -19,9 +19,12 @@ describe "Delete event note" do
   it "Successfully" do
     should change(Note,:count).from(1).to(0).and(
            change(EventNote,:count).from(1).to(0))
-    expect(response).to eq({
-      'id'         => mdl.id,
-      'text'       => "Everyone got killed" })
+    expect(response).to eq(
+      'id'      => mdl.id,
+      'text'    => "Everyone got killed",
+      'event'   => {
+        'id'      => event.id,
+        'title'   => "a title" })
   end
 
   after do

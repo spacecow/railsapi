@@ -21,8 +21,8 @@ module Api
       end
 
       def destroy
-        note = repo.delete_note params[:id]
-        render json:{note:note.full_json}
+        json = repo.delete_note params[:id]
+        render json:{note:json}
       end
 
       def delete_all

@@ -8,7 +8,7 @@ describe "Delete article note" do
   let(:mode){ :delete }
 
   let(:mdl_name){ "note" }
-  let(:article){ create :article }
+  let(:article){ create :article, name:"a name" }
   let(:noting){ create :article_note, article:article, note:mdl }
   let(:mdl){ create mdl_name, text:"Everyone got killed" }
 
@@ -19,9 +19,12 @@ describe "Delete article note" do
   it "Successfully" do
     should change(Note,:count).from(1).to(0).and(
            change(ArticleNote,:count).from(1).to(0))
-    expect(response).to eq({
-      'id'         => mdl.id,
-      'text'       => "Everyone got killed" })
+    expect(response).to eq(
+      'id'      => mdl.id,
+      'text'    => "Everyone got killed",
+      'article' => {
+        'id'      => article.id,
+        'name'    => "a name" })
   end
 
   after do

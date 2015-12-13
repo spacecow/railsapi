@@ -11,7 +11,11 @@ class Note < ActiveRecord::Base
 
   def factory_json; as_json(only:[:id,:text]) end
   def full_json
-    as_json(only:[:id,:text], include:{article:{only:[:id,:name]}})
+    as_json(
+      only:[:id,:text],
+      include:{
+        article:{ only:[:id,:name] },
+        event:{ only:[:id,:title] }})
   end
 
 end
