@@ -3,8 +3,6 @@ require 'action_controller'
 describe "Api::T1::EventNotesController" do
 
   let(:controller){ Api::T1::EventNotesController.new }
-  let(:factory){ double :factory }
-  let(:event_note){ double :event_note }
 
   before do
     class ApplicationController; end unless defined?(Rails)
@@ -15,14 +13,19 @@ describe "Api::T1::EventNotesController" do
 
   describe "REST" do
 
-    before{ expect(controller).to receive(:factory).with(no_args){ factory }}
+    let(:factory){ double :factory }
+    let(:event_note){ double :event_note }
+
+    before do
+      expect(controller).to receive(:factory).with(no_args){ factory }
+      expect(event_note).to receive(:factory_json).with(no_args){ :json }
+    end
 
     describe "#create" do
       let(:function){ :create }
       before do
         expect(controller).to receive(:event_note_params).with(no_args){ :params }
         expect(factory).to receive(:create_event_note).with(:params){ event_note }
-        expect(event_note).to receive(:factory_json).with(no_args){ :json }
         expect(controller).to receive(:render).
           with(json:{event_note: :json}){ :render }
       end
@@ -33,7 +36,6 @@ describe "Api::T1::EventNotesController" do
       let(:function){ :delete_all }
       before do
         expect(factory).to receive(:delete_event_notes).with(no_args){ [event_note] }
-        expect(event_note).to receive(:factory_json).with(no_args){ :json }
         expect(controller).to receive(:render).
           with(json:{event_notes:[:json]}){ :render }
       end

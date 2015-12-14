@@ -40,7 +40,6 @@ describe "ArticleNote DB, Validations" do
       expect(e.message).to include "PG::UniqueViolation" }}
   end
 
-
   context "Param note_id is nil" do
     let(:note_id){ nil }
     it{ should raise_error{|e|

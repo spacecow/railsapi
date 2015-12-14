@@ -7,6 +7,11 @@ module Api
         render json:{tag:tag.factory_json}
       end
 
+      def delete_all
+        tags = factory.delete_tags
+        render json:{tags:tags.map(&:factory_json)}
+      end
+
       private
 
         def tag_params

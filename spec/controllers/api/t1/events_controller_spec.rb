@@ -3,8 +3,6 @@ require 'action_controller'
 describe "Api::T1::EventsController" do
 
   let(:controller){ Api::T1::EventsController.new }
-  let(:factory){ double :factory }
-  let(:event){ double :event }
 
   before do
     class ApplicationController; end unless defined?(Rails)
@@ -15,10 +13,10 @@ describe "Api::T1::EventsController" do
 
   describe "REST" do
 
-    before do
-      allow(controller).to receive(:params).with(no_args){ params }
-      expect(controller).to receive(:factory).with(no_args){ factory }
-    end
+    let(:factory){ double :factory }
+    let(:event){ double :event }
+
+    before{ expect(controller).to receive(:factory).with(no_args){ factory }}
 
     describe "#create" do
       let(:function){ :create }

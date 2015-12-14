@@ -3,8 +3,6 @@ require 'action_controller'
 describe "Api::T1::NotesController" do
 
   let(:controller){ Api::T1::NotesController.new }
-  let(:factory){ double :factory }
-  let(:note){ double :note }
 
   before do
     class ApplicationController; end unless defined?(Rails)
@@ -15,14 +13,19 @@ describe "Api::T1::NotesController" do
 
   describe "REST" do
 
-    before{ expect(controller).to receive(:factory).with(no_args){ factory }}
+    let(:factory){ double :factory }
+    let(:note){ double :note }
+
+    before do
+      expect(controller).to receive(:factory).with(no_args){ factory }
+      expect(note).to receive(:factory_json).with(no_args){ :json }
+    end
 
     describe "#create" do
       let(:function){ :create }
       before do
         expect(controller).to receive(:note_params).with(no_args){ :params }
         expect(factory).to receive(:create_note).with(:params){ note }
-        expect(note).to receive(:factory_json).with(no_args){ :json }
         expect(controller).to receive(:render).
           with(json:{note: :json}){ :render }
       end

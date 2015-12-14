@@ -3,7 +3,6 @@ require 'action_controller'
 describe "Api::T1::ArticleNotesController" do
 
   let(:controller){ Api::T1::ArticleNotesController.new }
-  let(:article_note){ double :article_note }
 
   before do
     class ApplicationController; end unless defined?(Rails)
@@ -15,8 +14,12 @@ describe "Api::T1::ArticleNotesController" do
   describe "REST" do
 
     let(:factory){ double :factory }
+    let(:article_note){ double :article_note }
 
-    before{ expect(controller).to receive(:factory).with(no_args){ factory }}
+    before do
+      expect(controller).to receive(:factory).with(no_args){ factory }
+      expect(article_note).to receive(:factory_json).with(no_args){ :json }
+    end
 
     describe "#create" do
       let(:function){ :create }
@@ -26,7 +29,6 @@ describe "Api::T1::ArticleNotesController" do
           with(json:{article_note: :json}){ :render }
         expect(factory).to receive(:create_article_note).
           with(:params){ article_note }
-        expect(article_note).to receive(:factory_json).with(no_args){ :json }
       end
       it{ should be :render }
     end
@@ -39,7 +41,6 @@ describe "Api::T1::ArticleNotesController" do
           with(json:{article_notes:[:json]}){ :render }
         expect(factory).to receive(:delete_article_notes).
           with(no_args){ [article_note] }
-        expect(article_note).to receive(:factory_json).with(no_args){ :json }
       end
       it{ should be :render }
     end

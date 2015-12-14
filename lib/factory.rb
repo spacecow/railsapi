@@ -18,6 +18,10 @@ class Factory
     end
     tag
   end
+  def delete_tags
+    NoteTag.destroy_all
+    Tag.destroy_all
+  end
 
   def delete_universes; Universe.destroy_all end
 

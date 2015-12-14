@@ -17,6 +17,11 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       note
     end
 
+    factory :article_tag do
+      article
+      tag
+    end
+
     factory :event do
       universe
       title 'factory title'
