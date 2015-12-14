@@ -5,6 +5,7 @@ describe "Create tag" do
   let(:driver){ Capybara.current_session.driver }
   let(:function){ driver.submit mode, path, params }
   let(:response){ JSON.parse(page.text)[mdl] }
+  let(:header){ driver.header 'Accept', 'application/vnd.example.v1' }
   let(:path){ send("api_#{mdl.pluralize}_path") }
 
   let(:tag){ Tag.first }
@@ -14,6 +15,8 @@ describe "Create tag" do
   let(:mode){ :post }
   let(:params){{ tag:{ title:'TDP'} }}
   let(:mdl){ "tag" }
+
+  before{ header }
 
   subject{ ->{ function }}
 

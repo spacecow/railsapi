@@ -11,6 +11,12 @@ class Factory
 
   def create_note params; FactoryGirl.create :note, params end 
 
+  def create_tag tagable_type:, tagable_id:, **params
+    tag = Tag.create params
+    tagable_type.constantize.find(tagable_id).taggings.create tag_id:tag.id
+    tag
+  end
+
   def delete_universes; Universe.destroy_all end
 
 end

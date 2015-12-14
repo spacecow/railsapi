@@ -3,7 +3,6 @@ require 'action_controller'
 describe "Api::T1::ArticleNotesController" do
 
   let(:controller){ Api::T1::ArticleNotesController.new }
-  let(:factory){ double :factory }
   let(:article_note){ double :article_note }
 
   before do
@@ -14,6 +13,8 @@ describe "Api::T1::ArticleNotesController" do
   subject{ controller.send function }
 
   describe "REST" do
+
+    let(:factory){ double :factory }
 
     before{ expect(controller).to receive(:factory).with(no_args){ factory }}
 

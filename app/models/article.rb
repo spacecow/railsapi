@@ -2,6 +2,9 @@ class Article < ActiveRecord::Base
 
   belongs_to :universe
 
+  has_many :taggings, class_name:"ArticleTag" 
+  has_many :tags, through: :taggings
+
   has_many :notings, class_name:"ArticleNote"
   has_many :notes, through: :notings
 

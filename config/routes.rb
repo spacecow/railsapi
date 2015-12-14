@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :event_notes, only:[:create]
       delete '/event_notes', to:'event_notes#delete_all'
       resources :notes, only:[:create]
+      resources :tags, only:[:create]
       resources :universes, only:[:create]
       delete '/universes', to:'universes#delete_all'
     end

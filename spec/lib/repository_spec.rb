@@ -118,7 +118,7 @@ describe Repository do
     end
 
     after do
-      Tagging.delete_all
+      NoteTag.delete_all
       Tag.delete_all
       Note.delete_all
       Article.delete_all
