@@ -65,9 +65,11 @@ ActiveRecord::Schema.define(version: 20151214023733) do
   add_index "events", ["title", "universe_id"], name: "index_events_on_title_and_universe_id", unique: true, using: :btree
 
   create_table "note_tags", force: :cascade do |t|
-    t.integer "note_id"
-    t.integer "tag_id"
+    t.integer "note_id", null: false
+    t.integer "tag_id",  null: false
   end
+
+  add_index "note_tags", ["note_id", "tag_id"], name: "index_note_tags_on_note_id_and_tag_id", unique: true, using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.string "text", null: false
@@ -166,6 +168,8 @@ ActiveRecord::Schema.define(version: 20151214023733) do
   add_foreign_key "event_notes", "events"
   add_foreign_key "event_notes", "notes"
   add_foreign_key "events", "universes"
+  add_foreign_key "note_tags", "notes"
+  add_foreign_key "note_tags", "tags"
   add_foreign_key "participations", "articles"
   add_foreign_key "participations", "events"
   add_foreign_key "relations", "articles", column: "origin_id"
