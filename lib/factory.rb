@@ -11,9 +11,11 @@ class Factory
 
   def create_note params; FactoryGirl.create :note, params end 
 
-  def create_tag tagable_type:, tagable_id:, **params
+  def create_tag tagable_type:nil, tagable_id:nil, **params
     tag = Tag.create params
-    tagable_type.constantize.find(tagable_id).taggings.create tag_id:tag.id
+    if tagable_type && tagable_id
+      tagable_type.constantize.find(tagable_id).taggings.create tag_id:tag.id
+    end
     tag
   end
 
