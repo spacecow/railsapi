@@ -9,15 +9,18 @@ describe 'Show article' do
   let(:universe){ article.universe }
   let(:article_note){ create :article_note, article:article, note:note }
   let(:note){ create :note, text:'a note' }
-  let(:tagging){ create :note_tag, note_id:note.id, tag_id:tag.id }
+  let(:note_tag){ create :note_tag, note_id:note.id, tag_id:tag.id }
   let(:tag){ create :tag, title:'TDP' }
+  let(:article_tag){ create :article_tag, article_id:article.id, tag_id:tag2.id }
+  let(:tag2){ create :tag, title:'animal' }
   let(:participation){ create :participation, participant:article, event:event }
   let(:reference){ create :reference, referenceable:relation, comment:"a comment" }
   let(:event){ create :event, title:"an event" }
 
   before do
     article_note
-    tagging
+    article_tag
+    note_tag
     relation
     participation
     reference
@@ -40,19 +43,23 @@ describe 'Show article' do
           'id'          => tag.id,
           'title'       => 'TDP' ]
       ],
-      'relatives' => [{
-        'id'        => relation.id,
-        'type'      => 'Owns',
-        'references' => [{
-          'id'      => reference.id,
-          'comment' => 'a comment' }],
-        'target'    => {
-          'id'        => dog.id,
-          'gender'    => 'n',
-          'name'      => "dog" } }],
-      'events'    => [
-        'id'        => event.id,
-        'title'     => "an event" ] 
+      'tags'        => [
+        'id'          => tag2.id,
+        'title'       => "animal"
+      ],
+      'relatives'   => [{
+        'id'          => relation.id,
+        'type'        => 'Owns',
+        'references'  => [{
+          'id'          => reference.id,
+          'comment'     => 'a comment' }],
+        'target'      => {
+          'id'          => dog.id,
+          'gender'      => 'n',
+          'name'        => "dog" } }],
+      'events'      => [
+        'id'          => event.id,
+        'title'       => "an event" ] 
     })
   end
 
@@ -62,6 +69,7 @@ describe 'Show article' do
     Participation.delete_all
     Relation.delete_all
     NoteTag.delete_all
+    ArticleTag.delete_all
     Tag.delete_all
     Note.delete_all
     Event.delete_all

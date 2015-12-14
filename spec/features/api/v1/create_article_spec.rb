@@ -26,7 +26,8 @@ describe 'Create article' do
         'universe_id' => universe.id,
         'gender'      => 'm',
         'events'      => [],
-        'notes'       => [] 
+        'notes'       => [],
+        'tags'        => []
       })
     end
   end

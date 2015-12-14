@@ -19,6 +19,7 @@ class Factory
     tag
   end
   def delete_tags
+    ArticleTag.destroy_all
     NoteTag.destroy_all
     Tag.destroy_all
   end

@@ -24,7 +24,8 @@ describe "Update article" do
       'type'        => "Character",
       'gender'      => 'm',
       'events'      => [],
-      'notes'       => []
+      'notes'       => [],
+      'tags'        => []
     })
     expect(Article.first.name).to eq "updated name"
     expect(Article.first.gender).to eq "m"
