@@ -9,7 +9,7 @@ describe 'Show article' do
   let(:universe){ article.universe }
   let(:article_note){ create :article_note, article:article, note:note }
   let(:note){ create :note, text:'a note' }
-  let(:tagging){ create :tagging, tagable_id:note.id, tag_id:tag.id, tagable_type:'Note' }
+  let(:tagging){ create :note_tag, note_id:note.id, tag_id:tag.id }
   let(:tag){ create :tag, title:'TDP' }
   let(:participation){ create :participation, participant:article, event:event }
   let(:reference){ create :reference, referenceable:relation, comment:"a comment" }
@@ -61,7 +61,7 @@ describe 'Show article' do
     Reference.delete_all
     Participation.delete_all
     Relation.delete_all
-    Tagging.delete_all
+    NoteTag.delete_all
     Tag.delete_all
     Note.delete_all
     Event.delete_all

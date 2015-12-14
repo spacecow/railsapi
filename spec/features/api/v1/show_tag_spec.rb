@@ -4,7 +4,7 @@ describe 'Show tag' do
 
   let(:body){ JSON.parse(page.text)['tag'] }
   let(:tag){ create :tag, title:'TDP' }
-  let(:tagging){ create :tagging, tagable_id:note.id, tag_id:tag.id, tagable_type:'Note' }
+  let(:tagging){ create :note_tag, note_id:note.id, tag_id:tag.id }
   let(:note){ create :note }
 
   subject{ body }
@@ -26,7 +26,7 @@ describe 'Show tag' do
   end
 
   after do
-    Tagging.delete_all
+    NoteTag.delete_all
     Tag.delete_all
     Note.delete_all
     Article.delete_all

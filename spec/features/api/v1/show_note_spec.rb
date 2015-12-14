@@ -6,7 +6,7 @@ describe "Show note" do
   let(:article){ create :article, name:"a name" }
   let(:note){ create :note, text:"a note" }
   let(:tag){ create :tag, title:'TDP' }
-  let(:tagging){ create :tagging, tag:tag, tagable:note }
+  let(:tagging){ create :note_tag, tag:tag, note:note }
   let(:reference){ create :reference, params }
   let(:article_note){ create :article_note, article:article, note:note }
   let(:params){{ comment:"smart", referenceable:note, url:"www.example.com" }}
@@ -40,7 +40,7 @@ describe "Show note" do
 
   after do
     ArticleNote.delete_all
-    Tagging.delete_all
+    NoteTag.delete_all
     Tag.delete_all
     Reference.delete_all
     Note.delete_all

@@ -7,7 +7,7 @@ module Api
           tagable_type:remove_tagable_type,
           tagable_id:remove_tagable_id,
           params:tagging_params)
-        render json:{tagging:tagging}
+        render json:{tagging:tagging.full_json}
       end
 
       def delete_all

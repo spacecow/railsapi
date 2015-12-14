@@ -157,7 +157,7 @@ class Repository
     end
     tagable_type.constantize.find(tagable_id).taggings.create params
   end
-  def delete_taggings; Tagging.destroy_all end
+  def delete_taggings; NoteTag.destroy_all end
 
 
   def universe id; Universe.find(id) end

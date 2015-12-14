@@ -1,4 +1,4 @@
 class Tag < ActiveRecord::Base
-  has_many :taggings 
-  has_many :notes, through: :taggings, source: :tagable, source_type:"Note"
+  has_many :note_tags 
+  has_many :notes, through: :note_tags
 end 

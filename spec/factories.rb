@@ -31,6 +31,11 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       text 'factory text'
     end
 
+    factory :note_tag do
+      note
+      tag
+    end
+
     factory :participation do
       association :participant, factory: :article
       event
@@ -53,11 +58,6 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
 
     factory :tag do
       title 'factory title'
-    end
-
-    factory :tagging do
-      tag
-      association :tagable, factory: :note
     end
 
     factory :universe do

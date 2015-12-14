@@ -2,7 +2,6 @@ class Article < ActiveRecord::Base
 
   belongs_to :universe
 
-  #has_many :notes
   has_many :notings, class_name:"ArticleNote"
   has_many :notes, through: :notings
 

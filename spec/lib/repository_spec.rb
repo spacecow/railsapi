@@ -84,7 +84,7 @@ describe Repository do
 
   describe "#tag" do
     def create_tagging n 
-      create :tagging, tagable_id:n.id, tag_id:tag.id, tagable_type:'Note'
+      create :note_tag, note_id:n.id, tag_id:tag.id
     end
     let(:function){ :tag }
     let(:tag){ create :tag, title:"TDP" }

@@ -11,7 +11,7 @@ describe "Show event" do
   let(:participation){ create :participation, participant:article, event:event }
   let(:note){ create :note, text:"a note" }
   let(:noting){ create :event_note, event:event, note:note }
-  let(:tagging){ create :tagging, tagable_id:note.id, tag_id:tag.id, tagable_type:'Note' }
+  let(:tagging){ create :note_tag, note:note, tag:tag }
   let(:tag){ create :tag, title:'TDP' }
 
   subject(:response){ JSON.parse(page.text)['event'] }
@@ -50,7 +50,7 @@ describe "Show event" do
   end
 
   after do
-    Tagging.delete_all
+    NoteTag.delete_all
     Tag.delete_all
     EventNote.delete_all
     Note.delete_all
