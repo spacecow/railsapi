@@ -3,20 +3,20 @@ require 'rails_helper'
 describe "Update article" do
 
   let(:driver){ Capybara.current_session.driver }
-  let(:response){ JSON.parse(page.text)[mdl] }
-  let(:path){ send "api_#{mdl}_path", article  }
-
-  let(:mdl){ "article" }
   let(:mode){ :put }
-  let(:params){{ article:{ name:"updated name", gender:'m' }}}
-  let(:article){ create :article, name:"old name", gender:'f' }
+  let(:path){ send "api_#{mdl_name}_path", article  }
+  let(:response){ JSON.parse(page.text)[mdl_name] }
+
+  let(:mdl_name){ "article" }
+  let(:params){{ mdl_name => { name:"updated name", gender:'m' }}}
+  let(:article){ create mdl_name, name:"old name", gender:'f' }
 
   before{ article }
 
   subject{ ->{ driver.submit mode, path, params }}
 
   it "Successfully" do
-    should_not change(Article, :count) 
+    should_not change(Article,:count) 
     expect(response).to eq({
       'id'          => article.id,
       'name'        => "updated name",
@@ -25,10 +25,10 @@ describe "Update article" do
       'gender'      => 'm',
       'events'      => [],
       'notes'       => [],
-      'tags'        => []
-    })
-    expect(Article.first.name).to eq "updated name"
-    expect(Article.first.gender).to eq "m"
+      'tags'        => [] })
+    article.reload
+    expect(article.name).to eq "updated name"
+    expect(article.gender).to eq "m"
   end
 
   after do

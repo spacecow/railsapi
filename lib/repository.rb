@@ -61,6 +61,7 @@ class Repository
   def create_event universe_id, params
     Universe.find(universe_id).events.create(params).as_json(only:[:id,:title, :parent_id])
   end
+  def update_event event, params; event.update params end
   def delete_events; Event.delete_all end
 
 
@@ -152,7 +153,7 @@ class Repository
 
 
   def create_tagging tagable_type:, tagable_id:, params:
-    unless %w(Note).include?(tagable_type)
+    unless %w(Note Article).include?(tagable_type)
       raise ActiveRecord::StatementInvalid.new(
         'enum tagable_type_enum INSERT INTO "taggings"')
     end

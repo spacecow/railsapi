@@ -18,28 +18,28 @@ Rails.application.routes.draw do
     end
 
     scope module: :v1, constraints: ApiConstraints.new(version:"v1", default:true) do
-      resources :universes, only: [:show, :index, :create]
+      resources :universes, only: [:show,:index,:create]
 
-      resources :articles, only:[:show, :index, :create, :update]
+      resources :articles, only:[:show,:index,:create,:update]
       delete '/articles', to:'articles#delete_all'
 
       resources :article_types, only: :index
 
-      resources :books, only:[:index, :create]
+      resources :books, only:[:index,:create]
       delete '/books', to:'books#delete_all'
 
-      resources :events, only:[:show, :index, :create, :destroy]
+      resources :events, only:[:show,:index,:create,:update,:destroy]
 
-      resources :notes, only:[:show, :create, :update, :destroy]
+      resources :notes, only:[:show,:create,:update,:destroy]
       delete '/notes', to:'notes#delete_all'
   
       resources :participations, only:[:create]
       delete '/participations', to:'participations#delete_all'
 
-      resources :references, only:[:show, :create, :update]
+      resources :references, only:[:show,:create,:update]
       delete '/references', to:'references#delete_all'
 
-      resources :relations, only:[:show, :create]
+      resources :relations, only:[:show,:create]
       delete '/relations', to:'relations#delete_all'
 
       resources :relation_types, only: :index

@@ -13,7 +13,7 @@ class Relation < ActiveRecord::Base
       "Acquaintance" => "Acquaintance",
       "Follower"     => "Commander",
       "Warder"       => "Commander",
-      "Guide"        => "Commander",
+      "Guide"        => "Guides",
       "King"         => "Rules",
       "Sister"       => ["Brother","Sister"],
       "Brother"      => ["Brother","Sister"],

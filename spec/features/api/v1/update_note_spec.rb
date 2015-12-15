@@ -3,13 +3,13 @@ require 'rails_helper'
 describe "Update note" do
 
   let(:driver){ Capybara.current_session.driver }
-  let(:response){ JSON.parse(page.text)[mdl] }
-  let(:path){ send "api_#{mdl}_path", note }
-
-  let(:mdl){ "note" }
   let(:mode){ :put }
-  let(:params){{ note:{ text:"a new note" }}}
-  let(:note){ create :note, text:"an old note" }
+  let(:path){ send "api_#{mdl_name}_path", note }
+  let(:response){ JSON.parse(page.text)[mdl_name] }
+
+  let(:mdl_name){ "note" }
+  let(:note){ create mdl_name, text:"an old note" }
+  let(:params){{ mdl_name => { text:"an updated note" }}}
 
   before{ note }
 
@@ -18,11 +18,12 @@ describe "Update note" do
   it "Successfully" do
     should_not change(Note, :count) 
     expect(response).to eq({
-      'id'          => Note.first.id,
-      'text'        => "a new note",
+      'id'          => note.id,
+      'text'        => "an updated note",
       'tags'        => [],
       'references'  => [] })
-    expect(note.reload.text).to eq "a new note"
+    note.reload
+    expect(note.text).to eq "an updated note"
   end
 
   after do

@@ -17,6 +17,12 @@ module Api
         render json:{event:event} 
       end
 
+      def update
+        event = repo.event params[:id]
+        repo.update_event event, event_params 
+        render json:{event:event.full_json}
+      end
+
       def destroy
         event = repo.event(params[:id]).delete
         json = repo.event_as_json(event)

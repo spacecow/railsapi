@@ -2,6 +2,7 @@ describe "EventsController" do
 
   let(:controller){ Api::V1::EventsController.new }
   let(:repo){ double :repo }
+  let(:event){ double :event }
 
   before do
     stub_const "ApplicationController", Class.new unless defined?(Rails)
@@ -15,7 +16,6 @@ describe "EventsController" do
   describe "#show" do
     let(:function){ :show }
     let(:params){{ id: :id }}
-    let(:event){ double :event }
     before do
       expect(repo).to receive(:event).with(:id){ event }
       expect(controller).to receive(:render).with(json:{event: :json}){ :render }
@@ -47,10 +47,22 @@ describe "EventsController" do
     it{ should be :render }
   end
 
+  describe "#update" do
+    let(:function){ :update }
+    let(:params){{ id: :id }}
+    before do
+      expect(repo).to receive(:event).with(:id){ event }
+      expect(repo).to receive(:update_event).with(event,:params){ :event }
+      expect(controller).to receive(:event_params).with(no_args){ :params }
+      expect(controller).to receive(:render).with(json:{event: :json}){ :render }
+      expect(event).to receive(:full_json).with(no_args){ :json }
+    end
+    it{ should be :render }
+  end
+
   describe "#destroy" do
     let(:function){ :destroy }
     let(:params){{ id: :id }}
-    let(:event){ double :event }
     before do
       expect(controller).to receive(:render).with(json:{event: :json}){ :render }
       expect(repo).to receive(:event).with(:id){ event }
