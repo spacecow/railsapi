@@ -1,42 +1,41 @@
 require 'rails_helper'
 
-describe "Create participation" do
+describe "T1 Create participation" do
 
   let(:driver){ Capybara.current_session.driver }
   let(:mode){ :post }
   let(:path){ send "api_#{mdl_name.pluralize}_path" }
-  let(:header){ driver.header 'Accept', 'application/vnd.example.v1' }
+  let(:header){ driver.header 'Accept', 'application/vnd.example.t1' }
   let(:response){ JSON.parse(page.text)[mdl_name] }
+  let(:mdl){ mdl_name.camelize.constantize.first }
 
   let(:mdl_name){ "participation" }
-  let(:params){{ mdl_name => { event_id:event.id, article_id:article.id }}}
-  let(:event){ create :event, title:"a title" }
-  let(:article){ create :article, name:"a name" }
-  let(:mdl){ Participation.first }
+  let(:params){{}}
+  let(:event){ Event.first }
+  let(:article){ Article.first }
+  
 
   before{ header }
 
   subject{ ->{ driver.submit mode, path, params }}
 
-  it "a participation is created" do
+  it "Successfully" do
     should change(Participation,:count).from(0).to(1)
     expect(response).to eq(
       'id'          => mdl.id,
       'event'       => {
         'id'          => event.id,
-        'title'       => "a title" },
+        'title'       => "factory title" },
       'participant' => {
         'id'          => article.id,
-        'name'        => "a name"} )
-    expect(mdl.event_id).to be event.id
-    expect(mdl.article_id).to be article.id
+        'name'        => "factory name" } )
   end
 
   after do
     Participation.delete_all
     Event.delete_all
     Article.delete_all
-    Universe.delete_all
+    Universe.delete_all 
   end
 
 end
