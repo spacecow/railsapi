@@ -1,3 +1,5 @@
+require 'action_controller'
+
 describe "Api::T1::ParticipationsController" do
 
   let(:controller){ Api::T1::ParticipationsController.new }
@@ -31,15 +33,37 @@ describe "Api::T1::ParticipationsController" do
       it{ should be :render }
     end
 
+    describe "#delete_all" do
+      let(:function){ :delete_all }
+      before do
+        expect(factory).to receive(:delete_participations).
+          with(no_args){ [participation] }
+        expect(controller).to receive(:render).
+          with(json:{participations:[:json]}){ :render }
+      end
+      it{ should be :render }
+    end
   end
 
   describe "Private" do
 
-    xdescribe "#participation_params" do
-      let(:function){ :participation_params }
-      it{ subject }
-    end
+    before{ expect(controller).to receive(:params).with(no_args){ params }}
 
+    describe "#participation_params" do
+      let(:function){ :participation_params }
+      let(:params){ ActionController::Parameters.new(params_hash) }
+
+      context "no params" do
+        let(:params_hash){ {} } 
+        it{ should eq({}) }
+      end
+
+      context "with params" do
+        let(:params_hash){{ participation:{
+          article_id: :article_id, event_id: :event_id, xxx: :xxx }}} 
+        it{ should eq({ "article_id" => :article_id, "event_id" => :event_id }) }
+      end
+    end
   end
 
 end

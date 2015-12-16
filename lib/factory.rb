@@ -12,6 +12,7 @@ class Factory
   def create_note params; FactoryGirl.create :note, params end 
 
   def create_participation params; FactoryGirl.create :participation, params end 
+  def delete_participations; Participation.destroy_all end
 
   def create_tag tagable_type:nil, tagable_id:nil, **params
     tag = Tag.create params

@@ -1,36 +1,33 @@
 require 'rails_helper'
 
-describe "T1 Create participation" do
+describe "T1 Delete participations" do
 
   let(:driver){ Capybara.current_session.driver }
-  let(:mode){ :post }
-  let(:path){ send "api_#{mdl_name.pluralize}_path" }
+  let(:mode){ :delete }
+  let(:path){ send "api_#{mdls_name}_path" }
+  let(:mdls_name){ mdl_name.pluralize }
   let(:header){ driver.header 'Accept', 'application/vnd.example.t1' }
-  let(:response){ JSON.parse(page.text)[mdl_name] }
-  let(:mdl){ mdl_name.camelize.constantize.first }
+  let(:response){ JSON.parse(page.text)[mdls_name] }
+  let(:mdl){ create mdl_name }
 
   let(:mdl_name){ "participation" }
-  let(:params){{}}
-  let(:event){ Event.first }
   let(:article){ Article.first }
-  
+  let(:event){ Event.first }
 
-  before{ header }
+  before{ header; mdl }
 
-  subject{ ->{ driver.submit mode, path, params }}
+  subject{ ->{ driver.submit mode, path, nil }}
 
   it "Successfully" do
-    should change(Participation,:count).from(0).to(1)
-    expect(response).to eq(
+    should change(Participation,:count).from(1).to(0)
+    expect(response).to eq([
       'id'          => mdl.id,
       'event'       => {
         'id'          => event.id,
         'title'       => "factory title" },
       'participant' => {
         'id'          => article.id,
-        'name'        => "factory name" } )
-    expect(mdl.article_id).to be article.id
-    expect(mdl.event_id).to be event.id
+        'name'        => "factory name" } ])
   end
 
   after do

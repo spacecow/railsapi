@@ -12,12 +12,6 @@ module Api
         render json:{participation:participation.full_json}
       end
 
-      #TODO move to T1
-      def delete_all
-        participations = repo.delete_participations
-        render json:{participations:participations.map(&:full_json)}
-      end
-
       private
 
         def participation_params

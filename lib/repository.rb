@@ -97,7 +97,6 @@ class Repository
   def participation id; Participation.find id end
   def create_participation params; Participation.create params end
   def delete_participation id; participation(id).delete end
-  def delete_participations; Participation.destroy_all end
 
 
   def reference id:

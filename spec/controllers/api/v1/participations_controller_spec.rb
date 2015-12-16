@@ -36,15 +36,4 @@ describe "ParicipationsController" do
     it{ should be :render }
   end
 
-  describe "#delete_all" do
-    let(:function){ :delete_all }
-    before do
-      expect(controller).to receive(:render).
-        with(json:{participations:[:json]}){ :render }
-      expect(repo).to receive(:delete_participations).
-        with(no_args){ [participation] }
-    end
-    it{ should be :render }
-  end
-
 end

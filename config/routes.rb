@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       delete '/event_notes', to:'event_notes#delete_all'
       resources :notes, only:[:create]
       resources :participations, only:[:create]
+      delete '/participations', to:'participations#delete_all'
       resources :tags, only:[:create]
       delete '/tags', to:'tags#delete_all'
       resources :universes, only:[:create]
@@ -35,7 +36,6 @@ Rails.application.routes.draw do
       delete '/notes', to:'notes#delete_all'
   
       resources :participations, only:[:create,:destroy]
-      delete '/participations', to:'participations#delete_all'
 
       resources :references, only:[:show,:create,:update]
       delete '/references', to:'references#delete_all'
