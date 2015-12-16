@@ -18,12 +18,12 @@ describe "Update event" do
   it "Successfully" do
     should_not change(Event,:count) 
     expect(response).to eq({
-      'id'           => event.id,
-      'title'        => "an updated title",
-      'children'     => [],
-      'parents'      => [],
-      'participants' => [],
-      'notes'        => [] })
+      'id'             => event.id,
+      'title'          => "an updated title",
+      'children'       => [],
+      'parents'        => [],
+      'participations' => [],
+      'notes'          => [] })
     event.reload
     expect(event.title).to eq "an updated title"
   end

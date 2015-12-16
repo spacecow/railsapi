@@ -36,10 +36,14 @@ describe "Show event" do
         'children'     => [{
           'id'           => child.id,
           'title'        => "Yellow wedding" }],
-        'participants' => [{
-          'id'           => article.id,
-          'gender'       => 'n',
-          'name'         => "Ethenielle" }],
+        'participations' => [{
+          'id'             => participation.id,
+          'participant'    => {
+            'id'             => article.id,
+            'gender'         => 'n',
+            'name'           => "Ethenielle"
+          }
+        }],
         'notes'        => [
           'id'           => note.id,
           'text'         => "a note",

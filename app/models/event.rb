@@ -29,7 +29,10 @@ class Event < ActiveRecord::Base
       include:{
         parents:{ only:[:id,:title] },
         children:{ only:[:id,:title] },
-        participants:{ only:[:id,:name,:gender] },
+        participations:{
+          only:[:id],
+          include:{ participant:{ only:[:id,:name,:gender] }}
+        },
         notes:{
           only:[:id,:text],
           include:{ tags:{ only:[:id,:title] }} }})
