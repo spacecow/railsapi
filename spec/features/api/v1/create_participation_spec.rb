@@ -11,17 +11,23 @@ describe "Create participation" do
   let(:mdl){ "participation" }
 
   let(:participation){ Participation.last }
-  let(:event){ create :event }
-  let(:article){ create :article }
+  let(:event){ create :event, title:"a title" }
+  let(:article){ create :article, name:"a name" }
 
   subject{ ->{ driver.submit mode, path, params }}
 
   it "a participation is created" do
     should change(Participation,:count).from(0).to(1)
     expect(response).to eq(
-    { 'id'         => participation.id,
-      'event_id'   => event.id,
-      'article_id' => article.id })
+      'id'          => participation.id,
+      'event'       => {
+        'id'          => event.id,
+        'title'       => "a title" },
+      'participant' => {
+        'id'          => article.id,
+        'name'        => "a name"} )
+    expect(participation.event_id).to be event.id
+    expect(participation.article_id).to be article.id
   end
 
   after do

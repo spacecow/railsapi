@@ -4,7 +4,7 @@ module Api
 
       def create
         participation = repo.create_participation participation_params
-        render json:{participation:participation}
+        render json:{participation:participation.full_json}
       end
 
       def destroy
@@ -12,9 +12,10 @@ module Api
         render json:{participation:participation.full_json}
       end
 
+      #TODO move to T1
       def delete_all
         participations = repo.delete_participations
-        render json:{participations:participations}
+        render json:{participations:participations.map(&:full_json)}
       end
 
       private

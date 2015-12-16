@@ -16,10 +16,14 @@ describe "Delete participations" do
 
   it "Existing tags are deleted" do
     should change(Participation,:count).from(1).to(0)
-    expect(response).to eq(
-    [{'id'         => participation.id,
-      'article_id' => participation.article_id,
-      'event_id'   => participation.event_id }])
+    expect(response).to eq([
+      'id'          => participation.id,
+      'participant' => {
+        'id'          => participation.article_id,
+        'name'        => "factory name" },
+      'event'       => {
+        'id'          => participation.event_id,
+        'title'       => "factory title" } ])
   end
 
   after do
