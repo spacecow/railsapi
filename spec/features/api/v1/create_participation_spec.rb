@@ -9,7 +9,7 @@ describe "Create participation" do
   let(:response){ JSON.parse(page.text)[mdl_name] }
 
   let(:mdl_name){ "participation" }
-  let(:params){{ mdl_name => { event_id:event.id, article_id:article.id }}}
+  let(:params){{ mdl_name => { event_id:event.id, participant_id:article.id }}}
   let(:event){ create :event, title:"a title" }
   let(:article){ create :article, name:"a name" }
   let(:mdl){ Participation.first }

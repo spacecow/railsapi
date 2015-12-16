@@ -17,7 +17,7 @@ module Api
 
         def participation_params
           (params[:participation] || ActionController::Parameters.new()).
-            permit(:article_id,:event_id)
+            permit(:participant_id,:event_id)
         end
 
     end

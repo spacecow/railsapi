@@ -60,8 +60,8 @@ describe "Api::T1::ParticipationsController" do
 
       context "with params" do
         let(:params_hash){{ participation:{
-          article_id: :article_id, event_id: :event_id, xxx: :xxx }}} 
-        it{ should eq({ "article_id" => :article_id, "event_id" => :event_id }) }
+          participant_id: :participant_id, event_id: :event_id, xxx: :xxx }}} 
+        it{ should eq({ "participant_id" => :participant_id, "event_id" => :event_id }) }
       end
     end
   end
