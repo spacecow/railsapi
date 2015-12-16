@@ -2,11 +2,13 @@ describe "ParicipationsController" do
 
   let(:controller){ Api::V1::ParticipationsController.new }
   let(:repo){ double :repo }
+  let(:participation){ double :participation }
 
   before do
     class ApplicationController; end unless defined?(Rails)
     require './app/controllers/api/v1/participations_controller'
-    allow(controller).to receive(:repo).with(no_args){ repo }
+    expect(controller).to receive(:repo).with(no_args){ repo }
+    allow(controller).to receive(:params).with(no_args){ params }
   end
 
   subject{ controller.send function }
@@ -24,6 +26,18 @@ describe "ParicipationsController" do
     it{ should be :render }
   end
 
+  describe "#destroy" do
+    let(:function){ :destroy }
+    let(:params){{ id: :id }}
+    before do
+      expect(repo).to receive(:delete_participation).with(:id){ participation }
+      expect(participation).to receive(:full_json).with(no_args){ :json }
+      expect(controller).to receive(:render).
+        with(json:{participation: :json}){ :render }
+    end
+    it{ should be :render }
+  end
+
   describe "#delete_all" do
     let(:function){ :delete_all }
     before do
@@ -32,7 +46,7 @@ describe "ParicipationsController" do
       expect(repo).to receive(:delete_participations).
         with(no_args){ :participations }
     end
-    it{ subject }
+    it{ should be :render }
   end
 
 end

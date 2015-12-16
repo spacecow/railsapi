@@ -3,9 +3,9 @@ require 'rails_helper'
 describe "Delete article note" do
 
   let(:driver){ Capybara.current_session.driver }
-  let(:response){ JSON.parse(page.text)[mdl_name] }
-  let(:path){ send "api_#{mdl_name}_path", mdl.id }
   let(:mode){ :delete }
+  let(:path){ send "api_#{mdl_name}_path", mdl.id }
+  let(:response){ JSON.parse(page.text)[mdl_name] }
 
   let(:mdl_name){ "note" }
   let(:article){ create :article, name:"a name" }
