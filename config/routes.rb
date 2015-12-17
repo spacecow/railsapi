@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
       resources :events, only:[:show,:index,:create,:update,:destroy]
 
+      resources :mentions, only:[:create]
+
       resources :notes, only:[:show,:create,:update,:destroy]
       delete '/notes', to:'notes#delete_all'
   

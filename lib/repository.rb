@@ -65,6 +65,11 @@ class Repository
   def delete_events; Event.delete_all end
 
 
+  def create_mention origin_id:, params:
+    event(origin_id).mentions.create params
+  end
+
+
   def note id; Note.find(id) end
   def note_as_json n
     ts = n.tags.select(:id, :title).as_json

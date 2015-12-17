@@ -10,4 +10,11 @@ class Mention < ActiveRecord::Base
       target:{ only:[:id,:title] }})
   end
 
+  def full_json; as_json(
+    only:[:id],
+    include:{
+      origin:{ only:[:id,:title] },
+      target:{ only:[:id,:title] }})
+  end
+
 end
