@@ -33,6 +33,8 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
     end
 
     factory :mention do
+      association :origin, factory: :event
+      association :target, factory: :event
     end
 
     factory :note do

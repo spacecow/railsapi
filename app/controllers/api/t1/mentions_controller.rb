@@ -7,6 +7,11 @@ module Api
         render json:{mention:mention.factory_json}
       end
 
+      def delete_all
+        mentions = factory.delete_mentions
+        render json:{mentions:mentions.map(&:factory_json)}
+      end
+
       private
 
         def mention_params

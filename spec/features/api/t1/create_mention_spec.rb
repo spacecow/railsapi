@@ -11,8 +11,8 @@ describe "T1 Create mention" do
 
   let(:mdl_name){ "mention" }
   let(:params){{ mdl_name => { origin_id:origin.id, target_id:target.id }}}
-  let(:origin){ create :event }
-  let(:target){ create :event }
+  let(:origin){ create :event, title:"a title" }
+  let(:target){ create :event, title:"a title" }
 
   before{ header }
 
@@ -20,6 +20,16 @@ describe "T1 Create mention" do
 
   it "Successfully" do
     should change(Mention,:count).from(0).to(1)
+    expect(response).to eq(
+      'id'      => mdl.id,
+      'origin'  => {
+        'id'      => origin.id,
+        'title'   => "a title" },
+      'target'  => {
+        'id'      => target.id,
+        'title'   => "a title" })
+    expect(mdl.origin_id).to be origin.id
+    expect(mdl.target_id).to be target.id
   end
 
   after do
