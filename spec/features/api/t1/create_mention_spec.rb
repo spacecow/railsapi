@@ -9,12 +9,23 @@ describe "T1 Create mention" do
   let(:response){ JSON.parse(page.text)[mdl_name] }
   let(:mdl){ mdl_name.camelize.constantize.first }
 
+  let(:mdl_name){ "mention" }
+  let(:params){{ mdl_name => { origin_id:origin.id, target_id:target.id }}}
+  let(:origin){ create :event }
+  let(:target){ create :event }
+
   before{ header }
 
   subject{ ->{ driver.submit mode, path, params }}
 
   it "Successfully" do
     should change(Mention,:count).from(0).to(1)
+  end
+
+  after do
+    Mention.delete_all
+    Event.delete_all
+    Universe.delete_all
   end
 
 end

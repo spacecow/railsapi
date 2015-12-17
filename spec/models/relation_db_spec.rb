@@ -1,6 +1,7 @@
 require 'active_record'
 require './config/database'
 require './app/models/relation'
+
 require './app/models/relations/owner'
 require './app/models/article'
 require './app/models/universe'

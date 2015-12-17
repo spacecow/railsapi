@@ -32,6 +32,9 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       note
     end
 
+    factory :mention do
+    end
+
     factory :note do
       text 'factory text'
     end
