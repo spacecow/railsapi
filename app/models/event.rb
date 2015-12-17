@@ -5,6 +5,11 @@ class Event < ActiveRecord::Base
   has_many :notings, class_name:"EventNote"
   has_many :notes, through: :notings
 
+  has_many :mentions, foreign_key:"origin_id"
+  has_many :targets, through: :mentions
+  has_many :inverse_mentions, class_name:"Mention", foreign_key:"target_id"
+  has_many :origins, through: :inverse_mentions, source: :origin
+
   has_many :steps, foreign_key:"child_id"
   has_many :parents, through: :steps
   has_many :inverse_steps, class_name:"Step", foreign_key:"parent_id"
@@ -32,6 +37,10 @@ class Event < ActiveRecord::Base
         participations:{
           only:[:id],
           include:{ participant:{ only:[:id,:name,:gender] }}
+        },
+        mentions:{
+          only:[:id],
+          include:{ target:{ only:[:id,:title] }}
         },
         notes:{
           only:[:id,:text],

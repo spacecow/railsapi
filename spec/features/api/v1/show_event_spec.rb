@@ -13,11 +13,14 @@ describe "Show event" do
   let(:noting){ create :event_note, event:event, note:note }
   let(:tagging){ create :note_tag, note:note, tag:tag }
   let(:tag){ create :tag, title:'TDP' }
+  let(:distant){ create :event, title:"Distant event" }
+  let(:mention){ create :mention, origin:event, target:distant }
 
   subject(:response){ JSON.parse(page.text)['event'] }
 
   describe "Successfully" do
     before do
+      mention
       tagging
       noting
       parent_step
@@ -44,6 +47,13 @@ describe "Show event" do
             'name'           => "Ethenielle"
           }
         }],
+        'mentions'     => [
+          'id'           => mention.id,
+          'target'       => {
+            'id'           => distant.id,
+            'title'        => "Distant event"
+          }
+        ],
         'notes'        => [
           'id'           => note.id,
           'text'         => "a note",
@@ -54,6 +64,7 @@ describe "Show event" do
   end
 
   after do
+    Mention.delete_all
     NoteTag.delete_all
     Tag.delete_all
     EventNote.delete_all

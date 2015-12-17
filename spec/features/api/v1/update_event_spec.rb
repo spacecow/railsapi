@@ -23,6 +23,7 @@ describe "Update event" do
       'children'       => [],
       'parents'        => [],
       'participations' => [],
+      'mentions'       => [],
       'notes'          => [] })
     event.reload
     expect(event.title).to eq "an updated title"
