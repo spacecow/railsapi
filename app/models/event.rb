@@ -42,6 +42,10 @@ class Event < ActiveRecord::Base
           only:[:id],
           include:{ target:{ only:[:id,:title] }}
         },
+        inverse_mentions:{
+          only:[:id],
+          include:{ origin:{ only:[:id,:title] }}
+        },
         notes:{
           only:[:id,:text],
           include:{ tags:{ only:[:id,:title] }} }})

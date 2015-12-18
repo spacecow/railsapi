@@ -15,12 +15,14 @@ describe "Show event" do
   let(:tag){ create :tag, title:'TDP' }
   let(:distant){ create :event, title:"Distant event" }
   let(:mention){ create :mention, origin:event, target:distant }
+  let(:inverse){ create :event, title:"Inverse event" }
+  let(:mention2){ create :mention, origin:inverse, target:event }
 
   subject(:response){ JSON.parse(page.text)['event'] }
 
   describe "Successfully" do
     before do
-      mention
+      mention; mention2
       tagging
       noting
       parent_step
@@ -52,6 +54,13 @@ describe "Show event" do
           'target'       => {
             'id'           => distant.id,
             'title'        => "Distant event"
+          }
+        ],
+        'inverse_mentions' => [
+          'id'           => mention2.id,
+          'origin'       => {
+            'id'           => inverse.id,
+            'title'        => "Inverse event"
           }
         ],
         'notes'        => [
