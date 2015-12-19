@@ -1,0 +1,2 @@
+class Home < Relation
+end

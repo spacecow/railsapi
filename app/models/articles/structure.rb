@@ -1,0 +1,2 @@
+class Structure < Article
+end

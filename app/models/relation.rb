@@ -7,22 +7,30 @@ class Relation < ActiveRecord::Base
 
   def self.inverse_type s, gender='n'
     mapping = {
-      "Owner"        => "Owns",
-      "Courter"      => "Courts",
-      "Husband"      => "Wife",
       "Acquaintance" => "Acquaintance",
-      "Follower"     => "Commander",
-      "Warder"       => "Commander",
-      "Guide"        => "Guides",
-      "King"         => "Rules",
-      "Sister"       => ["Brother","Sister"],
-      "Brother"      => ["Brother","Sister"],
-      "Queen"        => "Rules",
-      "RightHand"    => "Commander",
-      "Uncle"        => ["Nephew", "Niece"],
       "Aunt"         => ["Nephew", "Niece"],
       "Advisor"      => "Advises",
-      "Counselor"    => "Counsels"}[s]
+      "Betrothed"    => "Betrothed",
+      "Brother"      => ["Brother","Sister"],
+      "Counselor"    => "Counsels",
+      "Courter"      => "Courts",
+      "Follower"     => "Commander",
+      "Guide"        => "Guides",
+      "Home"         => "Native",
+      "Husband"      => "Wife",
+      "King"         => "Rules",
+      "Owner"        => "Owns",
+      "Player"       => "Plays",
+      "Practitioner" => "Follows",
+      "Queen"        => "Rules",
+      "RightHand"    => "Commander",
+      "Sister"       => ["Brother","Sister"],
+      "Swordbearer"  => "Commander",
+      "Teacher"      => "Student",
+      "Uncle"        => ["Nephew", "Niece"],
+      "Variant"      => "Variant",
+      "Warder"       => "Commander",
+    }[s]
     case mapping
     when String; mapping
     when Array; mapping[{'n' => 0, 'm' => 0, 'f' => 1}[gender]]

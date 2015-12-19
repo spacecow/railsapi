@@ -8,7 +8,7 @@ describe 'List article types' do
   context 'response' do
     before{ function }
     subject{ body }
-    it{ is_expected.to eq(%w(Character Item Place)) }
+    it{ is_expected.to eq(%w(Character Family Item Location Race Religion Structure)) }
   end
 
 end

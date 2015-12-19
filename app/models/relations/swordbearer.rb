@@ -1,0 +1,2 @@
+class Swordbearer < Relation
+end

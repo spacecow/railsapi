@@ -1,0 +1,2 @@
+class Family < Article
+end

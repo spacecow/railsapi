@@ -1,0 +1,2 @@
+class Betrothed < Relation
+end

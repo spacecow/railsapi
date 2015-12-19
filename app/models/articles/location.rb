@@ -1,0 +1,2 @@
+class Location < Article
+end
