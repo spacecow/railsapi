@@ -56,7 +56,6 @@ Rails.application.routes.draw do
       delete '/tags', to:'tags#delete_all'
 
       resources :taggings, only:[:create]
-      delete '/taggings', to:'taggings#delete_all'
     end
   end
 end

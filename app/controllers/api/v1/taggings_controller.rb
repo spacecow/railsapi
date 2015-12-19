@@ -10,11 +10,6 @@ module Api
         render json:{tagging:tagging.full_json}
       end
 
-      def delete_all
-        taggings = repo.delete_taggings
-        render json:{taggings:taggings}
-      end
-
       private
 
         def tagging_params
