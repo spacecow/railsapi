@@ -12,8 +12,7 @@ describe "T1 Create article tag" do
   let(:tag){ mdl_name.camelize.constantize.first }
   let(:tagging){ ArticleTag.first }
   let(:article){ create :article }
-  let(:params){{ mdl_name => {
-    tagable_id:article.id, tagable_type:"Article", title:"Warder" }}}
+  let(:params){{ mdl_name => { tagable_id:article.id, tagable_type:"Article" }}}
 
   before{ header }
 
@@ -24,8 +23,8 @@ describe "T1 Create article tag" do
            change(Tag,:count).from(0).to(1))
     expect(response).to eq({
       'id'    => tag.id,
-      'title' => "Warder" })
-    expect(tag.title).to eq "Warder" 
+      'title' => "factory title" })
+    expect(tag.title).to eq "factory title" 
     expect(tagging.article_id).to be article.id 
     expect(tagging.tag_id).to be tag.id 
   end

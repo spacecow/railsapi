@@ -17,11 +17,11 @@ module Api
         render json:{tag:tag} 
       end
   
-      def delete_all
-        tags = repo.delete_tags
-        render json:{tags:tags}
+      def destroy
+        repo.delete_tag params[:id], **params[:tag].symbolize_keys
+        render nothing:true 
       end
-  
+
       private
 
         def tag_params

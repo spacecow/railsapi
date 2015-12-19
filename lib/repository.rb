@@ -151,7 +151,10 @@ class Repository
   end
   def tags; Tag.all end
   def create_tag params:; Tag.create params end
-  def delete_tags; Tag.destroy_all end
+  def delete_tag id, tagable_id:, tagable_type:
+    return unless %w(Article).include?(tagable_type)
+    tagable_type.constantize.find(tagable_id).taggings.find_by(tag_id:id).delete
+  end 
 
 
   def create_tagging tagable_type:, tagable_id:, params:

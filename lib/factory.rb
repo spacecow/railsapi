@@ -18,8 +18,8 @@ class Factory
   def delete_participations; Participation.destroy_all end
 
   def create_tag tagable_type:nil, tagable_id:nil, **params
-    tag = Tag.create params
-    if tagable_type && tagable_id
+    tag = FactoryGirl.create :tag, params
+    if tagable_type && tagable_id && %w(Article Note).include?(tagable_type)
       tagable_type.constantize.find(tagable_id).taggings.create tag_id:tag.id
     end
     tag

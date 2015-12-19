@@ -1,6 +1,6 @@
 require 'action_controller'
 
-describe "TagsController" do
+describe "Api::T1::TagsController" do
 
   let(:controller){ Api::T1::TagsController.new }
 

@@ -52,8 +52,7 @@ Rails.application.routes.draw do
       resources :steps, only:[:create]
       delete '/steps', to:'steps#delete_all'
 
-      resources :tags, only:[:show, :index, :create]
-      delete '/tags', to:'tags#delete_all'
+      resources :tags, only:[:show, :index, :create, :destroy]
 
       resources :taggings, only:[:create]
     end
