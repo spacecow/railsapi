@@ -6,7 +6,7 @@ class Repository
     article.as_json({
       only:[:id,:name,:type,:universe_id,:gender],
       include:{ 
-        tags:{ only:[:id,:title] },
+        tags:{ only:[:id,:title], methods: :article_id },
         notes:{
           only:[:id,:text],
           include:{ tags:{ only:[:id,:title] }}},

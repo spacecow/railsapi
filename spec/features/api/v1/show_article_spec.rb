@@ -6,6 +6,7 @@ describe 'Show article' do
   let(:dog){ create :article, name:"dog", gender:'n' }
   let(:relation){ create :relation, origin:dog, target:article }
   let(:article){ create :article, name:'Vin', gender:'f' }
+  let(:article2){ create :article, name:"animal" }
   let(:universe){ article.universe }
   let(:article_note){ create :article_note, article:article, note:note }
   let(:note){ create :note, text:'a note' }
@@ -18,6 +19,7 @@ describe 'Show article' do
   let(:event){ create :event, title:"an event" }
 
   before do
+    article2
     article_note
     article_tag
     note_tag
@@ -41,11 +43,13 @@ describe 'Show article' do
         'text'        => 'a note',
         'tags'        => [
           'id'          => tag.id,
-          'title'       => 'TDP' ]
+          'title'       => 'TDP'
+        ]
       ],
       'tags'        => [
         'id'          => tag2.id,
-        'title'       => "animal"
+        'title'       => "animal",
+        'article_id'  => article2.id 
       ],
       'relatives'   => [{
         'id'          => relation.id,
