@@ -1,0 +1,2 @@
+class LocatedIn < Relation
+end

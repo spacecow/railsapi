@@ -1,0 +1,2 @@
+class NearSister < Relation
+end
