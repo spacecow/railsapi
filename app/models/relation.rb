@@ -21,6 +21,8 @@ class Relation < ActiveRecord::Base
       "Husband"      => "Wife",
       "King"         => "Rules",
       "LocatedIn"    => "Contains",
+      "Maid"         => "Employer",
+      "Member"       => "Part of",
       "NearSister"   => "Near sister",
       "Owner"        => "Owns",
       "Player"       => "Plays",
@@ -33,6 +35,7 @@ class Relation < ActiveRecord::Base
       "Uncle"        => ["Nephew", "Niece"],
       "Variant"      => "Variant",
       "Warder"       => "Commander",
+      "Wielder"      => "Wields",
     }[s]
     case mapping
     when String; mapping

@@ -1,0 +1,2 @@
+class Wielder < Relation
+end

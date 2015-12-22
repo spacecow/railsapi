@@ -1,0 +1,2 @@
+class Member < Relation
+end

@@ -1,0 +1,2 @@
+class Magician < Article
+end
