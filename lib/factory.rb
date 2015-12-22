@@ -3,6 +3,8 @@ class Factory
   def create_article_note params; FactoryGirl.create :article_note, params end
   def delete_article_notes; ArticleNote.destroy_all end
 
+  def create_citation params; FactoryGirl.create :citation, params end 
+
   def create_event params; FactoryGirl.create :event, params end 
   def delete_events; Event.delete_all end
 

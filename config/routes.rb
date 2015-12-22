@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     scope module: :t1, constraints: ApiConstraints.new(version:"t1", default:false) do
       resources :article_notes, only:[:create]
       delete '/article_notes', to:'article_notes#delete_all'
+      resources :citations, only:[:create]
       resources :events, only:[:create]
       delete '/events', to:'events#delete_all'
       resources :event_notes, only:[:create]
