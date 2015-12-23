@@ -3,6 +3,7 @@ class Article < ActiveRecord::Base
   belongs_to :universe
 
   has_many :citations, foreign_key:"origin_id"
+  has_many :inverse_citations, foreign_key:"target_id", class_name:"Citation"
 
   has_many :taggings, class_name:"ArticleTag" 
   has_many :tags, through: :taggings

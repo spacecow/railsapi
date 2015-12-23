@@ -18,15 +18,16 @@ describe "Update article" do
   it "Successfully" do
     should_not change(Article,:count) 
     expect(response).to eq({
-      'id'          => article.id,
-      'name'        => "updated name",
-      'universe_id' => article.universe_id,
-      'type'        => "Character",
-      'gender'      => 'm',
-      'events'      => [],
-      'notes'       => [],
-      'citations'   => [],
-      'tags'        => [] })
+      'id'                => article.id,
+      'name'              => "updated name",
+      'universe_id'       => article.universe_id,
+      'type'              => "Character",
+      'gender'            => 'm',
+      'events'            => [],
+      'notes'             => [],
+      'citations'         => [],
+      'inverse_citations' => [],
+      'tags'              => [] })
     article.reload
     expect(article.name).to eq "updated name"
     expect(article.gender).to eq "m"

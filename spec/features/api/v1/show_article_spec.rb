@@ -18,9 +18,10 @@ describe 'Show article' do
   let(:reference){ create :reference, referenceable:relation, comment:"a comment" }
   let(:event){ create :event, title:"an event" }
   let(:citation){ create :citation, origin:article, content:"hell yeah" }
+  let(:citation2){ create :citation, target:article, content:"hell2 yeah" }
 
   before do
-    citation
+    citation; citation2
     article2
     article_note
     article_tag
@@ -43,6 +44,10 @@ describe 'Show article' do
       'citations'   => [
         'id'          => citation.id,
         'content'     => "hell yeah"
+      ],
+      'inverse_citations' => [
+        'id'                => citation2.id,
+        'content'           => "hell2 yeah"
       ],
       'notes'       => [
         'id'          => note.id,

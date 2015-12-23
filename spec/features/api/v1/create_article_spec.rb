@@ -20,15 +20,16 @@ describe 'Create article' do
     it "an article is created" do
       should change(Article,:count).from(0).to(1)
       expect(response["article"]).to eq({
-        'id'          => Article.first.id,
-        'name'        => 'Kelsier',
-        'type'        => 'Character',
-        'universe_id' => universe.id,
-        'gender'      => 'm',
-        'events'      => [],
-        'notes'       => [],
-        'citations'   => [],
-        'tags'        => []
+        'id'                => Article.first.id,
+        'name'              => 'Kelsier',
+        'type'              => 'Character',
+        'universe_id'       => universe.id,
+        'gender'            => 'm',
+        'events'            => [],
+        'notes'             => [],
+        'citations'         => [],
+        'inverse_citations' => [],
+        'tags'              => []
       })
     end
   end

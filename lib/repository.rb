@@ -8,6 +8,7 @@ class Repository
       include:{ 
         tags:{ only:[:id,:title], methods: :article_id },
         citations:{ only:[:id,:content] },
+        inverse_citations:{ only:[:id,:content] },
         notes:{
           only:[:id,:text],
           include:{ tags:{ only:[:id,:title] }}},
