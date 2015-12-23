@@ -7,11 +7,16 @@ module Api
         render json:{citation:citation.factory_json}
       end
 
+      def delete_all
+        citations = factory.delete_citations
+        render json:{citations:citations.map(&:factory_json)}
+      end
+
       private
 
         def citation_params
           (params[:citation] || ActionController::Parameters.new()).
-            permit(:content)
+            permit(:content,:origin_id,:target_id)
         end
 
     end

@@ -10,7 +10,8 @@ describe "T1 Create citation" do
   let(:mdl){ mdl_name.camelize.constantize.first }
 
   let(:mdl_name){ "citation" }
-  let(:params){{ mdl_name => { content:"Twice and twice" }}}
+  let(:params){{ mdl_name => { content:"Twice and twice", origin_id:origin.id }}}
+  let(:origin){ create :article }
 
   before{ header }
 
@@ -22,10 +23,14 @@ describe "T1 Create citation" do
       'id'      => mdl.id,
       'content' => "Twice and twice" })
     expect(mdl.content).to eq "Twice and twice" 
+    expect(mdl.origin_id).to be origin.id 
+    expect(mdl.target_id).to be nil 
   end
 
   after do
     Citation.delete_all
+    Article.delete_all
+    Universe.delete_all
   end
 
 end

@@ -23,6 +23,7 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
     end
 
     factory :citation do
+      content "factory content"
     end
 
     factory :event do

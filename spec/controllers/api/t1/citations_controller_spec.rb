@@ -29,7 +29,17 @@ describe "Api::T1::CitationsController" do
         expect(controller).to receive(:render).
           with(json:{citation: :json}){ :render }
       end
-      it{ subject }
+      it{ should eq :render }
+    end
+
+    describe "#delete_all" do
+      let(:function){ :delete_all }
+      before do
+        expect(factory).to receive(:delete_citations).with(no_args){ [citation] }
+        expect(controller).to receive(:render).
+          with(json:{citations:[:json]}){ :render }
+      end
+      it{ should eq :render }
     end
   end
 
@@ -43,8 +53,10 @@ describe "Api::T1::CitationsController" do
         it{ should eq({}) }
       end
       context "with params" do
-        let(:params_hash){{ citation:{ content: :content, xxx: :xxx }}} 
-        it{ should eq("content" => :content) }
+        let(:params_hash){{ citation:{ content: :content, origin_id: :origin_id,
+          target_id: :target_id, xxx: :xxx }}} 
+        it{ should eq("content" => :content, "origin_id" => :origin_id,
+          "target_id" => :target_id ) }
       end
     end
   end

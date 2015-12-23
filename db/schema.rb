@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20151222202016) do
   create_table "citations", force: :cascade do |t|
     t.integer  "origin_id"
     t.integer  "target_id"
-    t.string   "content"
+    t.string   "content",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

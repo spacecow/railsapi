@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :article_notes, only:[:create]
       delete '/article_notes', to:'article_notes#delete_all'
       resources :citations, only:[:create]
+      delete '/citations', to:'citations#delete_all'
       resources :events, only:[:create]
       delete '/events', to:'events#delete_all'
       resources :event_notes, only:[:create]
