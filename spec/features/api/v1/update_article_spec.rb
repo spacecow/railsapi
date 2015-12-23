@@ -25,6 +25,7 @@ describe "Update article" do
       'gender'      => 'm',
       'events'      => [],
       'notes'       => [],
+      'citations'   => [],
       'tags'        => [] })
     article.reload
     expect(article.name).to eq "updated name"

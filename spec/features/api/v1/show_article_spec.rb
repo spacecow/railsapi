@@ -17,8 +17,10 @@ describe 'Show article' do
   let(:participation){ create :participation, participant:article, event:event }
   let(:reference){ create :reference, referenceable:relation, comment:"a comment" }
   let(:event){ create :event, title:"an event" }
+  let(:citation){ create :citation, origin:article, content:"hell yeah" }
 
   before do
+    citation
     article2
     article_note
     article_tag
@@ -38,6 +40,10 @@ describe 'Show article' do
       'universe_id' => universe.id,
       'type'        => "Character",
       'gender'      => 'f',
+      'citations'   => [
+        'id'          => citation.id,
+        'content'     => "hell yeah"
+      ],
       'notes'       => [
         'id'          => note.id,
         'text'        => 'a note',
@@ -68,6 +74,7 @@ describe 'Show article' do
   end
 
   after do
+    Citation.delete_all
     ArticleNote.delete_all
     Reference.delete_all
     Participation.delete_all

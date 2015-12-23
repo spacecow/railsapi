@@ -27,6 +27,7 @@ describe 'Create article' do
         'gender'      => 'm',
         'events'      => [],
         'notes'       => [],
+        'citations'   => [],
         'tags'        => []
       })
     end
