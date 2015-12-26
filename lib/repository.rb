@@ -46,6 +46,9 @@ class Repository
   def delete_books; Book.destroy_all end
 
 
+  def create_citation params; Citation.create params end
+
+
   def event id; Event.find(id) end
   def event_as_json event
     event.as_json(

@@ -23,4 +23,10 @@ describe "T1 Delete citations" do
       'content' => "factory content" ])
   end
 
+  after do
+    Citation.delete_all
+    Article.delete_all
+    Universe.delete_all
+  end
+
 end

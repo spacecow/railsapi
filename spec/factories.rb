@@ -24,6 +24,7 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
 
     factory :citation do
       content "factory content"
+      association :origin, factory: :article
     end
 
     factory :event do

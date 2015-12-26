@@ -41,6 +41,14 @@ describe "Citation DB" do
       it{ should change(Citation,:count).from(0).to(1) }
     end
 
+    context "Both target_id and origin_id is nil" do
+      let(:origin_id){ nil }
+      let(:target_id){ nil }
+      it{ should raise_error{|e|
+        expect(e).to be_a ActiveRecord::StatementInvalid
+        expect(e.message).to include "PG::CheckViolation" }} 
+    end
+
     context "A non-citation is referenced as origin" do
       let(:origin_id){ -1 }
       it{ should raise_error{|e|
