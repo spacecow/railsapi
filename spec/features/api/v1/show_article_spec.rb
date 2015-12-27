@@ -17,8 +17,12 @@ describe 'Show article' do
   let(:participation){ create :participation, participant:article, event:event }
   let(:reference){ create :reference, referenceable:relation, comment:"a comment" }
   let(:event){ create :event, title:"an event" }
-  let(:citation){ create :citation, origin:article, content:"hell yeah" }
-  let(:citation2){ create :citation, target:article, content:"hell2 yeah" }
+  let(:citation_target){ create :article, name:"a citation target" }
+  let(:citation){ create :citation, origin:article, content:"hell yeah",
+    target:citation_target }
+  let(:citation_origin){ create :article, name:"a citation origin" }
+  let(:citation2){ create :citation, target:article, content:"hell2 yeah",
+    origin:citation_origin }
 
   before do
     citation; citation2
@@ -43,11 +47,21 @@ describe 'Show article' do
       'gender'      => 'f',
       'citations'   => [
         'id'          => citation.id,
-        'content'     => "hell yeah"
+        'content'     => "hell yeah",
+        'target'      => {
+          'id'          => citation_target.id,
+          'name'        => "a citation target",
+          'gender'      => 'n'
+        }
       ],
       'inverse_citations' => [
         'id'                => citation2.id,
-        'content'           => "hell2 yeah"
+        'content'           => "hell2 yeah",
+        'origin'      => {
+          'id'          => citation_origin.id,
+          'name'        => "a citation origin",
+          'gender'      => 'n'
+        }
       ],
       'notes'       => [
         'id'          => note.id,

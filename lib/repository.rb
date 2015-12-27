@@ -7,8 +7,14 @@ class Repository
       only:[:id,:name,:type,:universe_id,:gender],
       include:{ 
         tags:{ only:[:id,:title], methods: :article_id },
-        citations:{ only:[:id,:content] },
-        inverse_citations:{ only:[:id,:content] },
+        citations:{ 
+          only:[:id,:content],
+          include:{ target:{ only:[:id,:name,:gender] }}
+        },
+        inverse_citations:{ 
+          only:[:id,:content],
+          include:{ origin:{ only:[:id,:name,:gender] }}
+        },
         notes:{
           only:[:id,:text],
           include:{ tags:{ only:[:id,:title] }}},
