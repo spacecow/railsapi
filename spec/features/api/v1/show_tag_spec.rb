@@ -16,11 +16,12 @@ describe 'Show tag' do
 
   it "Tag exists" do
     should eq({
-      'id'    => tag.id,
-      'title' => 'TDP',
-      'notes' => [
-        'id'  => note.id,
-        'text' => 'factory text'
+      'id'         => tag.id,
+      'title'      => 'TDP',
+      'article_id' => nil,
+      'notes'      => [
+        'id'         => note.id,
+        'text'       => 'factory text'
       ]
     })
   end

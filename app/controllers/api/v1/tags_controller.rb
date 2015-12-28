@@ -4,7 +4,7 @@ module Api
 
       def show
         tag = repo.tag params[:id]
-        render json:{tag:tag}
+        render json:{tag:tag.full_json}
       end
 
       def index

@@ -153,13 +153,7 @@ class Repository
   def delete_steps; Step.destroy_all.as_json(only:[:id, :parent_id, :child_id]) end
 
 
-  def tag id
-    Tag.where(id:id).as_json(include:{
-      notes:{
-        only:[:id, :text],
-      }
-    }).first
-  end
+  def tag id; Tag.find(id) end
   def tags; Tag.all end
   def create_tag params:; Tag.create params end
   def delete_tag id, tagable_id:, tagable_type:
