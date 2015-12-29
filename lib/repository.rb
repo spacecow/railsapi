@@ -37,6 +37,11 @@ class Repository
   end
 
 
+  def create_article_mention origin_id:, params:
+    event(origin_id).article_mentions.create params
+  end
+
+
   def article_types
     Dir.entries("./app/models/articles").
       grep(/.*\.rb/).map{|e| e[0..-4].capitalize}
