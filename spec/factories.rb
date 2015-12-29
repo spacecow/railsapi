@@ -7,6 +7,11 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
       type 'Character'
     end
 
+    factory :article_mention do
+      association :origin, factory: :article
+      association :target, factory: :article
+    end
+
     factory :article_note do
       article
       note

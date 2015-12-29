@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     scope module: :t1, constraints: ApiConstraints.new(version:"t1", default:false) do
       resources :article_notes, only:[:create]
+      resources :article_mentions, only:[:create]
       delete '/article_notes', to:'article_notes#delete_all'
       resources :citations, only:[:create]
       delete '/citations', to:'citations#delete_all'

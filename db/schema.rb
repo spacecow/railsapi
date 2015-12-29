@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222202016) do
+ActiveRecord::Schema.define(version: 20151229023626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "article_mentions", force: :cascade do |t|
+    t.integer "origin_id", null: false
+    t.integer "target_id", null: false
+    t.string  "content"
+  end
+
+  add_index "article_mentions", ["origin_id", "target_id"], name: "index_article_mentions_on_origin_id_and_target_id", unique: true, using: :btree
 
   create_table "article_notes", force: :cascade do |t|
     t.integer  "article_id", null: false
@@ -174,6 +182,8 @@ ActiveRecord::Schema.define(version: 20151222202016) do
 
   add_index "universes", ["title"], name: "index_universes_on_title", unique: true, using: :btree
 
+  add_foreign_key "article_mentions", "articles", column: "origin_id"
+  add_foreign_key "article_mentions", "articles", column: "target_id"
   add_foreign_key "article_notes", "articles"
   add_foreign_key "article_notes", "notes"
   add_foreign_key "article_tags", "articles"
