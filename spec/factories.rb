@@ -8,7 +8,7 @@ if FactoryGirl.factories.instance_variable_get('@items').empty?
     end
 
     factory :article_mention do
-      association :origin, factory: :article
+      association :origin, factory: :event
       association :target, factory: :article
     end
 

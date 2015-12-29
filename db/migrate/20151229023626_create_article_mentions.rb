@@ -6,7 +6,7 @@ class CreateArticleMentions < ActiveRecord::Migration
       t.integer :target_id, null:false
       t.string :content
     end
-    add_foreign_key :article_mentions, :articles, column: :origin_id
+    add_foreign_key :article_mentions, :events, column: :origin_id
     add_foreign_key :article_mentions, :articles, column: :target_id
     add_index :article_mentions, [:origin_id, :target_id], unique:true
   end

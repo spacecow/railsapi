@@ -17,11 +17,15 @@ describe "Show event" do
   let(:mention){ create :mention, origin:event, target:distant }
   let(:inverse){ create :event, title:"Inverse event" }
   let(:mention2){ create :mention, origin:inverse, target:event }
+  let(:distant_article){ create :article, name:"Distant article" }
+  let(:article_mention){ create :article_mention, origin:event,
+    target:distant_article }
 
   subject(:response){ JSON.parse(page.text)['event'] }
 
   describe "Successfully" do
     before do
+      article_mention
       mention; mention2
       tagging
       noting
@@ -57,10 +61,18 @@ describe "Show event" do
           }
         ],
         'inverse_mentions' => [
-          'id'           => mention2.id,
-          'origin'       => {
-            'id'           => inverse.id,
-            'title'        => "Inverse event"
+          'id'               => mention2.id,
+          'origin'           => {
+            'id'               => inverse.id,
+            'title'            => "Inverse event"
+          }
+        ],
+        'article_mentions' => [
+          'id'               => article_mention.id,
+          'content'          => nil,
+          'target'           => {
+            'id'               => distant_article.id,
+            'name'             => "Distant article"
           }
         ],
         'notes'        => [
@@ -73,6 +85,7 @@ describe "Show event" do
   end
 
   after do
+    ArticleMention.delete_all
     Mention.delete_all
     NoteTag.delete_all
     Tag.delete_all

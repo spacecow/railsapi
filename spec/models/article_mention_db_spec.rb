@@ -2,6 +2,7 @@ require 'active_record'
 require './config/database'
 require './app/models/article_mention'
 
+require './app/models/event'
 require './app/models/article'
 require './app/models/universe'
 
@@ -13,7 +14,7 @@ end
 
 describe "ArticleMention DB, Validations" do
 
-  let(:origin){ create :article }
+  let(:origin){ create :event }
   let(:origin_id){ origin.id }
   let(:target){ create :article }
   let(:target_id){ target.id }
@@ -68,6 +69,7 @@ describe "ArticleMention DB, Validations" do
   after do
     ArticleMention.delete_all
     Article.delete_all
+    Event.delete_all
     Universe.delete_all
   end
 

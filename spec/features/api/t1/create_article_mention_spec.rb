@@ -12,7 +12,7 @@ describe "T1 Create article mention" do
   let(:mdl_name){ "article_mention" }
   let(:params){{ mdl_name => {
     origin_id:origin.id, target_id:target.id, content:"some content" }}}
-  let(:origin){ create :article, name:"a name" }
+  let(:origin){ create :event, title:"a title" }
   let(:target){ create :article, name:"a name" }
 
   before{ header }
@@ -26,7 +26,7 @@ describe "T1 Create article mention" do
       'content' => "some content",
       'origin'  => {
         'id'      => origin.id,
-        'name'    => "a name" },
+        'title'   => "a title" },
       'target'  => {
         'id'      => target.id,
         'name'    => "a name" })
@@ -37,6 +37,7 @@ describe "T1 Create article mention" do
   after do
     ArticleMention.delete_all
     Article.delete_all
+    Event.delete_all
     Universe.delete_all
   end
 

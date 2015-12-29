@@ -11,8 +11,8 @@ describe "T1 Delete article mentions" do
   let(:mdl){ create mdl_name, content:"some content" }
 
   let(:mdl_name){ "article_mention" }
-  let(:origin){ Article.first }
-  let(:target){ Article.last }
+  let(:origin){ Event.first }
+  let(:target){ Article.first }
 
   before{ header; mdl }
 
@@ -25,7 +25,7 @@ describe "T1 Delete article mentions" do
       'content' => "some content",
       'origin'  => {
         'id'      => origin.id,
-        'name'    => "factory name" },
+        'title'   => "factory title" },
       'target'  => {
         'id'      => target.id,
         'name'    => "factory name" } ])
@@ -34,6 +34,7 @@ describe "T1 Delete article mentions" do
   after do
     ArticleMention.delete_all
     Article.delete_all
+    Event.delete_all
     Universe.delete_all
   end
 

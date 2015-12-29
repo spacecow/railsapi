@@ -25,6 +25,7 @@ describe "Update event" do
       'participations'   => [],
       'mentions'         => [],
       'inverse_mentions' => [],
+      'article_mentions' => [],
       'notes'            => [] })
     event.reload
     expect(event.title).to eq "an updated title"

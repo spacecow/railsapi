@@ -182,8 +182,8 @@ ActiveRecord::Schema.define(version: 20151229023626) do
 
   add_index "universes", ["title"], name: "index_universes_on_title", unique: true, using: :btree
 
-  add_foreign_key "article_mentions", "articles", column: "origin_id"
   add_foreign_key "article_mentions", "articles", column: "target_id"
+  add_foreign_key "article_mentions", "events", column: "origin_id"
   add_foreign_key "article_notes", "articles"
   add_foreign_key "article_notes", "notes"
   add_foreign_key "article_tags", "articles"
