@@ -33,6 +33,17 @@ describe "Api::T1::ArticleMentionsController" do
       end
       it{ should be :render }
     end
+
+    describe "#delete_all" do
+      let(:function){ :delete_all }
+      before do
+        expect(factory).to receive(:delete_article_mentions).
+          with(no_args){ [article_mention] }
+        expect(controller).to receive(:render).
+          with(json:{article_mentions:[:json]}){ :render }
+      end
+      it{ should be :render }
+    end
   end
 
   describe "Private" do

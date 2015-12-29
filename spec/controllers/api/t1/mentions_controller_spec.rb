@@ -39,7 +39,7 @@ describe "Api::T1::MentionsController" do
         expect(controller).to receive(:render).
           with(json:{mentions:[:json]}){ :render }
       end
-      it{ subject }
+      it{ should be :render }
     end
   end
 

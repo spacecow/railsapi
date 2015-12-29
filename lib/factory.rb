@@ -1,6 +1,7 @@
 class Factory
 
   def create_article_mention params; FactoryGirl.create :article_mention, params end 
+  def delete_article_mentions; ArticleMention.destroy_all end
 
   def create_article_note params; FactoryGirl.create :article_note, params end
   def delete_article_notes; ArticleNote.destroy_all end
