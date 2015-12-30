@@ -3,10 +3,15 @@ module Api
     class ArticleMentionsController < ApplicationController
 
       def create
-        mention = repo.create_article_mention(
+        mdl = repo.create_article_mention(
           origin_id:remove_origin_id,
           params: mention_params)
-        render json:{article_mention:mention.full_json}
+        render json:{article_mention:mdl.full_json}
+      end
+
+      def update
+        mdl = repo.update_article_mention params[:id], mention_params 
+        render json:{article_mention:mdl.full_json}
       end
 
       private

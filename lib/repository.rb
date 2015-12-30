@@ -37,8 +37,12 @@ class Repository
   end
 
 
+  def article_mention id; ArticleMention.find(id) end
   def create_article_mention origin_id:, params:
     event(origin_id).article_mentions.create params
+  end
+  def update_article_mention id, params
+    article_mention(id).tap{|mention| mention.update params}
   end
 
 
