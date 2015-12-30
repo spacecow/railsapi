@@ -19,14 +19,24 @@ describe "Api::V1::ArticleMentionsController" do
     before do
       expect(controller).to receive(:repo).with(no_args){ repo }
       expect(mention).to receive(:full_json).with(no_args){ :json }
-      expect(controller).to receive(:mention_params).with(no_args){ :params }
       expect(controller).to receive(:render).
         with(json:{article_mention: :json}){ :render }
+    end
+
+    describe "#show" do
+      let(:function){ :show }
+      let(:params){{ id: :id }}
+      before do
+        expect(controller).to receive(:params).with(no_args){ params }
+        expect(repo).to receive(:article_mention).with(:id){ mention }
+      end
+      it{ should be :render }
     end
 
     describe "#create" do
       let(:function){ :create }
       before do
+        expect(controller).to receive(:mention_params).with(no_args){ :params }
         expect(controller).to receive(:remove_origin_id).
           with(no_args){ :origin_id }
         expect(repo).to receive(:create_article_mention).
@@ -39,6 +49,7 @@ describe "Api::V1::ArticleMentionsController" do
       let(:function){ :update }
       let(:params){{ id: :id }}
       before do
+        expect(controller).to receive(:mention_params).with(no_args){ :params }
         expect(controller).to receive(:params).with(no_args){ params }
         expect(repo).to receive(:update_article_mention).
           with(:id,:params){ mention }

@@ -50,7 +50,7 @@ class Event < ActiveRecord::Base
         },
         article_mentions:{
           only:[:id,:content],
-          include:{ target:{ only:[:id,:name] }}
+          include:{ target:{ only:[:id,:name,:gender] }}
         },
         notes:{
           only:[:id,:text],

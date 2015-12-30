@@ -2,6 +2,11 @@ module Api
   module V1
     class ArticleMentionsController < ApplicationController
 
+      def show
+        mdl = repo.article_mention params[:id]
+        render json:{article_mention:mdl.full_json}
+      end
+
       def create
         mdl = repo.create_article_mention(
           origin_id:remove_origin_id,
