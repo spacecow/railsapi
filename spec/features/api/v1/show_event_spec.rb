@@ -49,8 +49,8 @@ describe "Show event" do
           'id'             => participation.id,
           'participant'    => {
             'id'             => article.id,
+            'name'           => "Ethenielle",
             'gender'         => 'n',
-            'name'           => "Ethenielle"
           }
         }],
         'mentions'     => [
@@ -72,6 +72,7 @@ describe "Show event" do
           'content'          => nil,
           'target'           => {
             'id'               => distant_article.id,
+            'gender'           => 'n',
             'name'             => "Distant article"
           }
         ],
