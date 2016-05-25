@@ -1,0 +1,2 @@
+class Vessel < Article
+end
