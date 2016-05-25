@@ -1,0 +1,2 @@
+class Ruler < Relation
+end

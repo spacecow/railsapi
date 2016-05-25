@@ -1,0 +1,2 @@
+class Killer < Relation
+end
