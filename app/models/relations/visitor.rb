@@ -1,0 +1,2 @@
+class Visitor < Relation
+end

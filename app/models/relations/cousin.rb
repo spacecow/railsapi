@@ -1,0 +1,2 @@
+class Cousin < Relation
+end

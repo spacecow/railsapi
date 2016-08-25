@@ -1,0 +1,2 @@
+class Boyfriend < Relation
+end

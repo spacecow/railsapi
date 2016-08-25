@@ -1,0 +1,2 @@
+class Ancestor < Relation
+end

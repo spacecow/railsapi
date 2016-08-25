@@ -8,18 +8,25 @@ class Relation < ActiveRecord::Base
   def self.inverse_type s, gender='n'
     mapping = {
       "Acquaintance" => "Acquaintance",
+      "Ancestor"     => "Descendant",
       "Aunt"         => ["Nephew", "Niece"],
       "Advisor"      => "Advises",
       "Betrothed"    => "Betrothed",
       "Brother"      => ["Brother","Sister"],
+      "Boyfriend"    => ["Boyfriend","Girlfriend"],
+      "Companion"    => "Companion",
       "Counselor"    => "Counsels",
       "Courter"      => "Courts",
+      "Cousin"       => "Cousin",
       "Creator"      => "Created",
       "Employee"     => "Employer",
+      "Enemy"        => "Enemy",
       "Father"       => ["Son","Daughter"],
       "Follower"     => "Commander",
       "Friend"       => "Friend",
+      "Girlfriend"   => ["Boyfriend","Girlfriend"],
       "Guide"        => "Guides",
+      "Hearsay"      => "Talks about",
       "Home"         => "Native",
       "Husband"      => "Wife",
       "King"         => "Rules",
@@ -41,8 +48,10 @@ class Relation < ActiveRecord::Base
       "Teacher"      => "Student",
       "Uncle"        => ["Nephew", "Niece"],
       "Variant"      => "Variant",
+      "Visitor"      => "Visits",
       "Warder"       => "Commander",
       "Wielder"      => "Wields",
+      "Worshiper"    => "Worships",
     }[s]
     case mapping
     when String; mapping

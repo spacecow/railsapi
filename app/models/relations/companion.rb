@@ -1,0 +1,2 @@
+class Companion < Relation
+end

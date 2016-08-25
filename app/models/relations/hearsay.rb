@@ -1,0 +1,2 @@
+class Hearsay < Relation
+end

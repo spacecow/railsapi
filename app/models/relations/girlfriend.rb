@@ -1,0 +1,2 @@
+class Girlfriend < Relation
+end

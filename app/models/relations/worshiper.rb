@@ -1,0 +1,2 @@
+class Worshiper < Relation
+end
