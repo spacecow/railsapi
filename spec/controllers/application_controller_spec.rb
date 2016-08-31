@@ -69,14 +69,26 @@ describe "ApplicationContoller" do
   end
 
   describe "#record_not_unique" do
-    let(:msg){ 'duplicate key "index_universes_on_title" INSERT INTO "universes"' }
     let(:function){ :record_not_unique }
-    before do
-      expect(controller).to receive(:render).with(
-        status: :bad_request,
-        json:{universe:{title:'is already taken'}}){ :json }  
+    context "on a single attribute" do 
+      let(:msg){ 'duplicate key "index_universes_on_title" INSERT INTO "universes"' }
+      before do
+        expect(controller).to receive(:render).with(
+          status: :bad_request,
+          json:{universe:{title:'is already taken'}}){ :json }  
+      end
+      it{ is_expected.to eq :json }
     end
-    it{ is_expected.to eq :json }
+
+    context "on tow attributes" do 
+      let(:msg){ 'PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_articles_on_name_and_universe_id"' }
+      before do
+        expect(controller).to receive(:render).with(
+          status: :bad_request,
+          json:{article:{name:'is already taken'}}){ :json }  
+      end
+      it{ is_expected.to eq :json }
+    end
   end
  
 end

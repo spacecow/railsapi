@@ -25,8 +25,8 @@ class ApplicationController < ActionController::Base
 
   def record_not_unique error
     column, table = "", ""
-    if match = error.message.match(/duplicate key.*_on_(.*?)".*INSERT INTO "(.*?)"/m)
-      column, table = match.captures
+    if match = error.message.match(/duplicate key.*index_(.*)_on_(.*?)(?:_and_.*)?\"/m)
+      table, column = match.captures
       msg = 'is already taken'
     end
     render status: :bad_request,
