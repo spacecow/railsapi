@@ -47,6 +47,14 @@ describe Tag do
     }}
   end
 
+  context "title is duplicated" do
+    let(:tag2){ Tag.create params }
+    before{ tag2 }
+    it{ should raise_error{|e|
+      expect(e).to be_a ActiveRecord::RecordNotUnique
+    }} 
+  end
+
   after do
     Tag.delete_all
     Universe.delete_all
