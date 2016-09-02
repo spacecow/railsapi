@@ -6,8 +6,6 @@ describe Tag do
 
   let(:universe){ create :universe }
   let(:universe_id){ universe.id }
-  let(:tagable_id){ 1 }
-  let(:tagable_type){ "Note" }
   let(:title){ "TDP" }
   let(:params){{ title:title, universe_id:universe_id }}
 
