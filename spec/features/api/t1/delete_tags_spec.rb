@@ -9,7 +9,8 @@ describe "T1 Delete tags" do
   let(:header){ driver.header 'Accept', 'application/vnd.example.t1' }
   let(:response){ JSON.parse(page.text)[mdls_name] }
 
-  let(:tag){ create mdl_name, title:"Warder" }
+  let(:universe){ create :universe }
+  let(:tag){ create mdl_name, title:"Warder", universe_id:universe.id }
   let(:note_tag){ create :note_tag, tag:tag }
   let(:mdl_name){ "tag" }
 
@@ -19,16 +20,20 @@ describe "T1 Delete tags" do
 
   it "Successfully" do
     should change(Tag,:count).from(1).to(0).and(
-           change(NoteTag,:count).from(1).to(0))
+           change(NoteTag,:count).from(1).to(0)).and(
+           not_change(Note,:count).from(1)).and(
+           not_change(Universe,:count).from(1))
     expect(response).to eq([
-      'id'    => tag.id,
-      'title' => "Warder" ])
+      'id'          => tag.id,
+      'title'       => "Warder",
+      'universe_id' => universe.id ])
   end
 
   after do
     NoteTag.delete_all
     Tag.delete_all
     Note.delete_all
+    Universe.delete_all
   end
 
 end

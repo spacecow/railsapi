@@ -8,8 +8,9 @@ describe "Delete article tag" do
 
   let(:mdl_name){ "tag" }
   let(:params){{ mdl_name => { tagable_id:article.id, tagable_type:"Article" }}}
-  let(:mdl){ create mdl_name }
+  let(:mdl){ create mdl_name, universe_id:universe_id }
   let(:article){ create :article }
+  let(:universe_id){ article.universe_id }
   let(:tagging){ create :article_tag, article:article, tag:mdl }
 
   before{ tagging }
@@ -18,7 +19,9 @@ describe "Delete article tag" do
 
   it "Successfully" do
     should change(ArticleTag,:count).from(1).to(0).and(
-           change(Tag,:count).by(0))
+           not_change(Tag,:count).from(1)).and(
+           not_change(Article,:count).from(1)).and(
+           not_change(Universe,:count).from(1))
     expect(page.status_code).to be 200
   end
 

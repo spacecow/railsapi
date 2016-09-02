@@ -12,7 +12,8 @@ describe "TagsController#index" do
     subject{ controller.index }
     before do
       expect(controller).to receive(:repo){ repo }
-      expect(repo).to receive(:tags).with(no_args){ [:tag] }
+      expect(controller).to receive(:params){{universe_id: :universe_id}}
+      expect(repo).to receive(:tags).with(:universe_id){ [:tag] }
       expect(controller).to receive(:render).with(
         {json:{tags:[:tag]}}){ :json }
     end

@@ -16,7 +16,7 @@ module Api
 
         def tag_params
           (params[:tag] || ActionController::Parameters.new()).
-            permit(:tagable_type, :tagable_id, :title).symbolize_keys
+            permit(:tagable_type, :tagable_id, :title, :universe_id).symbolize_keys
         end
 
     end

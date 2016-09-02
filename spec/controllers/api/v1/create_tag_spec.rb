@@ -11,9 +11,9 @@ describe "TagsController#create" do
   describe "response" do
     before do
       expect(controller).to receive(:repo){ repo }
-      expect(controller).to receive(:tag_params){ :params }
-      expect(repo).to receive(:create_tag).with({
-        params: :params }){ :tag }
+      expect(controller).to receive(:tag_params).with(no_args){ :params }
+      expect(controller).to receive(:remove_universe_id).with(no_args){ :universe_id }
+      expect(repo).to receive(:create_tag).with(:universe_id, :params){ :tag }
       expect(controller).to receive(:render).with({json:{tag: :tag}}){ :json }
     end
     subject{ controller.create }

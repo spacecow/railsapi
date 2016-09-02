@@ -4,6 +4,7 @@ require './app/models/note_tag'
 
 require './app/models/tag'
 require './app/models/note'
+require './app/models/universe'
 
 require 'factory_girl'
 require './spec/factories'
@@ -14,9 +15,10 @@ end
 
 describe "NoteTag DB, Validations" do
 
+  let(:universe){ create :universe }
   let(:note){ create :note }
   let(:note_id){ note.id }
-  let(:tag){ create :tag }
+  let(:tag){ create :tag, universe_id:universe.id }
   let(:tag_id){ tag.id }
   let(:params){{ note_id:note_id, tag_id:tag_id }}
 
@@ -71,6 +73,7 @@ describe "NoteTag DB, Validations" do
     NoteTag.delete_all
     Tag.delete_all
     Note.delete_all
+    Universe.delete_all
   end
 
 end

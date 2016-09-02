@@ -9,25 +9,28 @@ describe "T1 Create tag" do
   let(:response){ JSON.parse(page.text)[mdl_name] }
 
   let(:mdl_name){ "tag" }
-  let(:params){{ mdl_name => { title:"Warder" }}}
+  let(:universe){ create :universe } 
+  let(:params){{ mdl_name => { title:"Warder", universe_id:universe.id }}}
   let(:tag){ mdl_name.camelize.constantize.first }
 
-  before{ header }
+  before{ header; universe }
 
   subject{ ->{ driver.submit mode, path, params }}
 
   it "Successfully" do
     should change(Tag,:count).from(0).to(1).and(
-           change(ArticleTag,:count).by(0))
+           not_change(ArticleTag,:count).from(0)).and(
+           not_change(Universe,:count).from(1))
     expect(response).to eq({
-      'id'    => tag.id,
-      'title' => "Warder" })
+      'id'          => tag.id,
+      'title'       => "Warder",
+      'universe_id' => universe.id })
     expect(tag.title).to eq "Warder" 
+    expect(tag.universe_id).to be universe.id 
   end
 
   after do
     Tag.delete_all
-    Article.delete_all
     Universe.delete_all
   end
 

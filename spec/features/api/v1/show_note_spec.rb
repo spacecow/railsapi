@@ -2,10 +2,11 @@ require 'rails_helper'
 
 describe "Show note" do
 
+  let(:universe){ article.universe }
   let(:body){ JSON.parse(page.text)["note"] }
   let(:article){ create :article, name:"a name" }
   let(:note){ create :note, text:"a note" }
-  let(:tag){ create :tag, title:'TDP' }
+  let(:tag){ create :tag, title:'TDP', universe_id:universe.id }
   let(:tagging){ create :note_tag, tag:tag, note:note }
   let(:reference){ create :reference, params }
   let(:article_note){ create :article_note, article:article, note:note }

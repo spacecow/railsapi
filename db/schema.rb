@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831085839) do
+ActiveRecord::Schema.define(version: 20160902072406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,7 +183,8 @@ ActiveRecord::Schema.define(version: 20160831085839) do
 #   Unknown type 'tagable_type_enum' for column 'tagable_type'
 
   create_table "tags", force: :cascade do |t|
-    t.string "title", null: false
+    t.string  "title",       null: false
+    t.integer "universe_id", null: false
   end
 
   create_table "universes", force: :cascade do |t|
@@ -216,4 +217,5 @@ ActiveRecord::Schema.define(version: 20160831085839) do
   add_foreign_key "steps", "events", column: "child_id"
   add_foreign_key "steps", "events", column: "parent_id"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "tags", "universes"
 end

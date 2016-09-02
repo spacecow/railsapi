@@ -6,32 +6,32 @@ describe "Create tag" do
   let(:function){ driver.submit mode, path, params }
   let(:response){ JSON.parse(page.text)[mdl] }
   let(:header){ driver.header 'Accept', 'application/vnd.example.v1' }
-  let(:path){ send("api_#{mdl.pluralize}_path") }
+  let(:path){ send "api_#{mdl.pluralize}_path" }
 
   let(:tag){ Tag.first }
-  let(:tag_id){ tag.id }
-  let(:note){ create :note }
-  let(:note_id){ note.id }
+  let(:universe){ create :universe }
   let(:mode){ :post }
-  let(:params){{ tag:{ title:'TDP'} }}
+  let(:params){{ tag:{ title:'TDP', universe_id:universe.id }}}
   let(:mdl){ "tag" }
 
-  before{ header }
+  before{ header; universe }
 
   subject{ ->{ function }}
 
   it "a tag is created" do
-    should change(Tag, :count).from(0).to(1)
+    should change(Tag, :count).from(0).to(1).and(
+           not_change(Universe, :count).from(1)).and(
+           not_change(Article, :count).from(0)).and(
+           not_change(Note, :count).from(0))
     expect(response).to eq({
-      "id" => tag_id,
+      "id" => tag.id,
       "title" => 'TDP',
+      "universe_id" => universe.id
     })
   end
 
   after do
     Tag.delete_all
-    Note.delete_all
-    Article.delete_all
     Universe.delete_all
   end
 

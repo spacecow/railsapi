@@ -163,8 +163,10 @@ class Repository
 
 
   def tag id; Tag.find(id) end
-  def tags; Tag.all end
-  def create_tag params:; Tag.create params end
+  def tags universe_id; Universe.find(universe_id).tags end
+  def create_tag universe_id, params
+    Universe.find(universe_id).tags.create params
+  end
   def delete_tag id, tagable_id:, tagable_type:
     return unless %w(Article).include?(tagable_type)
     tagable_type.constantize.find(tagable_id).taggings.find_by(tag_id:id).delete

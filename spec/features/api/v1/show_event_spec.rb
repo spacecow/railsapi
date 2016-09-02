@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe "Show event" do
 
+  let(:universe){ event.universe }
   let(:parent){ create :event, title:"Green wedding" }
   let(:parent_step){ create :step, parent:parent, child:event }
   let(:event){ create :event, title:"Red wedding" }
@@ -12,7 +13,7 @@ describe "Show event" do
   let(:note){ create :note, text:"a note" }
   let(:noting){ create :event_note, event:event, note:note }
   let(:tagging){ create :note_tag, note:note, tag:tag }
-  let(:tag){ create :tag, title:'TDP' }
+  let(:tag){ create :tag, title:'TDP', universe_id:universe.id }
   let(:distant){ create :event, title:"Distant event" }
   let(:mention){ create :mention, origin:event, target:distant }
   let(:inverse){ create :event, title:"Inverse event" }

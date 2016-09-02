@@ -8,12 +8,12 @@ module Api
       end
 
       def index
-        tags = repo.tags
+        tags = repo.tags params[:universe_id]
         render json:{tags:tags}
       end
 
       def create
-        tag = repo.create_tag(params:tag_params)
+        tag = repo.create_tag(remove_universe_id, tag_params)
         render json:{tag:tag} 
       end
   
@@ -26,6 +26,10 @@ module Api
 
         def tag_params
           params.require(:tag).permit(:title)
+        end
+
+        def remove_universe_id
+          params.require(:tag).delete(:universe_id)
         end
 
     end

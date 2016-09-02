@@ -14,9 +14,10 @@ end
 
 describe "ArticleTag DB, Validations" do
 
+  let(:universe){ create :universe }
   let(:article){ create :article }
   let(:article_id){ article.id }
-  let(:tag){ create :tag }
+  let(:tag){ create :tag, universe_id:universe.id }
   let(:tag_id){ tag.id }
   let(:params){{ article_id:article_id, tag_id:tag_id }}
 

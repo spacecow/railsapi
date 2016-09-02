@@ -11,9 +11,9 @@ describe 'Show article' do
   let(:article_note){ create :article_note, article:article, note:note }
   let(:note){ create :note, text:'a note' }
   let(:note_tag){ create :note_tag, note_id:note.id, tag_id:tag.id }
-  let(:tag){ create :tag, title:'TDP' }
+  let(:tag){ create :tag, title:'TDP', universe_id:universe.id }
   let(:article_tag){ create :article_tag, article_id:article.id, tag_id:tag2.id }
-  let(:tag2){ create :tag, title:'animal' }
+  let(:tag2){ create :tag, title:'animal', universe_id:universe.id }
   let(:participation){ create :participation, participant:article, event:event }
   let(:reference){ create :reference, referenceable:relation, comment:"a comment" }
   let(:event){ create :event, title:"an event" }

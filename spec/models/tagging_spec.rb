@@ -7,10 +7,11 @@ require './app/models/tagging'
 
 describe Tagging do
 
+  let(:universe){ create :universe }
   let(:tagable_type){ "Note" }
   let(:note){ create :note }
   let(:tagable_id){ note.id }
-  let(:tag){ create :tag }
+  let(:tag){ create :tag, universe_id:universe.id }
   let(:tag_id){ tag.id }
   let(:params){{ tag_id:tag_id,
                  tagable_id:tagable_id,
