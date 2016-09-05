@@ -1,0 +1,2 @@
+class ContractOn < Relation
+end
