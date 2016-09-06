@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(version: 20160906071358) do
     t.integer "universe_id", null: false
   end
 
-  add_index "tags", ["title"], name: "index_tags_on_title", unique: true, using: :btree
+  add_index "tags", ["title", "universe_id"], name: "index_tags_on_title_and_universe_id", unique: true, using: :btree
 
   create_table "universes", force: :cascade do |t|
     t.string "title", null: false

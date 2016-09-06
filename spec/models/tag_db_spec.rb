@@ -48,11 +48,20 @@ describe Tag do
   end
 
   context "title is duplicated" do
-    let(:tag2){ Tag.create params }
+    let(:universe2){ create :universe }
+    let(:tag2){ Tag.create title:title, universe_id:universe2_id }
     before{ tag2 }
-    it{ should raise_error{|e|
-      expect(e).to be_a ActiveRecord::RecordNotUnique
-    }} 
+    context "in the same universe" do
+      let(:universe2_id){ universe.id }
+      it{ should raise_error{|e|
+        expect(e).to be_a ActiveRecord::RecordNotUnique
+        expect(e.message).to include "PG::UniqueViolation"
+      }} 
+    end
+    context "in different universes" do
+      let(:universe2_id){ universe2.id }
+      it{ should change(Tag,:count).from(1).to(2) }
+    end
   end
 
   after do
