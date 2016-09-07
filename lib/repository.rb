@@ -148,6 +148,10 @@ class Repository
   def relation id; Relation.find(id) end
   def create_relation params; Relation.create(params) end
   def delete_relations; Relation.destroy_all end
+  def invert_relation relation
+    relation.update origin_id:relation.target_id,
+                    target_id:relation.origin_id
+  end
 
 
   def relation_types

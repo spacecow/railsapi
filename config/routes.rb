@@ -52,7 +52,11 @@ Rails.application.routes.draw do
       resources :references, only:[:show,:create,:update]
       delete '/references', to:'references#delete_all'
 
-      resources :relations, only:[:show,:create]
+      resources :relations, only:[:show,:create] do
+        member do
+          put :invert
+        end
+      end
       delete '/relations', to:'relations#delete_all'
 
       resources :relation_types, only: :index

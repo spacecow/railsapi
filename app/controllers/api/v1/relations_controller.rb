@@ -17,6 +17,12 @@ module Api
         render json:{relations:relations.map(&:full_json)}
       end
 
+      def invert
+        relation = repo.relation params[:id]
+        repo.invert_relation relation
+        render json:{relation:{id:relation.id}}
+      end
+
       private
 
         def relation_params
