@@ -9,10 +9,10 @@ describe 'List relation types' do
   context 'response' do
     it{ expect(response).to eq(
       %w(Acquaintance Advisor Ancestor Aunt Betrothed Boyfriend Brother
-         Companion Contract_on Counselor Courter Cousin Creator Customer Employee Enemy
+         Companion ContractOn Counselor Courter Cousin Creator Customer Employee Enemy
          Father Follower Friend Girlfriend Guide Hearsay Home Husband
-         Killer King Located_in Maid Member Mother Near_sister Owner
-         Player Practitioner Queen Resident Right_hand Ruler
+         Killer King LocatedIn Maid Member Mother NearSister Owner
+         Player Practitioner Queen Resident RightHand Ruler
          Sister Swordbearer Teacher Uncle Variant Visitor Warder Wielder
          Worshiper)) }
   end

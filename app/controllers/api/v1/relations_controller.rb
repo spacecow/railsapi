@@ -12,6 +12,11 @@ module Api
         render json:{relation:relation.full_json}
       end
 
+      def update
+        repo.update_relation params[:id], relation_params 
+        render json:{}
+      end
+
       def delete_all
         relations = repo.delete_relations
         render json:{relations:relations.map(&:full_json)}

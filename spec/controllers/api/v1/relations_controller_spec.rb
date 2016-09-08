@@ -39,6 +39,17 @@ describe "RelationsController" do
     it{ should be :render }
   end
 
+  describe "#update" do
+    let(:function){ :update }
+    let(:params){{ id: :id }}
+    before do
+      expect(controller).to receive(:relation_params).with(no_args){ :params }
+      expect(controller).to receive(:render).with(json:{}){ :render }
+      expect(repo).to receive(:update_relation).with(:id, :params)
+    end
+    it{ should be :render }
+  end
+
   describe "#delete_all" do
     let(:function){ :delete_all }
     let(:relation){ double :relation }
