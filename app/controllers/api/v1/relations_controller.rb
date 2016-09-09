@@ -13,8 +13,8 @@ module Api
       end
 
       def update
-        repo.update_relation params[:id], relation_params 
-        render json:{}
+        relation = repo.update_relation params[:id], relation_params 
+        render json:{relation:{id:relation.id}}
       end
 
       def delete_all

@@ -152,7 +152,7 @@ class Repository
     relation.update origin_id:relation.target_id,
                     target_id:relation.origin_id
   end
-  def update_relation id, params; relation(id).update params end
+  def update_relation id, params; relation(id).tap{|e| e.update params} end
 
 
   def relation_types
