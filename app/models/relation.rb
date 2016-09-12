@@ -39,6 +39,7 @@ class Relation < ActiveRecord::Base
       "Mother"       => ["Son","Daughter"],
       "NearSister"   => "Near sister",
       "Owner"        => "Owns",
+      "Participant"  => "Participated in",
       "Player"       => "Plays",
       "Practitioner" => "Follows",
       "Queen"        => "Rules",

@@ -1,0 +1,2 @@
+class Participant < Relation
+end
